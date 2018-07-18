@@ -63,7 +63,7 @@ $ npm test
 ## Example project
 Bumo SDK Node.js provides rich examples for developers' reference
 
-[Sample document entry](doc/SDK.md "")
+[Sample document entry](doc/SDK_CN.md "")
 
 ## License
 
