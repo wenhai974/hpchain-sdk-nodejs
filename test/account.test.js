@@ -93,7 +93,7 @@ describe('Test bumo-sdk account', function() {
 
 
   it('transaction', function() {
-    const privateKey = 'privbrmMWytnwxGxKkhb4QmAt6grn7HJM79cavvpvJ4wFti7XieNZYof';
+    const privateKey = 'your private key';
     const sourceAddress = 'buQnc3AGCo6ycWJCce516MDbPHKjK7ywwkuo';
 
     co(function* () {
