@@ -1,602 +1,872 @@
-# bumo-sdk-js
+[English](SDK.md) | 中文
+
+# Bumo SDK
 
 ## 概述
-bumo-sdk-js接口文档
+本文档简要概述Bumo Node.js SDK常用接口文档, 方便开发者更方便地写入和查询BU区块链。
 
-- [安装](#bumo-sdk-安装)
-- [使用方法及实例](#使用方法及实例)
-	- [返回值说明](#返回值说明)
-    - [创建bumo-sdk实例](#创建bumo-sdk实例)
-    - [检查区块是否同步](#检查区块是否同步)
-    - [验证账户地址](#验证账户地址)
-    - [查询交易详情](#查询交易详情)
-    - [通过区块高度查询区块交易](#通过区块高度查询区块交易)
-    - [获取当前区块高度](#获取当前区块高度)
-    - [发送BU](#发送bu)
-    - [账户](#生成账户)
-    	- [生成账户](#生成账户)
-    	- [查询账户余额](#查询账户余额)
-    	- [查询账户信息](#查询账户信息)
-    - [资产](#发行资产)
-    	- [发行资产](#发行资产)
-    	- [转移资产](#转移资产)
+- [名词解析](#名词解析)
+- [请求参数与响应数据格式](#请求参数与响应数据格式)
+	- [请求参数](#请求参数)
+	- [响应数据](#响应数据)
+- [使用方法](#使用方法)
+    - [生成SDK实例](#生成SDK实例)
+    - [生成公私钥地址](#生成公私钥地址)
+    - [有效性校验](#有效性校验接口)
+    - [查询](#查询)
+	- [提交交易](#提交交易)
+		- [获取账户nonce值](#获取账户nonce值)
+		- [构建操作](#构建操作)
+		- [构建交易Blob](#构建交易blob)
+		- [签名交易](#签名交易)
+		- [广播交易](#广播交易)
+- [账户服务](#账户服务)
+	- [checkValid](#checkvalid)
+	- [getInfo](#getinfo)
+	- [getNonce](#getnonce)
+	- [getBalance](#getbalance)
+	- [getAssets](#getassets)
+- [资产服务](#资产服务)
+    - [getAsset](#getasset)
+- [交易服务](#交易服务)
+    - [操作说明](#操作说明)
+	- [buildBlob](#buildblob)
+	- [evaluationFee](#evaluationfee)
+	- [sign](#sign)
+	- [submit](#submit)
+	- [getInfo](#getinfo)
+- [区块服务](#区块服务)
+    - [getNumber](#getnumber)
+	- [checkStatus](#checkstatus)
+	- [getTransactions](#gettransactions)
+	- [getInfo](#getinfo)
+	- [getLatestInfo](#getlatestinfo)
+	- [getValidators](#getvalidators)
+	- [getLatestValidators](#getlatestvalidators)
+	- [getReward](#getreward)
+	- [getLatestReward](#getlatestreward)
+	- [getFees](#getfees)
+	- [getLatestFees](#getlatestfees)
+- [情景示例](#情景示例)
 - [错误码](#错误码)
 
-## bumo-sdk 安装
+## 名词解析
+
+操作BU区块链： 向BU区块链写入或修改数据
+
+广播交易： 向BU区块链写入或修改数据
+
+查询BU区块链： 查询BU区块链中的数据
+
+账户服务： 提供账户相关的有效性校验与查询接口
+
+资产服务： 提供资产相关的查询接口
+
+交易服务： 提供操写入BU区块链与查询接口
+
+区块服务： 提供区块的查询接口
+
+账户nonce值： 每个账户都维护一个序列号，用于用户提交交易时标识交易执行顺序的
+
+
+
+## 请求参数与响应数据格式
+
+### 请求参数
+
+为了保证数字精度，请求参数中的Number类型，全都按照字符串处理，例如：
+amount = 500， 那么传递参数时候就将其更改为 amount = '500' 字符串形式
+
+
+### 响应数据
+
+响应数据为JavaScript对象，数据格式如下：
+
+```javascript
+{
+	errorCode: 0,
+	errorDesc: '',
+	result: {}
+}
+```
+
+说明：
+1. errorCode: 错误码。0表示无错误，大于0表示有错误
+2. errorDesc: 错误描述。
+3. result: 返回结果
+
+> 因响应数据结构固定，方便起见，后续接口说明中的`响应数据`均指`result`对象的属性
+
+
+## SDK安装
 ```
 npm install bumo-sdk --save
 ```
 
-## 使用方法及实例
-#### 返回值说明
-> 该SDK的返回值均为JSON字符串
+## 使用方法
 
-#### 创建bumo-sdk实例
-###### 传入参数
+这里介绍SDK的使用流程，首先需要生成SDK实现，然后调用相应服务的接口，其中服务包括账户服务、资产服务、合约服务、交易服务、区块服务，接口按使用分类分为生成公私钥地址接口、有效性校验接口、查询接口、提交交易相关接口
+
+### 生成SDK实例
+##### 传入参数
 options 是一个对象，可以包含如下属性
 
    参数      |     类型     |     描述      |
 ----------- | ------------ | ----------------- |
 host|   String   | ip地址:端口             |
 
-###### 实例：
+##### 实例：
 
-```js
+```javascript
 const BumoSDK = require('bumo-sdk');
 
-const bumo = new BumoSDK({
+const options = {
   host: 'seed1.bumotest.io:26002',
-});
-
-```
-
-#### 生成账户
-调用：bumo.account.create()， 该方法返回Promise
-###### 返回值
-返回值解析后是一个对象：对象属性如下
-
-   参数     |     类型     |     描述                    |
------------ | ------------ | --------------------------- |
-error_code |    Number    | 错误码             |
-msg |    String      | 描述信息 |
-data |    Object   | 返回数据 |
-
-data值是一个对象：格式如下
-
-```js
-{
-  privateKey: 'privbzRqpiYdPPRAPNiP1qtXgcruwf3JipRiFZzuQ6ndWU1MbRdkYP2u',
-  publicKey: 'b001e19aa19d58ed1bc07bf7fe32ff86899273c83b796d7fda82b27c85c218845330b869d216',
-  address: 'buQdgwWDJWEPsF6tJMdm2c4YPB6vdc5fRVwQ'
-}
-
-privateKey: 私钥
-publicKey: 公钥
-address: 地址
-```
-###### 实例：
-
-```js
-bumo.account.create().then(data => {
-  console.log(data);
-}).catch(err => {
-  console.log(err.message);
-});
-```
-#### 查询账户余额
-调用：bumo.account.getBalance(address)， 该方法返回Promise
-###### 传入参数
-
-   参数      |     类型     |     描述                    |
------------ | ------------ | ----------------- |
-address 	  |    String    | 账户地址              |
-###### 返回值
-返回值解析后是一个对象：对象属性如下
-
-   参数     |     类型     |     描述                    |
------------ | ------------ | --------------------------- |
-error_code |    Number    | 错误码             |
-msg |    String      | 描述信息 |
-data |    Object   | 返回数据 |
-data值是一个对象：格式如下
-
-```js
-{
-  balance: 9968804800
-}
-
-balance: 账户余额
-```
-
-###### 实例：
-
-```js
-bumo.account.getBalance('buQXz2qbTb3yx2cRyCz92EnaUKHrwZognnDw').then(data => {
-  console.log(data);
-}).catch(err => {
-  console.log(err.message);
-});
-```
-
-
-
-
-
-#### 查询账户信息
-调用：bumo.account.getInfo(address)， 该方法返回Promise
-###### 传入参数
-
-   参数      |     类型     |     描述                    |
------------ | ------------ | ----------------- |
-address 	  |    String    | 账户地址              |
-###### 返回值
-返回值解析后是一个对象：对象属性如下
-
-   参数     |     类型     |     描述                    |
------------ | ------------ | --------------------------- |
-error_code |    Number    | 错误码             |
-msg |    String      | 描述信息 |
-data |    Object   | 返回数据 |
-data值是一个对象：格式如下
-
-```js
-{
-  address: 'buQsBMbFNH3NRJBbFRCPWDzjx7RqRc1hhvn1',
-  balance: 9968804800,
-  nonce: 2,
-  assets : [
-  {
-    amount : 1400,
-    key :
-    {
-      code : 'HNC',
-      issuer : 'buQs9npaCq9mNFZG18qu88ZcmXYqd6bqpTU3'
-    }
-  }],
-}
-
-address: 账户地址
-balance: 账户BU余额
-nonce: 交易序号
-assets: 该账户拥有的资产
-    amount: 资产数量
-    key: 资产标识
-        code: 资产编码
-        issuer: 资产发行账户地址
-```
-###### 实例：
-
-```js
-bumo.account.getInfo('buQsBMbFNH3NRJBbFRCPWDzjx7RqRc1hhvn1').then(data => {
-  console.log(data);
-}).catch(err => {
-  console.log(err.message);
-});
-```
-
-
-#### 查询交易详情
-调用：bumo.getTransaction(transactionHash)， 该方法返回Promise
-###### 传入参数
-
-   参数      |     类型     |     描述                    |
------------ | ------------ | ----------------- |
-transactionHash |    String    | 交易中的唯一hash            |
-
-###### 返回值
-返回值解析后是一个对象：对象属性如下
-
-   参数     |     类型     |     描述                    |
------------ | ------------ | --------------------------- |
-error_code |    Number    | 错误码             |
-msg |    String      | 描述信息 |
-data |    Object   | 返回数据 |
-
-data值是一个对象：格式如下:
-
-```js
-
-{
-"total_count": 1,
-"transactions": [{
-	"actual_fee": 10004630000,
-	"close_time": 1524899145079608,
-	"error_code": 0,
-	"error_desc": "",
-	"hash": "7e28f25cb9c53bc9a7aa9e6ea7b4c65f85ca9d11ee6a136b4baf9574044c87d0",
-	"ledger_seq": 100,
-	"signatures": [{
-		"public_key": "b001bda5a3b59c6b0b1fe18c2c13859dca4c37bd2676f6f3369a5f9f201c84ecc030f482c946",
-		"sign_data": "9f289f7db9663b8bc477c6fd6c97ad143f94eea3f3ff4fc0b879221182b2759cf6bc1cf2cebecc78b6b0471733d9cc254648ee37ab52d52db260cff6db41d507"
-	}],
-	"transaction": {
-		"fee_limit": 50000000000,
-		"gas_price": 10000,
-		"nonce": 2,
-		"operations": [{
-			"create_account": {
-				"contract": {
-					"payload": "'use strict'; \r\n function main(input) { payAsset(); log(input); } \r\n function query(input) { \r\n log(input); } \r\nfunction init(){return;}"
-				},
-				"dest_address": "buQYmXPFrMsFMSRyqsPphXXt46c6JL1AJmUP",
-				"init_balance": 10000000,
-				"metadatas": [{
-					"key": "hello",
-					"value": "这是创建账号的过程中设置的一个metadata"
-				}],
-				"priv": {
-					"master_weight" : 1,
-					"thresholds": {
-						"tx_threshold": 1
-					}
-				}
-			},
-			"type": 1
-		}],
-		"source_address": "buQgH7GZJJGsMaiPVB5uPD1nGJsFP3D6nzsD"
-	},
-	"tx_size": 463
-}]
-}
-
-total_count: 交易总数量
-transactions: 交易列表
-    actual_fee: 交易的实际费用
-    close_time: 交易的关闭时间
-    error_code: 交易状态码
-    error_desc: 交易状态描述
-    hash: 交易hash值
-    ledger_seq: 交易所在的区块高度
-    signatures: 交易签名列表
-        public_key: 公钥
-        sign_data: 签名后的数据
-    transaction: 交易内容
-        fee_limit: 交易手续费
-        gas_price: 交易打包费
-        nonce: 交易的序列号
-        operations: 交易的操作列表
-
-            create_account: 交易操作名称
-                contract: 交易合约
-                    payload: 合约内容
-
-
-            dest_address: 目标账户地址
-            init_balance: 目标账户的初始化余额
-            metadatas: 附加信息
-                key: 附加信息键
-                value: 附加信息值
-            priv: 目标账户权限
-                master_weight: 目标账户的权重
-                thresholds: 门限
-                    tx_threshold: 交易门限
-            type: 交易操作类型(1 创建账户；2 发行资产；3 转移资产；4 设置metadata；5 设置权重；6 设置门限；7 支付BU;)
-    source_address: 交易的发起账户
-    tx_size: 交易所占字节数
-
-```
-
-###### 实例：
-
-```js
-bumo.getTransaction(transactionHash).then(data => {
-  console.log(data);
-}).catch(err => {
-  console.log(err.message);
-});
-```
-
-
-#### 通过区块高度查询区块交易
-调用：bumo.getBlock(blockNumber)， 该方法返回Promise
-###### 传入参数
-
-   参数      |     类型     |     描述                    |
------------ | ------------ | ----------------- |
-blockNumber |    Number    | 区块高度           |
-
-###### 返回值
-返回值解析后是一个对象：对象属性如下
-
-   参数     |     类型     |     描述                    |
------------ | ------------ | --------------------------- |
-error_code |    Number    | 错误码             |
-msg |    String      | 描述信息 |
-data |    Object   | 返回数据 |
-
-> data的结构参照 bumo.getTransaction中data的结构
-
-###### 实例：
-
-```js
-bumo.getBlock(blockNumber).then(data => {
-  console.log(data);
-}).catch(err => {
-  console.log(err.message);
-});
-```
-
-
-#### 检查区块是否同步
-调用：bumo.checkBlockStatus()， 该方法返回Promise
-
-###### 返回值
-返回值是一个布尔值
-
-```
-true: 区块已同步
-false: 区块未同步
-```
-
-###### 实例：
-
-```js
-bumo.checkBlockStatus().then(data => {
-  console.log(data);
-}).catch(err => {
-  console.log(err.message);
-});
-```
-
-#### 获取当前区块高度
-调用：bumo.getBlockNumber()， 该方法返回Promise
-
-###### 返回值
-返回值解析后是一个对象：对象属性如下
-
-   参数     |     类型     |     描述                    |
------------ | ------------ | --------------------------- |
-error_code |    Number    | 错误码             |
-msg |    String      | 描述信息 |
-data |    Object   | 返回数据 |
-
-data值是一个对象：格式如下
-
-```js
-{
-	seq: 206193
-}
-
-seq: 当前区块高度
-```
-
-
-###### 实例：
-
-```js
-bumo.getBlockNumber().then(data => {
-  console.log(data);
-}).catch(err => {
-  console.log(err.message);
-});
-```
-
-
-#### 验证账户地址
-调用：bumo.account.checkAddress(address)， 该方法返回Promise
-
-###### 传入参数
-
-   参数      |     类型     |     描述                    |
------------ | ------------ | ----------------- |
-address |    String    | 账户地址          |
-
-###### 返回值
-返回值解析后是一个对象：对象属性如下
-
-   参数     |     类型     |     描述                    |
------------ | ------------ | --------------------------- |
-error_code |    Number    | 错误码             |
-msg |    String      | 描述信息 |
-data |    Object   | 返回数据 |
-
-data值是一个布尔值：格式如下
-
-```js
-true: 有效地址
-false: 无效地址
-```
-
-
-###### 实例：
-
-```js
-bumo.account.checkAddress('buQgE36mydaWh7k4UVdLy5cfBLiPDSVhUoPq').then(data => {
-  console.log(data);
-}).catch(err => {
-  console.log(err.message);
-});
-```
-
-
-#### 发送BU
-调用：bumo.sendBu(args)， 该方法返回Promise
-###### args是一个js对象，结构如下
-
-   参数      |     类型     |     描述                    |
------------ | ------------ | ----------------- |
-senderPrivateKey |   String    | 发送者的私钥           |
-receiverAddress |   String    | 目标账户地址           |
-amount |  String    | 要转移的数量（单位是MO)      |
-nonce |  String   | 交易序号 (可通过调用bumo.account.getInfo() 函数获得)      |
-gasPrice |  String    | [可选参数] gas价格(不小于配置的最低值) (单位是MO)|
-feeLimit |  String   | [可选参数] 愿为交易花费的手续费  (单位是MO)   |
-> 注意：amount, gasPrice和feeLimit的单位是MO，且 1 BU = 10^8 MO. 其值是只能包含数字的字符串且不能以0开头
-
-###### 返回值
-返回值解析后是一个对象：对象属性如下
-
-   参数     |     类型     |     描述                    |
------------ | ------------ | --------------------------- |
-error_code |    Number    | 错误码             |
-msg |    String      | 描述信息 |
-data |    Object   | 返回数据 |
-
-
-data值是一个对象：格式如下
-
-```js
-{
-	hash: '47c2c92b95c68865a32563a66adeb40161ed6175009c19cd427fff89570cc74b'
-}
-
-hash: 交易hash值
-```
-###### 实例：
-
-```js
-const args = {
-	senderPrivateKey: 'privbsMCSqvv8kJ1A3Zt9RWjDHyG3jRdGpj9Jrgfxw7tdz3jZzhqA55v',
-	receiverAddress: 'buQgE36mydaWh7k4UVdLy5cfBLiPDSVhUoPq',
-	amount: '100000000',
-	nonce: '121',
 };
 
- bumo.sendBu(args).then(data => {
-   console.log(data);
- }).catch(err => {
-   console.log(err.message);
- });
+const sdk = new BumoSDK(options);
 
 ```
 
+### 信息查询
+用于查询BU区块链上的数据，直接调用相应的接口即可，比如，查询账户信息，调用如下：
 
-#### 发行资产(token)
-调用：bumo.asset.issueAsset(args)， 该方法返回Promise
-###### args是一个js对象，结构
+```javascript
+const address = 'buQemmMwmRQY1JkcU7w3nhruo%X5N3j6C29uo';
 
-   参数      |     类型     |     描述                    |
------------ | ------------ | ----------------- |
-privateKey |   String    | 资产发行方的私钥           |
-code|   String    | 要发行的资产代码，长度范围 [1 ～ 64]           |
-amount |  String    |   发行的数量  |
-nonce |  String   | 资产发行方交易序号 (可通过调用bumo.account.getInfo() 函数获得)      |
-gasPrice |  String    | [可选参数] gas价格(不小于配置的最低值) (单位是MO)|
-feeLimit |  String   | [可选参数] 愿为交易花费的手续费  (单位是MO)   |
-> 注意：amount、nonce、gasPrice、feeLimit其值是只能是包含数字的字符串且不能以0开头
-
-###### 返回值
-返回值解析后是一个对象：对象属性如下
-
-   参数     |     类型     |     描述                    |
------------ | ------------ | --------------------------- |
-error_code |    Number    | 错误码             |
-msg |    String      | 描述信息 |
-data |    Object   | 返回数据 |
-
-
-data值是一个对象：格式如下
-
-```js
-{
-	hash: '47c2c92b95c68865a32563a66adeb40161ed6175009c19cd427fff89570cc74b'
-}
-
-hash: 交易hash值
+sdk.account.getInfo(address).then(info=> {
+  console.log(info);
+}).catch(err => {
+  console.log(err.message);
+});
 ```
-###### 实例：
 
-```js
+### 提交交易
+提交交易的过程包括以下几步：获取账户nonce值，构建操作，构建交易Blob，签名交易和广播交易。
+
+#### 获取账户nonce值
+
+开发者可自己维护各个账户nonce，在提交完一个交易后，自动递增1，这样可以在短时间内发送多笔交易，否则，必须等上一个交易执行完成后，账户的nonce值才会加1。接口调用如下：
+
+```javascript
+
+const address = 'buQemmMwmRQY1JkcU7w3nhruo%X5N3j6C29uo';
+
+sdk.account.getNonce(address).then(info => {
+
+  if (info.errorCode !== 0) {
+    console.log(info);
+    return;
+  }
+  
+  const nonce = new BigNumber(info.result.nonce).plus(1).toString(10);
+});
+
+// 该例子中使用了big-number.js 将nonce的值加1，并返回字符串类型
+
+```
+
+#### 构建操作
+
+这里的操作是指在交易中做的一些动作。 例如：构建发送BU的操作，调用如下:
+
+```javascript
+const destAddress = 'buQWESXjdgXSFFajEZfkwi5H4fuAyTGgzkje';
+
+const info = sdk.operation.buSendOperation({
+	destAddress,
+	amount: '60000',
+	metadata: '746573742073656e64206275',
+});
+
+```
+
+#### 构建交易Blob
+
+该接口用于生成交易Blob字符串，接口调用如下：
+> 注意：nonce、gasPrice、feeLimit其值是只能是包含数字的字符串且不能以0开头
+> 
+
+```javascript
+
+  let blobInfo = sdk.transaction.buildBlob({
+    sourceAddress: 'buQnc3AGCo6ycWJCce516MDbPHKjK7ywwkuo',
+    gasPrice: '3000',
+    feeLimit: '1000',
+    nonce: '102',
+    operations: [ sendBuOperation ],
+    metadata: '74657374206275696c6420626c6f62',
+  });
+  
+  const blob = blobInfo.result;
+
+```
+
+#### 签名交易
+
+该接口用于交易发起者使用私钥对交易进行签名。接口调用如下：
+
+```javascript
+  const signatureInfo = sdk.transaction.sign({
+    privateKeys: [ privateKey ],
+    blob,
+  });
+  
+  const signature = signatureInfo.result;
+```
+
+#### 广播交易
+
+该接口用于向BU区块链发送交易，触发交易的执行。接口调用如下：
+
+```javascript
+  sdk.transaction.submit({
+    blob,
+    signature: signature,
+  }).then(data => {
+  	console.log(data);
+  });
+
+```
+
+## 账户服务
+
+账户服务主要是账户相关的接口，包括5个接口：checkValid, getInfo, getNonce, getBalance, getAssets, getMetadata。
+
+### checkValid
+> 接口说明
+
+   该接口用于检测账户地址的有效性
+
+> 调用方法
+
+sdk.account.checkValid(address)
+
+> 请求参数
+
+   参数      |     类型     |        描述       
+----------- | ------------ | ---------------- 
+address     |   String     |  待检测的账户地址   
+
+> 响应数据
+
+   参数      |     类型     |        描述       
+----------- | ------------ | ---------------- 
+isValid     |   Boolean     |  账户地址是否有效   
+
+> 错误码
+
+   异常       |     错误码   |   描述   
+-----------  | ----------- | -------- 
+SYSTEM_ERROR |   20000     |  System error 
+
+> 示例
+
+```javascript
+const address = 'buQemmMwmRQY1JkcU7w3nhruoX5N3j6C29uo';
+
+sdk.account.checkValid(address).then(result => {
+  console.log(result);
+}).catch(err => {
+  console.log(err.message);
+});
+
+```
+
+### getInfo
+
+> 接口说明
+
+   该接口用于获取账户信息
+
+> 调用方法
+
+sdk.account.getInfo(address);
+
+> 请求参数
+
+   参数      |     类型     |        描述       
+----------- | ------------ | ---------------- 
+address     |   String     |  待检测的账户地址  
+
+> 响应数据
+
+   参数    |     类型      |        描述       
+--------- | ------------- | ---------------- 
+address	|	String		|		账户地址       
+balance	|	String		|		账户余额       
+nonce	  	|	String		|		账户交易序列号
+assets		|	Array		|		账户资产
+priv		|	Object		|		账户权限
+
+> priv object
+
+   参数       |     类型     |        描述       
+-----------  | ------------ | ---------------- 
+masterWeight	|	String    |	账户自身权重
+thresholds	|	Object		|	门限
+
+> thresholds object
+
+   参数       |     类型     |        描述       
+-----------  | ------------ | ---------------- 
+tx_threshold	 |    String	    |   交易默认门限
+
+
+> 错误码
+
+   异常       |     错误码   |   描述   
+-----------  | ----------- | -------- 
+INVALID_ADDRESS_ERROR| 11006 | Invalid address
+CONNECTNETWORK _ERROR| 11007| Connect network failed
+SYSTEM_ERROR |   20000     |  System error 
+
+> 示例
+
+```javascript
+const address = 'buQemmMwmRQY1JkcU7w3nhruo%X5N3j6C29uo';
+
+sdk.account.getInfo(address).then(result => {
+  console.log(result);
+}).catch(err => {
+  console.log(err.message);
+});
+```
+
+### getNonce
+
+> 接口说明
+
+   该接口用于获取账户的nonce
+
+> 调用方法
+
+sdk.account.getNonce(address);
+
+> 请求参数
+
+   参数      |     类型     |        描述       
+----------- | ------------ | ---------------- 
+address     |   String     |  待检测的账户地址   
+
+> 响应数据
+
+   参数      |     类型     |        描述       
+----------- | ------------ | ---------------- 
+nonce       |   String    |  该账户的交易序列号   
+
+> 错误码
+
+   异常       |     错误码   |   描述   
+-----------  | ----------- | -------- 
+INVALID_ADDRESS_ERROR	|	11006	| Invalid address
+CONNECTNETWORK _ERROR	|	11007	| Connect network failed
+SYSTEM_ERROR				|	20000	|  System error 
+
+> 示例
+
+```javascript
+
+const address = "buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf";
+
+sdk.account.getNonce(address).then(result => {
+  console.log(result);
+}).catch(err => {
+  console.log(err.message);
+});
+
+```
+
+### getBalance
+
+> 接口说明
+
+   该接口用于查询账户BU的余额
+
+> 调用方法
+
+sdk.account.getBalance(address);
+
+> 请求参数
+
+   参数      |     类型     |        描述       
+----------- | ------------ | ---------------- 
+address     |   String     |  待检测的账户地址   
+
+> 响应数据
+
+   参数      |     类型     |        描述       
+----------- | ------------ | ---------------- 
+balance     |   String    |  该账户的]余额   
+
+> 错误码
+
+   异常       |     错误码   |   描述   
+-----------  | ----------- | -------- 
+INVALID_ADDRESS_ERROR| 11006 | Invalid address
+CONNECTNETWORK _ERROR| 11007| Connect network failed
+SYSTEM_ERROR |   20000     |  System error 
+
+> 示例
+
+```javascript
+
+const address = 'buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf';
+
+const info = sdk.getAccountService().getBalance(address);
+
+```
+
+### getAssets
+
+> 接口说明
+
+   该接口用于获取账户所有资产信息
+
+> 调用方法
+
+sdk.account.getAssets(address);
+
+> 请求参数
+
+   参数      |     类型     |        描述       
+----------- | ------------ | ---------------- 
+address     |   String     |  待检测的账户地址   
+
+> 响应数据
+
+   参数      |     类型     |        描述       
+----------- | ------------ | ---------------- 
+assets		|	Array	|	账户资产
+
+> assets 数组元素为Object，其中包含如下属性:
+
+   参数      |     类型     |        描述       
+----------- | ------------ | ---------------- 
+amount		|	String	|	账户资产数量
+key			|	object |  包含属性: code资产编码、issuer资产发行账户地址
+
+
+## 资产服务
+
+账户服务主要是资产相关的接口，目前有1个接口：getAsset
+
+### getAsset 
+
+> 接口说明
+
+   该接口用于获取账户指定资产信息
+
+> 调用方法
+
+sdk.asset.asset.getInfo(args);
+
+> 请求参数args为Object其中包含如下属性
+
+   参数      |     类型     |        描述       
+----------- | ------------ | ---------------- 
+address     |   String    |  必填，待查询的账户地址
+code        |   String    |  必填，资产编码，长度[1 1024]
+issuer      |   String    |  必填，资产发行账户地址
+
+> 响应数据
+
+   参数      	|     类型     	|        描述       
+----------- 	| ------------ 	| ---------------- 
+asset			|  Array			|	账户资产   
+
+> assets 数组元素为Object，其中包含如下属性:
+
+   参数      |     类型     |        描述       
+----------- | ------------ | ---------------- 
+amount		|	String	|	账户资产数量
+key			|	object |  包含属性: code资产编码、issuer资产发行账户地址
+
+> 错误码
+
+   异常       					|     错误码   |   描述   |
+----------------------			| ----------- | -------- |
+INVALID_ADDRESS_ERROR			|	11006	| Invalid address
+CONNECTNETWORK_ERROR			|	11007	| Connect network failed
+INVALID_ASSET_CODE_ERROR		|	11023	| The length of asset code must between 1 and 1024
+INVALID_ISSUER_ADDRESS_ERROR	|	11027	| Invalid issuer address
+SYSTEM_ERROR						|	20000	| System error
+
+> 示例
+
+```javascript
+
 const args = {
-  privateKey: 'privbwAAXFXsf4z7VtzPtWFmfDM8dEGZ97fsskUaJYeoduCCMxxv8jnH',
-  code: 'demo',
-  amount: '10000000',
-  gasPrice: '1000',
-  feeLimit: '1000000',
-  nonce: '121',
+	address: 'buQnnUEBREw2hB6pWHGPzwanX7d28xk6KVcp',
+	code: 'TST',
+	issuer: 'buQnnUEBREw2hB6pWHGPzwanX7d28xk6KVcp',
 };
 
- bumo.asset.issueAsset(args).then(data => {
-   console.log(data);
- }).catch(err => {
-   console.log(err.message);
- });
+
+sdk.asset.asset.getInfo(args).then(data => {
+  console.log(data);
+});
+    
 
 ```
 
-#### 转移资产(token)
-调用：bumo.asset.sendAsset(args)， 该方法返回Promise
-###### args是一个js对象，结构如下
 
-   参数      |     类型     |     描述                    |
------------ | ------------ | ----------------- |
-senderPrivateKey |   String    | 资产转移方的私钥           |
-receiverAddress | String | 资产接收方账户地址
-code|   String    | 要转移的资产编码，长度范围 [1 ～ 64]           |
-amount |  String    |   要转移资产的数量  |
-issuer | String | 资产发行账户地址
-nonce |  String   | 资产转移方交易序号 (可通过调用bumo.account.getInfo() 函数获得)      |
-gasPrice |  String    | [可选参数] gas价格(不小于配置的最低值) (单位是MO)|
-feeLimit |  String   | [可选参数] 愿为交易花费的手续费  (单位是MO)   |
-> 注意：amount、nonce、gasPrice、feeLimit其值是只能是包含数字的字符串且不能以0开头
+## 交易服务
 
-###### 返回值
-返回值解析后是一个对象：对象属性如下
+交易服务主要是交易相关的接口，目前有5个接口：buildBlob, evaluationFee, sign, submit, getInfo。
 
-   参数     |     类型     |     描述                    |
------------ | ------------ | --------------------------- |
-error_code |    Number    | 错误码             |
-msg |    String      | 描述信息 |
-data |    Object   | 返回数据 |
+其中调用buildBlob之前需要构建一些操作，分别包括:
 
-
-data值是一个对象：格式如下
-
-```js
-{
-	hash: '47c2c92b95c68865a32563a66adeb40161ed6175009c19cd427fff89570cc74b'
-}
-
-hash: 交易hash值
 ```
-###### 实例：
+AccountActivateOperation
+AccountSetMetadataOperation
+AccountSetPrivilegeOperation
+AssetIssueOperation
+AssetSendOperation 
+BUSendOperation
+TokenIssueOperation
+TokenTransferOperation
+TokenTransferFromOperation
+TokenApproveOperation
+TokenAssignOperation
+TokenChangeOwnerOperation
+ContractInvokeByAssetOperation
+ContractInvokeByBUOperation
+LogCreateOperation
+```
 
-```js
+
+### 操作说明
+
+##### 激活账户
+
+>  调用方式: sdk.operation.accountActivateOperation(args)
+> 
+>	参数说明: args为Object，其中包含如下属性
+
+
+   成员变量    |     类型  |        描述                           |
+------------- | -------- | ----------------------------------   |
+sourceAddress |   String |  选填，操作源账户                       |
+metadata      |   String |  选填，备注，必须是16进制字符串           |
+destAddress   |   String |  必填，目标账户地址                     |
+initBalance   |   String |  必填，初始化资产，大小[0.1, max(int64)] |
+
+
+##### 发送BU
+>  调用方式: sdk.operation.buSendOperation(args)
+> 
+>	参数说明: args为Object，其中包含如下属性
+
+
+   成员变量    |     类型  |        描述                           |
+------------- | -------- | ----------------------------------   |
+sourceAddress		|   String |  选填，操作源账户                       |
+metadata			|   String |  选填，备注，必须是16进制字符串           |
+destAddress		|   String |  必填，目标账户地址                     |
+buAmount			|   String |  必填，初始化资产，大小[1, max(int64)] |
+
+
+##### 发布资产
+>  调用方式: sdk.operation.assetIssueOperation(args)
+> 
+>	参数说明: args为Object，其中包含如下属性
+
+
+   成员变量    |     类型  |        描述                           |
+------------- | -------- | ----------------------------------   |
+sourceAddress		|   String |  选填，操作源账户                       |
+metadata			|   String |  选填，备注，必须是16进制字符串           |
+code				|   String |  必填，资产编码                     |
+assetAmount		|   String |  必填，资产发布数量，大小[1, max(int64)] |
+
+
+
+##### 转移资产
+>  调用方式: sdk.operation.assetSendOperation(args)
+> 
+>	参数说明: args为Object，其中包含如下属性
+
+
+   成员变量    |     类型  |        描述                           |
+------------- | -------- | ----------------------------------   |
+sourceAddress		|   String |  选填，操作源账户                       |
+metadata			|   String |  选填，备注，必须是16进制字符串           |
+destAddress		|   String |  必填，目标账户地址                     |
+code				|   String |  必填，资产编码                     |
+issuer				|   String |  必填，资产发行账户地址              |
+assetAmount		|   String |  必填，资产转移数量，大小[1, max(int64)] |
+
+
+### buildBlob
+
+> 接口说明
+
+   该接口用于生成交易Blob字符串
+
+> 调用方法
+
+sdk.transaction.buildBlob(args)
+
+> 请求参数args为Object, 其中包含如下属性:
+
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+sourceAddress		|   String     |  必填，操作源账户    |
+gasPrice			|   String     |  必填，打包费用   |
+feeLimit			|   String     |  必填，交易费用  |
+nonce				|   String     |  必填，交易序列号 |
+operations		|   Array		  |  必填，操作   |
+ceilLedgerSeq		|   String     |  选填，区块高度限制  |
+metadata			|   String     |  选填，备注，必须是16进制字符串   |
+
+
+> 响应数据
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+transactionBlob |   String     |  Transaction序列化后的16进制字符串   |
+
+> 错误码
+
+   异常       |     错误码   |   描述   |
+-----------  | ----------- | -------- |
+SYSTEM_ERROR |   20000     |  系统错误 |
+
+> 示例
+
+```javascript
 const args = {
-	senderPrivateKey: 'privbwAAXFXsf4z7VtzPtWFmfDM8dEGZ97fsskUaJYeoduCCMxxv8jnH',
-	receiverAddress: 'buQtGi7QmaiaMDygKxMAsKPyLicYjPV2xKVq',
-	code: 'demo',
-	issuer: 'buQsBMbFNH3NRJBbFRCPWDzjx7RqRc1hhvn1',
-	amount: '300000',
-	nonce: '121',
+  sourceAddress,
+  gasPrice,
+  feeLimit,
+  nonce,
+  // ceilLedgerSeq: '',
+  operations: [ sendBuOperation ],
+  metadata: 'oh my tx',
+};
+const blobInfo = sdk.transaction.buildBlob(args);
+
+```
+
+### evaluationFee
+
+> 接口说明
+
+   该接口实现交易的费用评估
+
+> 调用方法
+
+sdk.transaction.evaluationFee(args)
+
+> 请求参数args为Object, 包含如下属性
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+sourceAddress		|   String     |  必填，发起该操作的源账户地址   |
+nonce				|   String     |  必填，待发起的交易序列号   |
+operation			|   String     |  必填，待提交的操作列表  |
+signtureNumber	|   String     |  选填，待签名者的数量，默认是1  |
+metadata			|   String     |  选填，备注，必须为16进制字符串   |
+
+> 响应数据
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+gasPrice    |   String     |  打包费用  |
+feeLimit    |   String     |  交易费用  |
+
+> 错误码
+
+   异常       |     错误码   |   描述   |
+-----------  | ----------- | -------- |
+SYSTEM_ERROR |   20000     |  系统错误 |
+
+> 示例
+
+```javascript
+const args = {
+	sourceAddress: 'buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf',
+	nonce: '101',
+	operation: sendBuOperation,
+	signtureNumber: '1',
+	metadata: 'Test evaluation fee',
 };
 
- bumo.asset.sendAsset(args).then(data => {
-   console.log(data);
- }).catch(err => {
-   console.log(err.message);
- });
+sdk.transaction.evaluationFee(args)..then(data => {
+  console.log(data);
+});
 
+
+```
+
+###  sign
+
+> 接口说明
+
+   该接口实现交易的签名
+
+> 调用方法
+
+sdk.transaction.sign(args)
+
+> 请求参数args为Object, 包含如下属性
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+privateKeys		|   Array     |  必填，私钥列表   |
+blob				|   String     |  必填，待签名blob   |
+
+
+> 响应数据
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+signatures    |   Array     |  签名后的数据列表  |
+
+> signatures元素为object, 其中包含如下属性
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+signData    |   String     |  签名后的数据列表  |
+publicKey    |   String     | 公钥 |
+
+
+> 错误码
+
+   异常       |     错误码   |   描述   |
+-----------  | ----------- | -------- |
+SYSTEM_ERROR |   20000     |  系统错误 |
+
+> 示例
+
+```javascript
+const signatureInfo = sdk.transaction.sign({
+	privateKeys: [ privateKey ],
+	blob,
+});
+  
+console.log(signatureInfo);
+
+```
+
+###  submit
+
+> 接口说明
+
+   该接口实现交易的提交
+
+> 调用方法
+
+sdk.transaction.submit(args)
+
+> 请求参数args为Object, 包含如下属性
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+	blob				|   String     |  必填，交易blob  |
+  signature		|   Array     |  必填，签名列表   |
+
+
+> 响应数据
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+hash    |   String     |  交易hash |
+
+
+
+> 错误码
+
+   异常       |     错误码   |   描述   |
+-----------  | ----------- | -------- |
+SYSTEM_ERROR |   20000     |  系统错误 |
+
+> 示例
+
+```javascript
+  let transactionInfo = yield sdk.transaction.submit({
+    blob: blob,
+    signature: signature,
+  });
+
+```
+## 区块服务
+
+### getNumber
+
+> 接口说明
+
+   查询最新的区块高度
+
+> 调用方法
+
+sdk.blob.getNumber()
+
+
+> 响应数据
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+header    |   Object    |  区块头   |
+blockNumber    |   String    |  最新的区块高度  |
+
+> 错误码
+
+   异常       |     错误码   |   描述   |
+-----------  | ----------- | -------- |
+SYSTEM_ERROR |   20000     |  系统错误 |
+
+> 示例
+
+```javascript
+sdk.blob.getNumber().then((result) => {
+  console.log(result);
+}).catch((err) => {
+  console.log(err.message);
+});
+
+```
+
+### checkStatus
+
+> 接口说明
+
+   检查本地节点区块是否同步完成
+
+> 调用方法
+
+sdk.blob.checkStatus()
+
+
+> 响应数据
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+isSynchronous     |   boolean     |  区块是否同步   |
+
+> 错误码
+
+   异常       |     错误码   |   描述   |
+-----------  | ----------- | -------- |
+SYSTEM_ERROR |   20000     |  系统错误 |
+
+> 示例
+
+```javascript
+
+sdk.blob.checkStatus().then((result) => {
+  console.log(result);
+}).catch((err) => {
+  console.log(err.message);
+});
+    
 ```
 
 
 
-### 错误码
 
-> 接口调用错误码信息
+## 情景示例
 
-参数 | 描述
------|-----
-0	| 成功
-1	| 私钥不合法
-2	| 公钥不合法
-3	| 地址不合法
-4	| 账户不存在
-5 | 交易失败
-6 | 交易号(nonce)太小
-7 | 权重不足
-8 | 函数参数数目不正确
-9 | 函数参数类型不正确
-10 | 函数参数不能为空
-11 | 内部服务器错误
-12 | 交易号(nonce)不正确
-13 | Bu不足
-14 | 源地址与目标地址相同
-15 | 目标账户已存在
-16 | 费用不足
-17 | 查询结果不存在
-18 | 放弃交易
-19 | 包含无效参数
-20 | 失败
-21 | gas price 小于默认值
-22 | 函数参数格式不正确
+## 错误码
