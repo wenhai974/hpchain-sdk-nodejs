@@ -2,7 +2,10 @@ bumo-sdk
 =======
 
 
-Bumo blockchain for Node.js developer.
+SDK include bumo blockchain serivces.
+
+## Goal of this module
+Let global users can all use bumo blockchain services more easily.
 
 
 ## Installation
