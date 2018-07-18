@@ -13,12 +13,18 @@ describe('Test bu operation', function() {
   it('build operation', function() {
     const sourceAddress = 'buQsBMbFNH3NRJBbFRCPWDzjx7RqRc1hhvn1';
     const destAddress = 'buQtGi7QmaiaMDygKxMAsKPyLicYjPV2xKVq';
-    const sendBuOperation = sdk.operation.buSendOperation({
+    const sendBuInfo = sdk.operation.buSendOperation({
       sourceAddress,
       destAddress,
-      amount: '60000',
-      metadata: 'oh my send bu',
+      buAmount: '60000',
+      // metadata: 'oh my send bu',
     });
+
+    if (sendBuInfo.errorCode !== 0) {
+      console.log(sendBuInfo);
+      return;
+    }
+    const sendBuOperation = sendBuInfo.result.operation;
 
     const result = sdk.transaction.buildBlob({
       sourceAddress,
@@ -26,8 +32,8 @@ describe('Test bu operation', function() {
       feeLimit: '123',
       nonce: `123`,
       ceilLedgerSeq: '1',
-      operation: sendBuOperation,
-      metadata: 'oh my tx',
+      operations: [ sendBuOperation ],
+      // metadata: 'oh my tx',
     });
 
 
