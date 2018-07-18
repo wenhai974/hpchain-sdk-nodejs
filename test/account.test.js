@@ -26,7 +26,6 @@ describe('Test bumo-sdk account', function() {
     // const address = 'buQVkUUBKpDKRmHYWw1MU8U7ngoQehno165i';
     sdk.account.getInfo(address).then(result => {
       console.log(result);
-      console.log(JSON.stringify(result));
     }).catch(err => {
       console.log(err.message);
     });

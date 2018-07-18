@@ -30,8 +30,8 @@ describe('Test asset', function() {
       destAddress: 'buQsBMbFNH3NRJBbFRCPWDzjx7RqRc1hhvn1',
       code: 'leo',
       issuer: 'buQsBMbFNH3NRJBbFRCPWDzjx7RqRc1hhvn1',
-      amount: '100',
-      metadata: 'oh my test send asset',
+      assetAmount: '100',
+      // metadata: 'oh my test send asset',
     };
 
     let issueOperationInfo = sdk.operation.assetSendOperation(args);
