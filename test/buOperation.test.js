@@ -16,8 +16,8 @@ describe('Test bu operation', function() {
     const sendBuOperation = sdk.operation.buSendOperation({
       sourceAddress,
       destAddress,
-      buAmount: '6000a',
-      metadata: 'oh my send bu',
+      buAmount: '6000',
+      // metadata: 'oh my send bu',
     });
     console.log(sendBuOperation);
   });
