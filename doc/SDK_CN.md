@@ -113,7 +113,7 @@ options 是一个对象，可以包含如下属性
 
    参数      |     类型     |     描述      |
 ----------- | ------------ | ----------------- |
-host|   String   | ip地址:端口             |
+host|   String   | ip地址:端口             
 
 ##### 实例：
 
@@ -232,6 +232,34 @@ const info = sdk.operation.buSendOperation({
 ## 账户服务
 
 账户服务主要是账户相关的接口，包括5个接口：checkValid, getInfo, getNonce, getBalance, getAssets, getMetadata。
+
+
+#### create
+> 接口说明
+
+   生成公私钥对及地址
+ > 调用方法
+
+sdk.account.create()
+
+> 响应数据
+
+   参数      |     类型     |        描述       
+----------- | ------------ | ----------------
+privateKey     |   String     |  私钥  
+publicKey     |   String     |  公钥 
+address     |   String     |  地址 
+
+
+> 实例：
+
+```js
+sdk.account.create().then(result => {
+  console.log(result);
+}).catch(err => {
+  console.log(err.message);
+});
+```
 
 ### checkValid
 > 接口说明
@@ -528,17 +556,17 @@ sdk.asset.asset.getInfo(args).then(data => {
 
    成员变量    |     类型  |        描述                           |
 ------------- | -------- | ----------------------------------   |
-sourceAddress |   String |  选填，操作源账户                       |
-metadata      |   String |  选填，备注，必须是16进制字符串           |
-destAddress   |   String |  必填，目标账户地址                     |
-initBalance   |   String |  必填，初始化资产，其值只能是包含数字的字符串且不能以0开头, 值范围[1, max(int64)] (单位是MO) |
+sourceAddress |   String |  选填，操作源账户                       
+metadata      |   String |  选填，备注，必须是16进制字符串           
+destAddress   |   String |  必填，目标账户地址                     
+initBalance   |   String |  必填，初始化资产，其值只能是包含数字的字符串且不能以0开头, 值范围[1, max(int64)] (单位是MO)
 > 1 BU = 10^8 MO
 
 > 返回值
 
 成员变量		|     类型  |        描述                           |
 ---------	| -------- | ----------------------------------   |
-operation |   Object  |  激活账户操作对象                       |
+operation |   Object  |  激活账户操作对象                       
 
 ##### 发送BU
 >  调用方式: sdk.operation.buSendOperation(args)
@@ -548,16 +576,16 @@ operation |   Object  |  激活账户操作对象                       |
 
    成员变量    |     类型  |        描述                           |
 ------------- | -------- | ----------------------------------   |
-sourceAddress		|   String |  选填，操作源账户                       |
-metadata			|   String |  选填，备注，必须是16进制字符串           |
-destAddress		|   String |  必填，目标账户地址                     |
-buAmount			|   String |  必填，初始化资产，其值只能是包含数字的字符串且不能以0开头, 值范围[1, max(int64)] (单位是MO)|
+sourceAddress		|   String |  选填，操作源账户                     
+metadata			|   String |  选填，备注，必须是16进制字符串           
+destAddress		|   String |  必填，目标账户地址                     
+buAmount			|   String |  必填，初始化资产，其值只能是包含数字的字符串且不能以0开头, 值范围[1, max(int64)] (单位是MO)
 
 > 返回值
 
 成员变量		|     类型  |        描述                           |
 ---------	| -------- | ----------------------------------   |
-operation |   Object  |  发送BU操作对象                       |
+operation |   Object  |  发送BU操作对象                      
 
 
 ##### 发布资产
@@ -568,16 +596,16 @@ operation |   Object  |  发送BU操作对象                       |
 
    成员变量    |     类型  |        描述                           |
 ------------- | -------- | ----------------------------------   |
-sourceAddress		|   String |  选填，操作源账户                       |
-metadata			|   String |  选填，备注，必须是16进制字符串           |
-code				|   String |  必填，资产编码                     |
-assetAmount		|   String |  必填，资产发布数量，其值只能是包含数字的字符串且不能以0开头, 值范围[1, max(int64)] (单位是MO) |
+sourceAddress		|   String |  选填，操作源账户                       
+metadata			|   String |  选填，备注，必须是16进制字符串           
+code				|   String |  必填，资产编码                     
+assetAmount		|   String |  必填，资产发布数量，其值只能是包含数字的字符串且不能以0开头, 值范围[1, max(int64)] (单位是MO)
 
 > 返回值
 
 成员变量		|     类型  |        描述                           |
 ---------	| -------- | ----------------------------------   |
-operation |   Object  |  发布资产操作对象                       |
+operation |   Object  |  发布资产操作对象                       
 
 
 ##### 转移资产
@@ -588,18 +616,18 @@ operation |   Object  |  发布资产操作对象                       |
 
    成员变量    |     类型  |        描述                           |
 ------------- | -------- | ----------------------------------   |
-sourceAddress		|   String |  选填，操作源账户                       |
-metadata			|   String |  选填，备注，必须是16进制字符串           |
-destAddress		|   String |  必填，目标账户地址                     |
-code				|   String |  必填，资产编码                     |
-issuer				|   String |  必填，资产发行账户地址              |
-assetAmount		|   String |  必填，资产转移数量，其值只能是包含数字的字符串且不能以0开头, 值范围[1, max(int64)] (单位是MO) |
+sourceAddress		|   String |  选填，操作源账户                       
+metadata			|   String |  选填，备注，必须是16进制字符串           
+destAddress		|   String |  必填，目标账户地址                     
+code				|   String |  必填，资产编码                     
+issuer				|   String |  必填，资产发行账户地址              
+assetAmount		|   String |  必填，资产转移数量，其值只能是包含数字的字符串且不能以0开头, 值范围[1, max(int64)] (单位是MO)
 
 > 返回值
 
 成员变量		|     类型  |        描述                           |
 ---------	| -------- | ----------------------------------   |
-operation |   Object  |  转移资产操作对象                       |
+operation |   Object  |  转移资产操作对象                       
 
 
 ### buildBlob
@@ -617,13 +645,13 @@ sdk.transaction.buildBlob(args)
 
    参数      |     类型     |        描述       |
 ----------- | ------------ | ---------------- |
-sourceAddress		|   String     |  必填，操作源账户    |
-gasPrice			|   String     |  必填，打包费用 (单位是MO)  |
-feeLimit			|   String     |  必填，交易费用 (单位是MO) |
-nonce				|   String     |  必填，交易序列号 |
-operations		|   Array		  |  必填，操作   |
-ceilLedgerSeq		|   String     |  选填，区块高度限制  |
-metadata			|   String     |  选填，备注，必须是16进制字符串   |
+sourceAddress		|   String     |  必填，操作源账户
+gasPrice			|   String     |  必填，打包费用 (单位是MO)
+feeLimit			|   String     |  必填，交易费用 (单位是MO)
+nonce				|   String     |  必填，交易序列号
+operations		|   Array		  |  必填，操作   
+ceilLedgerSeq		|   String     |  选填，区块高度限制  
+metadata			|   String     |  选填，备注，必须是16进制字符串   
 
 >  gasPrice、feeLimit、nonce、ceilLedgerSeq其值只能是包含数字的字符串且不能以0开头
 > 响应数据
@@ -670,24 +698,24 @@ sdk.transaction.evaluationFee(args)
 
    参数      |     类型     |        描述       |
 ----------- | ------------ | ---------------- |
-sourceAddress		|   String     |  必填，发起该操作的源账户地址   |
-nonce				|   String     |  必填，待发起的交易序列号   |
-operation			|   String     |  必填，待提交的操作列表  |
-signtureNumber	|   String     |  选填，待签名者的数量，默认是1  |
-metadata			|   String     |  选填，备注，必须为16进制字符串   |
+sourceAddress		|   String     |  必填，发起该操作的源账户地址
+nonce				|   String     |  必填，待发起的交易序列号   
+operation			|   String     |  必填，待提交的操作列表  
+signtureNumber	|   String     |  选填，待签名者的数量，默认是1  
+metadata			|   String     |  选填，备注，必须为16进制字符串   
 
 > 响应数据
 
    参数      |     类型     |        描述       |
 ----------- | ------------ | ---------------- |
-gasPrice    |   String     |  打包费用  |
-feeLimit    |   String     |  交易费用  |
+gasPrice    |   String     |  打包费用  
+feeLimit    |   String     |  交易费用  
 
 > 错误码
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-SYSTEM_ERROR |   20000     |  系统错误 |
+SYSTEM_ERROR |   20000     |  系统错误
 
 > 示例
 
@@ -721,29 +749,29 @@ sdk.transaction.sign(args)
 
    参数      |     类型     |        描述       |
 ----------- | ------------ | ---------------- |
-privateKeys		|   Array     |  必填，私钥列表   |
-blob				|   String     |  必填，待签名blob   |
+privateKeys		|   Array     |  必填，私钥列表  
+blob				|   String     |  必填，待签名blob
 
 
 > 响应数据
 
    参数      |     类型     |        描述       |
 ----------- | ------------ | ---------------- |
-signatures    |   Array     |  签名后的数据列表  |
+signatures    |   Array     |  签名后的数据列表  
 
 > signatures元素为object, 其中包含如下属性
 
    参数      |     类型     |        描述       |
 ----------- | ------------ | ---------------- |
-signData    |   String     |  签名后的数据列表  |
-publicKey    |   String     | 公钥 |
+signData    |   String     |  签名后的数据列表  
+publicKey    |   String     | 公钥
 
 
 > 错误码
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-SYSTEM_ERROR |   20000     |  系统错误 |
+SYSTEM_ERROR |   20000     |  系统错误
 
 > 示例
 
@@ -771,15 +799,15 @@ sdk.transaction.submit(args)
 
    参数      |     类型     |        描述       |
 ----------- | ------------ | ---------------- |
-	blob				|   String     |  必填，交易blob  |
-  signature		|   Array     |  必填，签名列表   |
+	blob				|   String     |  必填，交易blob
+  signature		|   Array     |  必填，签名列表
 
 
 > 响应数据
 
    参数      |     类型     |        描述       |
 ----------- | ------------ | ---------------- |
-hash    |   String     |  交易hash |
+hash    |   String     |  交易hash
 
 
 
@@ -787,7 +815,7 @@ hash    |   String     |  交易hash |
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-SYSTEM_ERROR |   20000     |  系统错误 |
+SYSTEM_ERROR |   20000     |  系统错误
 
 > 示例
 
@@ -815,14 +843,14 @@ sdk.blob.getNumber()
 
    参数      |     类型     |        描述       |
 ----------- | ------------ | ---------------- |
-header    |   Object    |  区块头   |
-blockNumber    |   String    |  最新的区块高度  |
+header    |   Object    |  区块头   
+blockNumber    |   String    |  最新的区块高度
 
 > 错误码
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-SYSTEM_ERROR |   20000     |  系统错误 |
+SYSTEM_ERROR |   20000     |  系统错误
 
 > 示例
 
@@ -850,13 +878,13 @@ sdk.blob.checkStatus()
 
    参数      |     类型     |        描述       |
 ----------- | ------------ | ---------------- |
-isSynchronous     |   boolean     |  区块是否同步   |
+isSynchronous     |   boolean     |  区块是否同步
 
 > 错误码
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-SYSTEM_ERROR |   20000     |  系统错误 |
+SYSTEM_ERROR |   20000     |  系统错误
 
 > 示例
 
@@ -868,6 +896,51 @@ sdk.blob.checkStatus().then((result) => {
   console.log(err.message);
 });
 
+```
+
+### getTransactions
+
+> 接口说明
+
+  查询指定区块高度下的所有交易
+  
+
+> 调用方法
+
+sdk.blob.getTransactions()
+
+
+> 请求参数
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+blockNumber     |   String     |  待查询的区块高度
+
+
+> 响应数据
+
+参数  |    类型 |   描述  |
+-----------|------------|----------------|
+total_count  |   String   |   返回的总交易数
+transactions    |  Array    |   交易内容
+
+> 错误码
+
+   异常       |     错误码   |   描述   |
+-----------  | ----------- | -------- |
+INVALID_BLOCKNUMBER_ERROR | 11060 | BlockNumber must bigger than 0
+SYSTEM_ERROR |   20000     |  系统错误
+
+> 示例
+
+```js
+
+sdk.blob.getTransactions(100).then(result => {
+  console.log(result);
+  console.log(JSON.stringify(result));
+}).catch(err => {
+  console.log(err.message);
+});
 ```
 
 
@@ -875,41 +948,430 @@ sdk.blob.checkStatus().then((result) => {
 
 > 接口说明
 
-  检查本地节点区块是否同步完成
+  获取区块信息
 
 > 调用方法
 
-sdk.blob.getInfo()
+sdk.blob.getInfo(blockNumber)
 
 > 请求参数
 
    参数      |     类型     |        描述       |
 ----------- | ------------ | ---------------- |
-isSynchronous     |   boolean     |  区块是否同步   |
+blockNumber     |   String     |  待查询的区块高度
 
 > 响应数据
 
    参数      |     类型     |        描述       |
 ----------- | ------------ | ---------------- |
-isSynchronous     |   boolean     |  区块是否同步   |
+closeTime | String | 区块关闭时间number | String | 区块高度txCount | String | 交易总量version | String | 区块版本
 
 > 错误码
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-SYSTEM_ERROR |   20000     |  系统错误 |
+INVALID_BLOCKNUMBER_ERROR | 11060 | BlockNumber must bigger than 0
+SYSTEM_ERROR |   20000     |  系统错误
 
 > 示例
 
 ```js
 
-sdk.blob.checkStatus().then((result) => {
+sdk.blob.getInfo(100).then(result => {
   console.log(result);
-}).catch((err) => {
+}).catch(err => {
+  console.log(err.message);
+});
+
+```
+
+### getLatestInfo
+
+> 接口说明
+
+  获取最新区块信息
+
+> 调用方法
+
+sdk.blob. getLatestInfo()
+
+
+> 响应数据
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+closeTime | String | 区块关闭时间number | String | 区块高度txCount | String | 交易总量version | String | 区块版本
+
+> 错误码
+
+   异常       |     错误码   |   描述   |
+-----------  | ----------- | -------- |
+INVALID_BLOCKNUMBER_ERROR | 11060 | BlockNumber must bigger than 0
+SYSTEM_ERROR |   20000     |  系统错误
+
+> 示例
+
+```js
+
+sdk.blob.getLatestInfo().then(result => {
+  console.log(result);
+}).catch(err => {
   console.log(err.message);
 });
 
 ```
 
 
+### getValidators
+
+> 接口说明
+
+  获取指定区块中所有验证节点数
+
+> 调用方法
+
+sdk.blob.getValidators(blockNumber)
+
+> 请求参数
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+blockNumber     |   String     |  待查询的区块高度
+
+> 响应数据
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+validators | Array | 验证节点列表
+
+
+> validators 的元素为Object，其中包含如下属性
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+address | String| 识节点地址
+plegeCoinAmount | String | 验证节点押金
+
+
+
+> 错误码
+
+   异常       |     错误码   |   描述   |
+-----------  | ----------- | -------- |
+INVALID_BLOCKNUMBER_ERROR | 11060 | BlockNumber must bigger than 0
+SYSTEM_ERROR |   20000     |  系统错误
+
+> 示例
+
+```js
+
+sdk.blob.getValidators(100).then(result => {
+  console.log(result);
+}).catch(err => {
+  console.log(err.message);
+});
+```
+
+### getLatestValidators
+
+> 接口说明
+
+   获取最新区块中所有验证节点数
+
+> 调用方法
+
+sdk.blob.getValidators()
+
+
+> 响应数据
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+validators | Array | 验证节点列表
+
+
+> validators 的元素为Object，其中包含如下属性
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+address | String| 识节点地址
+plegeCoinAmount | String | 验证节点押金
+
+
+
+> 错误码
+
+   异常       |     错误码   |   描述   |
+-----------  | ----------- | -------- |
+INVALID_BLOCKNUMBER_ERROR | 11060 | BlockNumber must bigger than 0
+SYSTEM_ERROR |   20000     |  系统错误
+
+> 示例
+
+```js
+
+sdk.blob.getLatestValidators().then(result => {
+  console.log(result);
+}).catch(err => {
+  console.log(err.message);
+});
+
+```
+
+### getReward
+
+> 接口说明
+
+  获取指定区块中的区块奖励和验证节点奖励
+
+> 调用方法
+
+sdk.blob.getReward(blockNumber)
+
+> 请求参数
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+blockNumber     |   String     |  待查询的区块高度
+
+> 响应数据
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+blockReward | String | 区块奖励数
+validatorsReward | Array | 验证节点奖励情况
+
+
+> validatorsReward 的元素为Object，其中包含如下属性
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+validator | String| 验证节点地址
+ reward | String | 验证节点奖励
+
+
+
+> 错误码
+
+   异常       |     错误码   |   描述   |
+-----------  | ----------- | -------- |
+INVALID_BLOCKNUMBER_ERROR | 11060 | BlockNumber must bigger than 0
+SYSTEM_ERROR |   20000     |  系统错误
+
+> 示例
+
+```js
+
+sdk.blob.getReward(100).then(result => {
+  console.log(result);
+}).catch(err => {
+  console.log(err.message);
+});
+    
+```
+
+### getLatestReward
+
+> 接口说明
+
+   获取最新区块中的区块奖励和验证节点奖励
+
+> 调用方法
+
+sdk.blob.getLatestReward()
+
+
+> 响应数据
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+blockReward | String | 区块奖励数
+validatorsReward | Array | 验证节点奖励情况
+
+
+> validatorsReward 的元素为Object，其中包含如下属性
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+validator | String| 验证节点地址
+ reward | String | 验证节点奖励
+
+
+
+> 错误码
+
+   异常       |     错误码   |   描述   |
+-----------  | ----------- | -------- |
+SYSTEM_ERROR |   20000     |  系统错误
+
+> 示例
+
+```js
+
+sdk.blob.getLatestReward().then(result => {
+  console.log(result);
+}).catch(err => {
+  console.log(err.message);
+});
+    
+```
+
+
+### getFees
+
+> 接口说明
+
+   获取指定区块中的账户最低资产限制和打包费用
+
+> 调用方法
+
+sdk.blob.getFees(blockNumber)
+
+> 请求参数
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+blockNumber     |   String     |  待查询的区块高度
+
+> 响应数据
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+fees | Object | 费用
+
+
+
+> fees包含如下属性
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+baseReserve | String| 账户最低资产限制
+ gasPrice | String | 打包费用，单位MO，1 BU = 10^8 MO
+
+
+
+> 错误码
+
+   异常       |     错误码   |   描述   |
+-----------  | ----------- | -------- |
+INVALID_BLOCKNUMBER_ERROR | 11060 | BlockNumber must bigger than 0
+SYSTEM_ERROR |   20000     |  系统错误
+
+> 示例
+
+```js
+
+sdk.blob.getFees(100).then(result => {
+  console.log(result);
+}).catch(err => {
+  console.log(err.message);
+});
+    
+```
+
+### getLatestFees
+
+> 接口说明
+
+   获取最新区块中的账户最低资产限制和打包费用
+
+> 调用方法
+
+sdk.blob.getLatestFees()
+
+> 响应数据
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+fees | Object | 费用
+
+
+
+> fees包含如下属性
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+baseReserve | String| 账户最低资产限制
+ gasPrice | String | 打包费用，单位MO，1 BU = 10^8 MO
+
+
+
+> 错误码
+
+   异常       |     错误码   |   描述   |
+-----------  | ----------- | -------- |
+SYSTEM_ERROR |   20000     |  系统错误
+
+> 示例
+
+```js
+
+sdk.blob.getLatestFees().then(result => {
+  console.log(result);
+}).catch(err => {
+  console.log(err.message);
+});
+    
+```
+
+
+
 ## 错误码
+
+   异常       |     错误码   |   描述   |
+-----------  | ----------- | -------- |
+ACCOUNT_CREATE_ERROR	|	11001	|	Create account failed
+INVALID_SOURCEADDRESS_ERROR									|	11002	|	Invalid sourceAddress
+INVALID_DESTADDRESS_ERROR										|	11003	|	Invalid destAddress
+INVALID_INITBALANCE_ERROR										|	11004	|	InitBalance must between 1 and max(int64)
+SOURCEADDRESS_EQUAL_DESTADDRESS_ERROR				|	11005	|	SourceAddress cannot be equal to destAddress
+INVALID_ADDRESS_ERROR												|	11006	|	Invalid address
+CONNECTNETWORK_ERROR												|	11007 |	Connect network failed
+METADATA_NOT_HEX_STRING_ERROR								|	11008 |	Metadata must be a hex string
+NO_ASSET_ERROR															| 11009 |	The account does not have the asset
+NO_METADATA_ERROR														| 11010 |	The account does not have the metadata
+INVALID_DATAKEY_ERROR												| 11011 |	The length of key must between 1 and 1024
+INVALID_DATAVALUE_ERROR											| 11012 |	The length of value must between 0 and 256000
+INVALID_DATAVERSION_ERROR										| 11013 |	The version must be equal or bigger than 0
+INVALID_MASTERWEIGHT_ERROR									| 11015 |	MasterWeight must between 0 and max(uint32)
+INVALID_SIGNER_ADDRESS_ERROR								| 11016 |	Invalid signer address
+INVALID_SIGNER_WEIGHT_ERROR									| 11017 |	Signer weight must between 0 and max(uint32)
+INVALID_TX_THRESHOLD_ERROR									| 11018 |	TxThreshold must between 0 and max(int64)
+INVALID_OPERATION_TYPE_ERROR								| 11019 |	Operation type must between 1 and 100
+INVALID_TYPE_THRESHOLD_ERROR								| 11020 |	TypeThreshold must between 0 and max(int64)
+INVALID_ASSET_CODE_ERROR										| 11023 |	The length of key must between 1 and 1024
+INVALID_ASSET_AMOUNT_ERROR									| 11024 |	AssetMount must between 0 and max(int64)
+INVALID_BU_AMOUNT_ERROR											| 11026 |	BuAmount must between 0 and max(int64)
+INVALID_ISSUER_ADDRESS_ERROR								| 11027 |	Invalid issuer address
+NO_SUCH_TOKEN_ERROR													| 11030	|	No such token
+INVALID_TOKEN_NAME_ERROR										| 11031	|	The length of token name must between 1 and 1024
+INVALID_TOKEN_SIMBOL_ERROR									| 11032	|	The length of symbol must between 1 and 1024
+INVALID_TOKEN_DECIMALS_ERROR								| 11033	|	Decimals must less than 8
+INVALID_TOKEN_TOTALSUPPLY_ERROR							| 11034	|	TotalSupply must between 1 and max(int64)
+INVALID_TOKENOWNER_ERRPR										| 11035	|	Invalid token owner
+INVALID_CONTRACTADDRESS_ERROR								| 11037	|	Invalid contract address
+CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR		| 11038	|	contractAddress is not a contract account
+INVALID_TOKEN_AMOUNT_ERROR									| 11039	|	Amount must between 1 and max(int64)
+SOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR		| 11040	|	SourceAddress cannot be equal to contractAddress
+INVALID_FROMADDRESS_ERROR										| 11041	|	Invalid fromAddress
+FROMADDRESS_EQUAL_DESTADDRESS_ERROR					| 11042	|	FromAddress cannot be equal to destAddress
+INVALID_SPENDER_ERROR												| 11043	|	Invalid spender
+INVALID_LOG_TOPIC_ERROR											| 11045	|	The length of log topic must between 1 and 128
+INVALID_LOG_DATA_ERROR											| 11046	|	The length of one of log data must between 1 and 1024
+INVALID_NONCE_ERROR													| 11048	|	Nonce must between 1 and max(int64)
+INVALID_GASPRICE_ERROR											| 11049	|	Amount must between gasPrice in block and max(int64)
+INVALID_FEELIMIT_ERROR											| 11050	|	FeeLimit must between 1 and max(int64)
+OPERATIONS_EMPTY_ERROR											| 1105O	|	perations cannot be empty
+INVALID_CEILLEDGERSEQ_ERROR									| 11052	|	CeilLedgerSeq must be equal or bigger than 0
+OPERATIONS_ONE_ERROR												| 11053	|	One of operations error
+INVALID_SIGNATURENUMBER_ERROR								| 11054	|	SignagureNumber must between 1 and max(int32)
+INVALID_HASH_ERROR													| 11055	|	Invalid transaction hash
+INVALID_BLOB_ERROR													| 11056	|	Invalid blobPRIVATEKEY_NULL_ERROR	11057	PrivateKeys cannot be empty
+PRIVATEKEY_ONE_ERROR												| 11058	|	One of privateKeys error
+URL_EMPTY_ERROR															| 11062	|	Url cannot be empty
+CONTRACTADDRESS_CODE_BOTH_NULL_ERROR				| 11063	|	ContractAddress and code cannot be empty at the same time
+INVALID_OPTTYPE_ERROR												| 11064	|	OptType must between 0 and 2
+GET_ALLOWANCE_ERROR													| 11065	|	底层错误描述
+GET_TOKEN_INFO_ERROR												| 11066	|	底层错误描述
+CONNECTN_BLOCKCHAIN_ERROR										| 19999	|	Connect blockchain failed
+SYSTEM_ERROR																| 20000	|	System error

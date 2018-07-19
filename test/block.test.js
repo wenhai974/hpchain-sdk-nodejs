@@ -10,8 +10,8 @@ const sdk = new BumoSDK({
 
 describe('Test bumo-sdk account', function() {
 
-  it('test getBlock', function() {
-    sdk.blob.getBlock(100).then((result) => {
+  it('test getNumber', function() {
+    sdk.blob.getNumber().then((result) => {
       console.log(result);
     }).catch((err) => {
       console.log(err.message);
@@ -26,77 +26,78 @@ describe('Test bumo-sdk account', function() {
     });
   });
   //
-  it('test getNumber', function() {
-    sdk.blob.getNumber().then((result) => {
-      console.log(result);
-    }).catch((err) => {
-      console.log(err.message);
-    });
-  });
 
   it('test getTransactions', function() {
-    sdk.blob.getTransactions(100).then((result) => {
+    sdk.blob.getTransactions(100).then(result => {
       console.log(result);
       console.log(JSON.stringify(result));
-    }).catch((err) => {
+    }).catch(err => {
       console.log(err.message);
     });
   });
 
   it('test getInfo', function() {
-    sdk.blob.getInfo(100).then((result) => {
+    sdk.blob.getInfo(100).then(result => {
       console.log(result);
-    }).catch((err) => {
+    }).catch(err => {
       console.log(err.message);
     });
   });
 
 
   it('test getLatestInfo', function() {
-    sdk.blob.getLatestInfo().then((result) => {
+    sdk.blob.getLatestInfo().then(result => {
       console.log(result);
-    }).catch((err) => {
+    }).catch(err => {
       console.log(err.message);
     });
   });
-
 
   it('test getValidators', function() {
-    sdk.blob.getValidators().then((result) => {
+    sdk.blob.getValidators(100).then(result => {
       console.log(result);
-    }).catch((err) => {
+    }).catch(err => {
       console.log(err.message);
     });
   });
 
-  it('test getLatestValidators', function() {
-    sdk.blob.getLatestValidators(100).then((result) => {
+  it('test  getLatestValidators', function() {
+    sdk.blob.getLatestValidators().then(result => {
       console.log(result);
-    }).catch((err) => {
+    }).catch(err => {
       console.log(err.message);
     });
   });
 
   it('test getReward', function() {
-    sdk.blob.getReward(100).then((result) => {
+    sdk.blob.getReward(100).then(result => {
       console.log(result);
-    }).catch((err) => {
+    }).catch(err => {
       console.log(err.message);
     });
   });
 
-  it('test getFees', function() {
-    sdk.blob.getFees(100).then((result) => {
+  it('test getLatestReward', function() {
+    sdk.blob.getLatestReward().then(result => {
       console.log(result);
-    }).catch((err) => {
+    }).catch(err => {
+      console.log(err.message);
+    });
+  });
+
+
+  it('test getFees', function() {
+    sdk.blob.getFees(100).then(result => {
+      console.log(result);
+    }).catch(err => {
       console.log(err.message);
     });
   });
 
   it('test getLatestFees', function() {
-    sdk.blob.getLatestFees(100).then((result) => {
+    sdk.blob.getLatestFees().then(result => {
       console.log(result);
-    }).catch((err) => {
+    }).catch(err => {
       console.log(err.message);
     });
   });
