@@ -1,4 +1,4 @@
-bumo-sdk
+bumo-sdk-nodejs
 =======
 
 Let developers can all use bumo blockchain services more easily.
