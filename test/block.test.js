@@ -61,6 +61,14 @@ describe('Test bumo-sdk account', function() {
   });
 
 
+  it('test getValidators', function() {
+    sdk.blob.getValidators().then((result) => {
+      console.log(result);
+    }).catch((err) => {
+      console.log(err.message);
+    });
+  });
+
   it('test getLatestValidators', function() {
     sdk.blob.getLatestValidators(100).then((result) => {
       console.log(result);
