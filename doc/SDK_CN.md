@@ -1,9 +1,9 @@
-[English](SDK.md) | 中文
+[English](doc/SDK_EN.md) | 中文
 
 # Bumo SDK
 
 ## 概述
-本文档简要概述Bumo Node.js SDK常用接口文档, 方便开发者更方便地写入和查询BU区块链。
+本文档简要概述bumo-sdk-nodejs常用接口文档, 让开发者更方便地写入和查询BU区块链。
 
 - [名词解析](#名词解析)
 - [请求参数与响应数据格式](#请求参数与响应数据格式)
@@ -82,7 +82,7 @@ amount = 500， 那么传递参数时候就将其更改为 amount = '500' 字符
 
 响应数据为JavaScript对象，数据格式如下：
 
-```javascript
+```js
 {
 	errorCode: 0,
 	errorDesc: '',
@@ -117,7 +117,7 @@ host|   String   | ip地址:端口             |
 
 ##### 实例：
 
-```javascript
+```js
 const BumoSDK = require('bumo-sdk');
 
 const options = {
@@ -131,7 +131,7 @@ const sdk = new BumoSDK(options);
 ### 信息查询
 用于查询BU区块链上的数据，直接调用相应的接口即可，比如，查询账户信息，调用如下：
 
-```javascript
+```js
 const address = 'buQemmMwmRQY1JkcU7w3nhruo%X5N3j6C29uo';
 
 sdk.account.getInfo(address).then(info=> {
@@ -148,7 +148,7 @@ sdk.account.getInfo(address).then(info=> {
 
 开发者可自己维护各个账户nonce，在提交完一个交易后，自动递增1，这样可以在短时间内发送多笔交易，否则，必须等上一个交易执行完成后，账户的nonce值才会加1。接口调用如下：
 
-```javascript
+```js
 
 const address = 'buQemmMwmRQY1JkcU7w3nhruo%X5N3j6C29uo';
 
@@ -170,7 +170,7 @@ sdk.account.getNonce(address).then(info => {
 
 这里的操作是指在交易中做的一些动作。 例如：构建发送BU的操作，调用如下:
 
-```javascript
+```js
 const destAddress = 'buQWESXjdgXSFFajEZfkwi5H4fuAyTGgzkje';
 
 const info = sdk.operation.buSendOperation({
@@ -187,7 +187,7 @@ const info = sdk.operation.buSendOperation({
 > 注意：nonce、gasPrice、feeLimit其值是只能是包含数字的字符串且不能以0开头
 >
 
-```javascript
+```js
 
   let blobInfo = sdk.transaction.buildBlob({
     sourceAddress: 'buQnc3AGCo6ycWJCce516MDbPHKjK7ywwkuo',
@@ -206,7 +206,7 @@ const info = sdk.operation.buSendOperation({
 
 该接口用于交易发起者使用私钥对交易进行签名。接口调用如下：
 
-```javascript
+```js
   const signatureInfo = sdk.transaction.sign({
     privateKeys: [ privateKey ],
     blob,
@@ -219,7 +219,7 @@ const info = sdk.operation.buSendOperation({
 
 该接口用于向BU区块链发送交易，触发交易的执行。接口调用如下：
 
-```javascript
+```js
   sdk.transaction.submit({
     blob,
     signature: signature,
@@ -262,7 +262,7 @@ SYSTEM_ERROR |   20000     |  System error
 
 > 示例
 
-```javascript
+```js
 const address = 'buQemmMwmRQY1JkcU7w3nhruoX5N3j6C29uo';
 
 sdk.account.checkValid(address).then(result => {
@@ -323,7 +323,7 @@ SYSTEM_ERROR |   20000     |  System error
 
 > 示例
 
-```javascript
+```js
 const address = 'buQemmMwmRQY1JkcU7w3nhruo%X5N3j6C29uo';
 
 sdk.account.getInfo(address).then(result => {
@@ -365,9 +365,9 @@ SYSTEM_ERROR				|	20000	|  System error
 
 > 示例
 
-```javascript
+```js
 
-const address = "buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf";
+const address = 'buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf';
 
 sdk.account.getNonce(address).then(result => {
   console.log(result);
@@ -409,7 +409,7 @@ SYSTEM_ERROR |   20000     |  System error
 
 > 示例
 
-```javascript
+```js
 
 const address = 'buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf';
 
@@ -494,7 +494,7 @@ SYSTEM_ERROR						|	20000	| System error
 
 > 示例
 
-```javascript
+```js
 
 const args = {
 	address: 'buQnnUEBREw2hB6pWHGPzwanX7d28xk6KVcp',
@@ -515,26 +515,7 @@ sdk.asset.asset.getInfo(args).then(data => {
 
 交易服务主要是交易相关的接口，目前有5个接口：buildBlob, evaluationFee, sign, submit, getInfo。
 
-其中调用buildBlob之前需要构建一些操作，分别包括:
-
-```
-AccountActivateOperation
-AccountSetMetadataOperation
-AccountSetPrivilegeOperation
-AssetIssueOperation
-AssetSendOperation
-BUSendOperation
-TokenIssueOperation
-TokenTransferOperation
-TokenTransferFromOperation
-TokenApproveOperation
-TokenAssignOperation
-TokenChangeOwnerOperation
-ContractInvokeByAssetOperation
-ContractInvokeByBUOperation
-LogCreateOperation
-```
-
+其中调用buildBlob之前需要构建一些操作，分别包括如下操作:
 
 ### 操作说明
 
@@ -550,8 +531,14 @@ LogCreateOperation
 sourceAddress |   String |  选填，操作源账户                       |
 metadata      |   String |  选填，备注，必须是16进制字符串           |
 destAddress   |   String |  必填，目标账户地址                     |
-initBalance   |   String |  必填，初始化资产，大小[0.1, max(int64)] |
+initBalance   |   String |  必填，初始化资产，其值只能是包含数字的字符串且不能以0开头, 值范围[1, max(int64)] (单位是MO) |
+> 1 BU = 10^8 MO
 
+> 返回值
+
+成员变量		|     类型  |        描述                           |
+---------	| -------- | ----------------------------------   |
+operation |   Object  |  激活账户操作对象                       |
 
 ##### 发送BU
 >  调用方式: sdk.operation.buSendOperation(args)
@@ -564,7 +551,13 @@ initBalance   |   String |  必填，初始化资产，大小[0.1, max(int64)] |
 sourceAddress		|   String |  选填，操作源账户                       |
 metadata			|   String |  选填，备注，必须是16进制字符串           |
 destAddress		|   String |  必填，目标账户地址                     |
-buAmount			|   String |  必填，初始化资产，大小[1, max(int64)] |
+buAmount			|   String |  必填，初始化资产，其值只能是包含数字的字符串且不能以0开头, 值范围[1, max(int64)] (单位是MO)|
+
+> 返回值
+
+成员变量		|     类型  |        描述                           |
+---------	| -------- | ----------------------------------   |
+operation |   Object  |  发送BU操作对象                       |
 
 
 ##### 发布资产
@@ -578,8 +571,13 @@ buAmount			|   String |  必填，初始化资产，大小[1, max(int64)] |
 sourceAddress		|   String |  选填，操作源账户                       |
 metadata			|   String |  选填，备注，必须是16进制字符串           |
 code				|   String |  必填，资产编码                     |
-assetAmount		|   String |  必填，资产发布数量，大小[1, max(int64)] |
+assetAmount		|   String |  必填，资产发布数量，其值只能是包含数字的字符串且不能以0开头, 值范围[1, max(int64)] (单位是MO) |
 
+> 返回值
+
+成员变量		|     类型  |        描述                           |
+---------	| -------- | ----------------------------------   |
+operation |   Object  |  发布资产操作对象                       |
 
 
 ##### 转移资产
@@ -595,7 +593,13 @@ metadata			|   String |  选填，备注，必须是16进制字符串           
 destAddress		|   String |  必填，目标账户地址                     |
 code				|   String |  必填，资产编码                     |
 issuer				|   String |  必填，资产发行账户地址              |
-assetAmount		|   String |  必填，资产转移数量，大小[1, max(int64)] |
+assetAmount		|   String |  必填，资产转移数量，其值只能是包含数字的字符串且不能以0开头, 值范围[1, max(int64)] (单位是MO) |
+
+> 返回值
+
+成员变量		|     类型  |        描述                           |
+---------	| -------- | ----------------------------------   |
+operation |   Object  |  转移资产操作对象                       |
 
 
 ### buildBlob
@@ -614,37 +618,39 @@ sdk.transaction.buildBlob(args)
    参数      |     类型     |        描述       |
 ----------- | ------------ | ---------------- |
 sourceAddress		|   String     |  必填，操作源账户    |
-gasPrice			|   String     |  必填，打包费用   |
-feeLimit			|   String     |  必填，交易费用  |
+gasPrice			|   String     |  必填，打包费用 (单位是MO)  |
+feeLimit			|   String     |  必填，交易费用 (单位是MO) |
 nonce				|   String     |  必填，交易序列号 |
 operations		|   Array		  |  必填，操作   |
 ceilLedgerSeq		|   String     |  选填，区块高度限制  |
 metadata			|   String     |  选填，备注，必须是16进制字符串   |
 
-
+>  gasPrice、feeLimit、nonce、ceilLedgerSeq其值只能是包含数字的字符串且不能以0开头
 > 响应数据
 
    参数      |     类型     |        描述       |
 ----------- | ------------ | ---------------- |
-transactionBlob |   String     |  Transaction序列化后的16进制字符串   |
+transactionBlob |   String     |  Transaction序列化后的16进制字符串   
 
 > 错误码
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-SYSTEM_ERROR |   20000     |  系统错误 |
-
+INVALID_SOURCEADDRESS_ERROR | 11002 | Invalid sourceAddress
+INVALID_NONCE_ERROR					| 11048 | Nonce must between 1 and max(int64)
+INVALID_GASPRICE_ERROR			| 11049	| Amount must between gasPrice in block and max(int64)
+INVALID_FEELIMIT_ERROR			| 11050	|	FeeLimit must between 1000000 and max(int64)
+SYSTEM_ERROR 								|   20000     |  系统错误
 > 示例
 
-```javascript
+```js
 const args = {
   sourceAddress,
   gasPrice,
   feeLimit,
   nonce,
-  // ceilLedgerSeq: '',
   operations: [ sendBuOperation ],
-  metadata: 'oh my tx',
+  metadata: '6f68206d79207478',
 };
 const blobInfo = sdk.transaction.buildBlob(args);
 
@@ -685,16 +691,16 @@ SYSTEM_ERROR |   20000     |  系统错误 |
 
 > 示例
 
-```javascript
+```js
 const args = {
 	sourceAddress: 'buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf',
 	nonce: '101',
 	operation: sendBuOperation,
 	signtureNumber: '1',
-	metadata: 'Test evaluation fee',
+	metadata: '54657374206576616c756174696f6e20666565',
 };
 
-sdk.transaction.evaluationFee(args)..then(data => {
+sdk.transaction.evaluationFee(args).then(data => {
   console.log(data);
 });
 
@@ -741,7 +747,7 @@ SYSTEM_ERROR |   20000     |  系统错误 |
 
 > 示例
 
-```javascript
+```js
 const signatureInfo = sdk.transaction.sign({
 	privateKeys: [ privateKey ],
 	blob,
@@ -785,7 +791,7 @@ SYSTEM_ERROR |   20000     |  系统错误 |
 
 > 示例
 
-```javascript
+```js
   let transactionInfo = yield sdk.transaction.submit({
     blob: blob,
     signature: signature,
@@ -820,7 +826,7 @@ SYSTEM_ERROR |   20000     |  系统错误 |
 
 > 示例
 
-```javascript
+```js
 sdk.blob.getNumber().then((result) => {
   console.log(result);
 }).catch((err) => {
@@ -854,7 +860,7 @@ SYSTEM_ERROR |   20000     |  系统错误 |
 
 > 示例
 
-```javascript
+```js
 
 sdk.blob.checkStatus().then((result) => {
   console.log(result);
@@ -865,8 +871,45 @@ sdk.blob.checkStatus().then((result) => {
 ```
 
 
+### getInfo
 
+> 接口说明
 
-## 情景示例
+  检查本地节点区块是否同步完成
+
+> 调用方法
+
+sdk.blob.getInfo()
+
+> 请求参数
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+isSynchronous     |   boolean     |  区块是否同步   |
+
+> 响应数据
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+isSynchronous     |   boolean     |  区块是否同步   |
+
+> 错误码
+
+   异常       |     错误码   |   描述   |
+-----------  | ----------- | -------- |
+SYSTEM_ERROR |   20000     |  系统错误 |
+
+> 示例
+
+```js
+
+sdk.blob.checkStatus().then((result) => {
+  console.log(result);
+}).catch((err) => {
+  console.log(err.message);
+});
+
+```
+
 
 ## 错误码
