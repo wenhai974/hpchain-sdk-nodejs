@@ -1,6 +1,5 @@
-[English](doc/SDK_EN.md) | 中文
 
-# Bumo SDK
+# bumo-sdk-nodejs
 
 ## 概述
 本文档简要概述bumo-sdk-nodejs常用接口文档, 让开发者更方便地写入和查询BU区块链。
@@ -47,7 +46,6 @@
 	- [getLatestReward](#getlatestreward)
 	- [getFees](#getfees)
 	- [getLatestFees](#getlatestfees)
-- [情景示例](#情景示例)
 - [错误码](#错误码)
 
 ## 名词解析
@@ -231,7 +229,7 @@ const info = sdk.operation.buSendOperation({
 
 ## 账户服务
 
-账户服务主要是账户相关的接口，包括5个接口：checkValid, getInfo, getNonce, getBalance, getAssets, getMetadata。
+账户服务主要是账户相关的接口
 
 
 #### create
