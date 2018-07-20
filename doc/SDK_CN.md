@@ -421,7 +421,7 @@ address     |   String     |  待检测的账户地址
 
    参数      |     类型     |        描述       
 ----------- | ------------ | ----------------
-balance     |   String    |  该账户的]余额   
+balance     |   String    |  该账户的余额
 
 > 错误码
 
@@ -960,7 +960,10 @@ blockNumber     |   String     |  待查询的区块高度
 
    参数      |     类型     |        描述       |
 ----------- | ------------ | ---------------- |
-closeTime | String | 区块关闭时间number | String | 区块高度txCount | String | 交易总量version | String | 区块版本
+closeTime | String | 区块关闭时间
+number | String | 区块高度
+txCount | String | 交易总量
+version | String | 区块版本
 
 > 错误码
 
@@ -996,7 +999,10 @@ sdk.blob. getLatestInfo()
 
    参数      |     类型     |        描述       |
 ----------- | ------------ | ---------------- |
-closeTime | String | 区块关闭时间number | String | 区块高度txCount | String | 交易总量version | String | 区块版本
+closeTime | String | 区块关闭时间
+number | String | 区块高度
+txCount | String | 交易总量
+version | String | 区块版本
 
 > 错误码
 
