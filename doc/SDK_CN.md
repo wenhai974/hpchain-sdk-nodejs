@@ -1082,7 +1082,7 @@ sdk.blob.getValidators(100).then(result => {
 
 > 调用方法
 
-sdk.blob.getValidators()
+sdk.blob.getLatestValidators()
 
 
 > 响应数据
@@ -1096,7 +1096,7 @@ validators | Array | 验证节点列表
 
    参数      |     类型     |        描述       |
 ----------- | ------------ | ---------------- |
-address | String| 识节点地址
+address | String| 节点地址
 plegeCoinAmount | String | 验证节点押金
 
 
@@ -1105,7 +1105,6 @@ plegeCoinAmount | String | 验证节点押金
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-INVALID_BLOCKNUMBER_ERROR | 11060 | blockNumber must bigger than 0
 SYSTEM_ERROR |   20000     |  系统错误
 
 > 示例
