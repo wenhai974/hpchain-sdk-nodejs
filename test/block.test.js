@@ -11,7 +11,7 @@ const sdk = new BumoSDK({
 describe('Test bumo-sdk account', function() {
 
   it('test getNumber', function() {
-    sdk.blob.getNumber().then((result) => {
+    sdk.block.getNumber().then((result) => {
       console.log(result);
     }).catch((err) => {
       console.log(err.message);
@@ -19,7 +19,7 @@ describe('Test bumo-sdk account', function() {
   });
 
   it('test checkBlockStatus', function() {
-    sdk.blob.checkStatus().then((result) => {
+    sdk.block.checkStatus().then((result) => {
       console.log(result);
     }).catch((err) => {
       console.log(err.message);
@@ -28,7 +28,7 @@ describe('Test bumo-sdk account', function() {
   //
 
   it('test getTransactions', function() {
-    sdk.blob.getTransactions('100').then(result => {
+    sdk.block.getTransactions('100').then(result => {
       console.log(result);
     }).catch(err => {
       console.log(err.message);
@@ -36,7 +36,7 @@ describe('Test bumo-sdk account', function() {
   });
 
   it('test getInfo', function() {
-    sdk.blob.getInfo(100).then(result => {
+    sdk.block.getInfo(100).then(result => {
       console.log(result);
     }).catch(err => {
       console.log(err.message);
@@ -45,7 +45,7 @@ describe('Test bumo-sdk account', function() {
 
 
   it('test getLatestInfo', function() {
-    sdk.blob.getLatestInfo().then(result => {
+    sdk.block.getLatestInfo().then(result => {
       console.log(result);
     }).catch(err => {
       console.log(err.message);
@@ -53,7 +53,7 @@ describe('Test bumo-sdk account', function() {
   });
 
   it('test getValidators', function() {
-    sdk.blob.getValidators(100).then(result => {
+    sdk.block.getValidators(100).then(result => {
       console.log(result);
     }).catch(err => {
       console.log(err.message);
@@ -61,7 +61,7 @@ describe('Test bumo-sdk account', function() {
   });
 
   it('test  getLatestValidators', function() {
-    sdk.blob.getLatestValidators().then(result => {
+    sdk.block.getLatestValidators().then(result => {
       console.log(result);
       console.log(JSON.stringify(result))
     }).catch(err => {
@@ -70,7 +70,7 @@ describe('Test bumo-sdk account', function() {
   });
 
   it('test getReward', function() {
-    sdk.blob.getReward(100).then(result => {
+    sdk.block.getReward(100).then(result => {
       console.log(result);
     }).catch(err => {
       console.log(err.message);
@@ -78,7 +78,7 @@ describe('Test bumo-sdk account', function() {
   });
 
   it('test getLatestReward', function() {
-    sdk.blob.getLatestReward().then(result => {
+    sdk.block.getLatestReward().then(result => {
       console.log(result);
     }).catch(err => {
       console.log(err.message);
@@ -87,7 +87,7 @@ describe('Test bumo-sdk account', function() {
 
 
   it('test getFees', function() {
-    sdk.blob.getFees(100).then(result => {
+    sdk.block.getFees(100).then(result => {
       console.log(result);
     }).catch(err => {
       console.log(err.message);
@@ -95,7 +95,7 @@ describe('Test bumo-sdk account', function() {
   });
 
   it('test getLatestFees', function() {
-    sdk.blob.getLatestFees().then(result => {
+    sdk.block.getLatestFees().then(result => {
       console.log(result);
     }).catch(err => {
       console.log(err.message);

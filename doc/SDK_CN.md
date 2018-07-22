@@ -832,7 +832,7 @@ SYSTEM_ERROR |   20000     |  系统错误
 
 > 调用方法
 
-sdk.blob.getNumber()
+sdk.block.getNumber()
 
 
 > 响应数据
@@ -851,7 +851,7 @@ SYSTEM_ERROR |   20000     |  系统错误
 > 示例
 
 ```js
-sdk.blob.getNumber().then((result) => {
+sdk.block.getNumber().then((result) => {
   console.log(result);
 }).catch((err) => {
   console.log(err.message);
@@ -867,7 +867,7 @@ sdk.blob.getNumber().then((result) => {
 
 > 调用方法
 
-sdk.blob.checkStatus()
+sdk.block.checkStatus()
 
 
 > 响应数据
@@ -886,7 +886,7 @@ SYSTEM_ERROR |   20000     |  系统错误
 
 ```js
 
-sdk.blob.checkStatus().then((result) => {
+sdk.block.checkStatus().then((result) => {
   console.log(result);
 }).catch((err) => {
   console.log(err.message);
@@ -903,7 +903,7 @@ sdk.blob.checkStatus().then((result) => {
 
 > 调用方法
 
-sdk.blob.getTransactions(blockNumber)
+sdk.block.getTransactions(blockNumber)
 
 
 > 请求参数
@@ -931,7 +931,7 @@ SYSTEM_ERROR |   20000     |  系统错误
 
 ```js
 
-sdk.blob.getTransactions(100).then(result => {
+sdk.block.getTransactions(100).then(result => {
   console.log(result);
   console.log(JSON.stringify(result));
 }).catch(err => {
@@ -948,7 +948,7 @@ sdk.blob.getTransactions(100).then(result => {
 
 > 调用方法
 
-sdk.blob.getInfo(blockNumber)
+sdk.block.getInfo(blockNumber)
 
 > 请求参数
 
@@ -976,7 +976,7 @@ SYSTEM_ERROR |   20000     |  系统错误
 
 ```js
 
-sdk.blob.getInfo(100).then(result => {
+sdk.block.getInfo(100).then(result => {
   console.log(result);
 }).catch(err => {
   console.log(err.message);
@@ -992,7 +992,7 @@ sdk.blob.getInfo(100).then(result => {
 
 > 调用方法
 
-sdk.blob. getLatestInfo()
+sdk.block. getLatestInfo()
 
 
 > 响应数据
@@ -1015,7 +1015,7 @@ SYSTEM_ERROR |   20000     |  系统错误
 
 ```js
 
-sdk.blob.getLatestInfo().then(result => {
+sdk.block.getLatestInfo().then(result => {
   console.log(result);
 }).catch(err => {
   console.log(err.message);
@@ -1032,7 +1032,7 @@ sdk.blob.getLatestInfo().then(result => {
 
 > 调用方法
 
-sdk.blob.getValidators(blockNumber)
+sdk.block.getValidators(blockNumber)
 
 > 请求参数
 
@@ -1067,7 +1067,7 @@ SYSTEM_ERROR |   20000     |  系统错误
 
 ```js
 
-sdk.blob.getValidators(100).then(result => {
+sdk.block.getValidators(100).then(result => {
   console.log(result);
 }).catch(err => {
   console.log(err.message);
@@ -1082,7 +1082,7 @@ sdk.blob.getValidators(100).then(result => {
 
 > 调用方法
 
-sdk.blob.getLatestValidators()
+sdk.block.getLatestValidators()
 
 
 > 响应数据
@@ -1111,7 +1111,7 @@ SYSTEM_ERROR |   20000     |  系统错误
 
 ```js
 
-sdk.blob.getLatestValidators().then(result => {
+sdk.block.getLatestValidators().then(result => {
   console.log(result);
 }).catch(err => {
   console.log(err.message);
@@ -1127,7 +1127,7 @@ sdk.blob.getLatestValidators().then(result => {
 
 > 调用方法
 
-sdk.blob.getReward(blockNumber)
+sdk.block.getReward(blockNumber)
 
 > 请求参数
 
@@ -1163,7 +1163,7 @@ SYSTEM_ERROR |   20000     |  系统错误
 
 ```js
 
-sdk.blob.getReward(100).then(result => {
+sdk.block.getReward(100).then(result => {
   console.log(result);
 }).catch(err => {
   console.log(err.message);
@@ -1179,7 +1179,7 @@ sdk.blob.getReward(100).then(result => {
 
 > 调用方法
 
-sdk.blob.getLatestReward()
+sdk.block.getLatestReward()
 
 
 > 响应数据
@@ -1209,7 +1209,7 @@ SYSTEM_ERROR |   20000     |  系统错误
 
 ```js
 
-sdk.blob.getLatestReward().then(result => {
+sdk.block.getLatestReward().then(result => {
   console.log(result);
 }).catch(err => {
   console.log(err.message);
@@ -1226,7 +1226,7 @@ sdk.blob.getLatestReward().then(result => {
 
 > 调用方法
 
-sdk.blob.getFees(blockNumber)
+sdk.block.getFees(blockNumber)
 
 > 请求参数
 
@@ -1262,7 +1262,7 @@ SYSTEM_ERROR |   20000     |  系统错误
 
 ```js
 
-sdk.blob.getFees(100).then(result => {
+sdk.block.getFees(100).then(result => {
   console.log(result);
 }).catch(err => {
   console.log(err.message);
@@ -1278,7 +1278,7 @@ sdk.blob.getFees(100).then(result => {
 
 > 调用方法
 
-sdk.blob.getLatestFees()
+sdk.block.getLatestFees()
 
 > 响应数据
 
@@ -1307,7 +1307,7 @@ SYSTEM_ERROR |   20000     |  系统错误
 
 ```js
 
-sdk.blob.getLatestFees().then(result => {
+sdk.block.getLatestFees().then(result => {
   console.log(result);
 }).catch(err => {
   console.log(err.message);
