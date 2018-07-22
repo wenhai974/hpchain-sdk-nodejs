@@ -437,7 +437,7 @@ SYSTEM_ERROR |   20000     |  System error
 
 const address = 'buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf';
 
-const info = sdk.getAccountService().getBalance(address);
+const info = sdk.account.getBalance(address);
 
 ```
 
@@ -483,7 +483,7 @@ key			|	object |  包含属性: code资产编码、issuer资产发行账户地�
 
 > 调用方法
 
-sdk.asset.asset.getInfo(args);
+sdk.asset.asset.getAsset(args);
 
 > 请求参数args为Object其中包含如下属性
 
@@ -1008,7 +1008,6 @@ version | String | 区块版本
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-INVALID_BLOCKNUMBER_ERROR | 11060 | BlockNumber must bigger than 0
 SYSTEM_ERROR |   20000     |  系统错误
 
 > 示例
