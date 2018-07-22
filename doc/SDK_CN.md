@@ -903,7 +903,7 @@ sdk.blob.checkStatus().then((result) => {
 
 > 调用方法
 
-sdk.blob.getTransactions()
+sdk.blob.getTransactions(blockNumber)
 
 
 > 请求参数

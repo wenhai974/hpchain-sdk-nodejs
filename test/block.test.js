@@ -28,9 +28,8 @@ describe('Test bumo-sdk account', function() {
   //
 
   it('test getTransactions', function() {
-    sdk.blob.getTransactions(100).then(result => {
+    sdk.blob.getTransactions('100').then(result => {
       console.log(result);
-      console.log(JSON.stringify(result));
     }).catch(err => {
       console.log(err.message);
     });
