@@ -967,11 +967,11 @@ error_code|String|交易错误码
 error_desc|String|交易描述
 hash|String|交易hash
 ledger_seq|String|区块序列号
-transaction|[TransactionInfo Object](#transactioninfoObject)|交易内容列表
+transaction|[TransactionInfo Object](#transactionInfoObject)|交易内容列表
 signatures|[Signature Object](#signatureObject)|签名列表
 tx_size|int64|交易大小
 
-### transactioninfoObject
+### transactionInfoObject
 
    成员      |     类型     |        描述       |
 ----------- | ------------ | ---------------- |
