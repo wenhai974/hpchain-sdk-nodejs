@@ -1056,8 +1056,8 @@ validators | Array | 验证节点列表
 
    参数      |     类型     |        描述       |
 ----------- | ------------ | ---------------- |
-address | String| 识节点地址
-plegeCoinAmount | String | 验证节点押金
+address | String| 共识节点地址
+pledge_coin_amount | String | 验证节点押金
 
 
 
@@ -1101,8 +1101,8 @@ validators | Array | 验证节点列表
 
    参数      |     类型     |        描述       |
 ----------- | ------------ | ---------------- |
-address | String| 节点地址
-plegeCoinAmount | String | 验证节点押金
+address | String| 共识节点地址
+pledge_coin_amount | String | 验证节点押金
 
 
 

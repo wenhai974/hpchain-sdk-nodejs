@@ -74,6 +74,7 @@ describe('Test bumo-sdk account', function() {
   it('test getReward', function() {
     sdk.block.getReward('100').then(result => {
       console.log(result);
+      console.log(JSON.stringify(result))
     }).catch(err => {
       console.log(err.message);
     });
