@@ -956,7 +956,39 @@ blockNumber     |   String     |  待查询的区块高度
 参数  |    类型 |   描述  |
 -----------|------------|----------------|
 total_count  |   String   |   返回的总交易数
-transactions    |  Array    |   交易内容
+transactions    |  [Array](#transactions)    |   交易内容
+
+### transactions
+成员变量  |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+actual_fee|String|交易实际费用
+close_time|String|交易关闭时间
+error_code|String|交易错误码
+error_desc|String|交易描述
+hash|String|交易hash
+ledger_seq|String|区块序列号
+transaction|[TransactionInfo Object](#transactioninfoObject)|交易内容列表
+signatures|[Signature Object](#signatureObject)|签名列表
+tx_size|int64|交易大小
+
+### transactioninfoObject
+
+   成员      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+source_address|String|交易发起的源账户地址
+fee_limit|String|交易费用
+gas_price|String|交易打包费用
+nonce|String|交易序列号
+operations|Object|操作列表
+
+
+### signatureObject
+成员变量      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+sign_data|String|签名后数据
+public_key|String|公钥
+
+
 
 > 错误码
 
