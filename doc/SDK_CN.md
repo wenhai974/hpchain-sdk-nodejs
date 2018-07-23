@@ -318,28 +318,41 @@ sdk.account.getInfo(address);
 ----------- | ------------ | ----------------
 address     |   String     |  待检测的账户地址
 
+
 > 响应数据
 
-   参数    |     类型      |        描述
+   参数    |     类型      |        描述       
 --------- | ------------- | ----------------
-address	|	String		|		账户地址
-balance	|	String		|		账户余额
-nonce	  	|	String		|		账户交易序列号
-assets		|	Array		|		账户资产
-priv		|	Object		|		账户权限
+address	  |    String     |    账户地址       
+balance	  |    String      |    账户余额       
+nonce	  |    String      |    账户交易序列号
+priv	  | [Object](#priv) |    账户权限
 
-> priv object
-
-   参数       |     类型     |        描述
+#### priv
+   成员       |     类型     |        描述       
 -----------  | ------------ | ----------------
-masterWeight	|	String    |	账户自身权重
-thresholds	|	Object		|	门限
+master_weight |	 String    |   账户自身权重
+signers	     |[Object](#signers)|   签名者权重
+thresholds	 |[Object](#thresholds)|	门限
 
-> thresholds object
+#### signers
+   成员       |     类型     |        描述       
+-----------  | ------------ | ----------------
+address	     |   String	    |   签名账户地址
+weight	     |   String    |   签名账户权重
 
-   参数       |     类型     |        描述
+#### thresholds
+   成员       |     类型     |        描述       
 -----------  | ------------ | ----------------
 tx_threshold	 |    String	    |   交易默认门限
+type_thresholds|[Object](#type_thresholds)|不同类型交易的门限
+
+#### type_thresholds
+   成员       |     类型     |        描述       
+-----------  | ------------ | ----------------
+type         |    String	    |    操作类型
+threshold    |    String      |    门限
+
 
 
 > 错误码

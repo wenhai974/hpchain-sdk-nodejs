@@ -22,10 +22,12 @@ describe('Test bumo-sdk account', function() {
   });
 
   it('test account.getInfo', function() {
-    const address = 'buQsBMbFNH3NRJBbFRCPWDzjx7RqRc1hhvn1';
+    const address = 'buQemmMwmRQY1JkcU7w3nhruoX5N3j6C29uo';
+    // const address = 'buQsBMbFNH3NRJBbFRCPWDzjx7RqRc1hhvn1';
     // const address = 'buQVkUUBKpDKRmHYWw1MU8U7ngoQehno165i';
     sdk.account.getInfo(address).then(result => {
       console.log(result);
+      console.log(JSON.stringify(result));
     }).catch(err => {
       console.log(err.message);
     });
