@@ -45,6 +45,7 @@ describe('Test asset', function() {
       issuer: 'buQWESXjdgXSFFajEZfkwi5H4fuAyTGgzkje',
     };
 
+    // sdk.asset.asset.getInfo(args).then(data => {
     sdk.asset.asset.getInfo(args).then(data => {
       console.log(data);
       console.log(JSON.stringify(data));

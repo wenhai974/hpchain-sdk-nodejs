@@ -30,13 +30,14 @@ describe('Test bumo-sdk account', function() {
   it('test getTransactions', function() {
     sdk.block.getTransactions('100').then(result => {
       console.log(result);
+      console.log(JSON.stringify(result));
     }).catch(err => {
       console.log(err.message);
     });
   });
 
   it('test getInfo', function() {
-    sdk.block.getInfo(100).then(result => {
+    sdk.block.getInfo('100').then(result => {
       console.log(result);
     }).catch(err => {
       console.log(err.message);
@@ -53,8 +54,9 @@ describe('Test bumo-sdk account', function() {
   });
 
   it('test getValidators', function() {
-    sdk.block.getValidators(100).then(result => {
+    sdk.block.getValidators('100').then(result => {
       console.log(result);
+      console.log(JSON.stringify(result));
     }).catch(err => {
       console.log(err.message);
     });
@@ -70,7 +72,7 @@ describe('Test bumo-sdk account', function() {
   });
 
   it('test getReward', function() {
-    sdk.block.getReward(100).then(result => {
+    sdk.block.getReward('100').then(result => {
       console.log(result);
     }).catch(err => {
       console.log(err.message);
@@ -87,7 +89,7 @@ describe('Test bumo-sdk account', function() {
 
 
   it('test getFees', function() {
-    sdk.block.getFees(100).then(result => {
+    sdk.block.getFees('100').then(result => {
       console.log(result);
     }).catch(err => {
       console.log(err.message);
