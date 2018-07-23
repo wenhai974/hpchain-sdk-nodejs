@@ -54,7 +54,7 @@ describe('Test build blob', function() {
           nonce: `${nonce}`,
           ceilLedgerSeq: '1',
           operations: [ acountActivateOperation ],
-          // metadata: 'oh my tx',
+          // metadata: '',
         });
 
         console.log(result);

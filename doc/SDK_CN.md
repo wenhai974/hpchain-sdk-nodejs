@@ -475,6 +475,25 @@ assets		|	Array	|	账户资产
 amount		|	String	|	账户资产数量
 key			|	object |  包含属性: code资产编码、issuer资产发行账户地址
 
+> 错误码
+
+   异常       |     错误码   |   描述
+-----------  | ----------- | --------
+INVALID_ADDRESS_ERROR| 11006 | invalid address
+CONNECTNETWORK_ERROR| 11007| connect network failed
+SYSTEM_ERROR |   20000     |  system error
+
+> 示例
+
+```js
+
+sdk.account.getAssets(address).then(result => {
+	console.log(result);
+}).catch(err => {
+	console.log(err.message);
+});
+
+```
 
 ## 资产服务
 

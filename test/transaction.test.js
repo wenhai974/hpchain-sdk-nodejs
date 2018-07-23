@@ -97,7 +97,7 @@ describe('Test transaction', function() {
         sourceAddress,
         nonce,
         operation: sendBuOperation,
-        signtureNumber: '',
+        signtureNumber: '100',
         // metadata: 'Test evaluation fee',
       };
 
