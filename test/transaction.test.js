@@ -14,7 +14,7 @@ const sdk = new BumoSDK({
 describe('Test transaction', function() {
 
 
-  it('evaluationFee', function() {
+  it('evaluatFee', function() {
     const sourceAddress = 'buQtGi7QmaiaMDygKxMAsKPyLicYjPV2xKVq';
     const destAddress = 'buQWESXjdgXSFFajEZfkwi5H4fuAyTGgzkje';
 
@@ -43,7 +43,7 @@ describe('Test transaction', function() {
       };
 
       // return console.log(args);
-      sdk.transaction.evaluationFee(args).then(feeData => {
+      sdk.transaction.evaluatFee(args).then(feeData => {
         console.log(feeData)
       }).catch(err => {
         console.log(err);
@@ -95,13 +95,13 @@ describe('Test transaction', function() {
       // evaluation fee
       const args = {
         sourceAddress,
-        nonce,
+        nonce: '',
         operation: sendBuOperation,
         signtureNumber: '1',
         // metadata: 'Test evaluation fee',
       };
 
-      let feeData = yield sdk.transaction.evaluationFee(args);
+      let feeData = yield sdk.transaction.evaluatFee(args);
 
       if (feeData.errorCode !== 0) {
         console.log(feeData);
