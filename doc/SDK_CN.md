@@ -19,24 +19,24 @@
 		- [广播交易](#广播交易)
 - [账户服务](#账户服务)
 	- [checkValid](#checkvalid)
-	- [getInfo](#getinfo)
+	- [getInfo](#getInfo-账户)
 	- [getNonce](#getnonce)
 	- [getBalance](#getbalance)
 	- [getAssets](#getassets)
 - [资产服务](#资产服务)
-    - [getInfo](#getInfo)
+    - [getInfo](#getInfo-资产)
 - [交易服务](#交易服务)
     - [操作说明](#操作说明)
 	- [buildBlob](#buildblob)
 	- [evaluatFee](#evaluatfee)
 	- [sign](#sign)
 	- [submit](#submit)
-	- [getInfo](#getinfo)
+	- [getInfo](#getInfo-交易)
 - [区块服务](#区块服务)
     - [getNumber](#getnumber)
 	- [checkStatus](#checkstatus)
 	- [getTransactions](#gettransactions)
-	- [getInfo](#getinfo)
+	- [getInfo](#getInfo-区块)
 	- [getLatestInfo](#getlatestinfo)
 	- [getValidators](#getvalidators)
 	- [getLatestValidators](#getlatestvalidators)
@@ -302,7 +302,7 @@ sdk.account.checkValid(address).then(result => {
 
 ```
 
-### getInfo
+### getInfo-账户
 
 > 接口说明
 
@@ -512,7 +512,7 @@ sdk.account.getAssets(address).then(result => {
 
 账户服务主要是资产相关的接口，目前有1个接口：getAsset
 
-### getInfo
+### getInfo-资产
 
 > 接口说明
 
@@ -1017,7 +1017,7 @@ sdk.block.getTransactions(100).then(result => {
 ```
 
 
-### getInfo
+### getInfo-区块
 
 > 接口说明
 
