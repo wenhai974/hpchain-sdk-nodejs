@@ -40,7 +40,7 @@ describe('Test asset', function() {
 
   it('asset getInfo', function() {
     const args = {
-      address: 'buQWESXjdgXSFFajEZfkwi5H4fuAyTGgzkje',
+      // address: 'buQWESXjdgXSFFajEZfkwi5H4fuAyTGgzkje',
       code: 'BTC',
       issuer: 'buQWESXjdgXSFFajEZfkwi5H4fuAyTGgzkje',
     };

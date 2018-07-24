@@ -37,7 +37,7 @@ describe('Test build blob', function() {
           sourceAddress,
           destAddress,
           initBalance,
-          // metadata,
+          metadata,
         });
 
         if (acountActivateInfo.errorCode !== 0) {
