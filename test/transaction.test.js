@@ -104,7 +104,7 @@ describe('Test transaction', function() {
       const args = {
         sourceAddress,
         nonce,
-        operation: sendBuOperation,
+        operations: [sendBuOperation],
         signtureNumber: '100',
         // metadata: 'Test evaluation fee',
       };
@@ -152,7 +152,6 @@ describe('Test transaction', function() {
       }
 
       let signature = signatureInfo.result.signatures;
-
       // 4. submit transaction
       let transactionInfo = yield sdk.transaction.submit({
         blob,
