@@ -853,6 +853,8 @@ hash    |   String     |  交易hash
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
+INVALID_BLOB_ERROR | 11056 | invalid blob
+INVALID_SIGNATURE_ERROR | 15027 | invalid signature
 SYSTEM_ERROR |   20000     |  系统错误
 
 > 示例
@@ -1559,11 +1561,13 @@ INVALID_CEILLEDGERSEQ_ERROR									| 11052	|	ceilLedgerSeq must be equal or big
 OPERATIONS_ONE_ERROR												| 11053	|	one of operations error
 INVALID_SIGNATURENUMBER_ERROR								| 11054	|	signagureNumber must between 1 and max(int32)
 INVALID_HASH_ERROR													| 11055	|	invalid transaction hash
-INVALID_BLOB_ERROR													| 11056	|	invalid blobPRIVATEKEY_NULL_ERROR	11057	PrivateKeys cannot be empty
+INVALID_BLOB_ERROR													| 11056	|	invalid blob
+PRIVATEKEY_NULL_ERROR												|	11057	| privateKeys cannot be empty
 PRIVATEKEY_ONE_ERROR												| 11058	|	one of privateKeys error
 URL_EMPTY_ERROR															| 11062	|	url cannot be empty
 CONTRACTADDRESS_CODE_BOTH_NULL_ERROR				| 11063	|	contractAddress and code cannot be empty at the same time
 INVALID_OPTTYPE_ERROR												| 11064	|	optType must between 0 and 2
+INVALID_SIGNATURE_ERROR 										| 15027 | invalid signature
 GET_ALLOWANCE_ERROR													| 11065	|	底层错误描述
 GET_TOKEN_INFO_ERROR												| 11066	|	底层错误描述
 CONNECTN_BLOCKCHAIN_ERROR										| 19999	|	connect blockchain failed
