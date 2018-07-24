@@ -45,10 +45,10 @@
 	- [getFees](#getfees)
 	- [getLatestFees](#getlatestfees)
 - [工具](#工具)
-	- [utfToHex](#utfToHex)
-	- [hexToUtf](#hexToUtf)
-	- [buToMo](#buToMo)
-	- [moToBu](#moToBu)
+	- [utfToHex](#utftohex)
+	- [hexToUtf](#hextoutf)
+	- [buToMo](#butomo)
+	- [moToBu](#motobu)
 - [错误码](#错误码)
 
 ## 名词解析
