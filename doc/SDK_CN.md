@@ -734,7 +734,7 @@ sdk.transaction.evaluatFee(args)
 ----------- | ------------ | ---------------- |
 sourceAddress		|   String     |  必填，发起该操作的源账户地址
 nonce				|   String     |  必填，待发起的交易序列号
-operation			|   String     |  必填，待提交的操作列表
+operations			|   Array     |  必填，待提交的操作列表
 signtureNumber	|   String     |  选填，待签名者的数量，默认是1
 metadata			|   String     |  选填，备注，必须为16进制字符串
 
@@ -759,7 +759,7 @@ SYSTEM_ERROR |   20000     |  系统错误
 const args = {
 	sourceAddress: 'buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf',
 	nonce: '101',
-	operation: sendBuOperation,
+	operations: [sendBuOperation],
 	signtureNumber: '1',
 	metadata: '54657374206576616c756174696f6e20666565',
 };
