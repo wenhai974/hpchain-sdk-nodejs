@@ -66,6 +66,7 @@ describe('Test transaction', function() {
     const hash = 'e21fb61a66e251ec2cb593ab09781daaacaea6701f2ac2f26eb867d8e60324ba';
     sdk.transaction.getInfo(hash).then(data => {
       console.log(data);
+      console.log(JSON.stringify(data));
     })
   });
 
