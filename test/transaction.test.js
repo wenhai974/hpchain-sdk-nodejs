@@ -29,17 +29,25 @@ describe('Test transaction', function() {
 
       let sendBuOperation = sdk.operation.buSendOperation({
         destAddress,
-        amount: '60000',
-        metadata: 'oh my send bu',
+        buAmount: '60000',
+        // metadata: 'oh my send bu',
       });
+
+
+      if (sendBuOperation.errorCode !== 0) {
+        console.log(sendBuOperation);
+        return;
+      }
+
+     const operationItem = sendBuOperation.result.operation;
 
       // evaluation fee
       const args = {
         sourceAddress,
         nonce,
-        operation: sendBuOperation,
+        operations: [operationItem],
         signtureNumber: '1',
-        metadata: 'Test evaluation fee',
+        // metadata: 'Test evaluation fee',
       };
 
       // return console.log(args);
