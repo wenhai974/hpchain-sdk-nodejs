@@ -999,6 +999,7 @@ public_key|String|公钥
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
 INVALID_BLOCKNUMBER_ERROR | 11060 | blockNumber must bigger than 0
+QUERY_RESULT_NOT_EXIST | 15014 | query result not exist
 SYSTEM_ERROR |   20000     |  系统错误
 
 > 示例
