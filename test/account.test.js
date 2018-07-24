@@ -61,8 +61,8 @@ describe('Test bumo-sdk account', function() {
     }).catch(err => {
       console.log(err.message);
     });
-
   });
+
 
   it('test account.getAssets', function() {
     const address = 'buQsBMbFNH3NRJBbFRCPWDzjx7RqRc1hhvn1';

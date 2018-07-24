@@ -807,6 +807,8 @@ publicKey    |   String     | 公钥
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
+INVALID_BLOB_ERROR | 11056 | invalid blob
+PRIVATEKEY_ONE_ERROR | 11058 | one of privateKeys error
 SYSTEM_ERROR |   20000     |  系统错误
 
 > 示例
