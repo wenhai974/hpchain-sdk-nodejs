@@ -749,6 +749,8 @@ feeLimit    |   String     |  交易费用
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
+INVALID_NONCE_ERROR					| 11048 | nonce must between 1 and max(int64)
+INVALID_ARGUMENTS | 15016 | Invalid arguments to the function
 SYSTEM_ERROR |   20000     |  系统错误
 
 > 示例
