@@ -65,7 +65,8 @@ describe('Test bumo-sdk account', function() {
 
 
   it('test account.getAssets', function() {
-    const address = 'buQsBMbFNH3NRJBbFRCPWDzjx7RqRc1hhvn1';
+    // const address = 'buQsBMbFNH3NRJBbFRCPWDzjx7RqRc1hhvn1';
+    const address = 'buQemmMwmRQY1JkcU7w3nhruoX5N3j6C29uo';
 
     sdk.account.getAssets(address).then(result => {
       console.log(result);
