@@ -24,7 +24,7 @@
 	- [getBalance](#getbalance)
 	- [getAssets](#getassets)
 - [资产服务](#资产服务)
-    - [getAsset](#getasset)
+    - [getInfo](#getInfo)
 - [交易服务](#交易服务)
     - [操作说明](#操作说明)
 	- [buildBlob](#buildblob)
@@ -512,7 +512,7 @@ sdk.account.getAssets(address).then(result => {
 
 账户服务主要是资产相关的接口，目前有1个接口：getAsset
 
-### getAsset
+### getInfo
 
 > 接口说明
 
@@ -520,7 +520,7 @@ sdk.account.getAssets(address).then(result => {
 
 > 调用方法
 
-sdk.asset.asset.getAsset(args);
+sdk.asset.asset.getInfo(args);
 
 > 请求参数args为Object其中包含如下属性
 
