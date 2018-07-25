@@ -28,7 +28,7 @@
 - [交易服务](#交易服务)
     - [操作说明](#操作说明)
 	- [buildBlob](#buildblob)
-	- [evaluatFee](#evaluatfee)
+	- [evaluateFee](#evaluateFee)
 	- [sign](#sign)
 	- [submit](#submit)
 	- [getInfo](#getinfo-交易)
@@ -574,7 +574,7 @@ sdk.asset.asset.getInfo(args).then(data => {
 
 ## 交易服务
 
-交易服务主要是交易相关的接口，目前有5个接口：buildBlob, evaluatFee, sign, submit, getInfo。
+交易服务主要是交易相关的接口，目前有5个接口：buildBlob, evaluateFee, sign, submit, getInfo。
 
 其中调用buildBlob之前需要构建一些操作，分别包括如下操作:
 
@@ -718,7 +718,7 @@ const blobInfo = sdk.transaction.buildBlob(args);
 
 ```
 
-### evaluatFee
+### evaluateFee
 
 > 接口说明
 
@@ -726,7 +726,7 @@ const blobInfo = sdk.transaction.buildBlob(args);
 
 > 调用方法
 
-sdk.transaction.evaluatFee(args)
+sdk.transaction.evaluateFee(args)
 
 > 请求参数args为Object, 包含如下属性
 
@@ -764,7 +764,7 @@ const args = {
 	metadata: '54657374206576616c756174696f6e20666565',
 };
 
-sdk.transaction.evaluatFee(args).then(data => {
+sdk.transaction.evaluateFee(args).then(data => {
   console.log(data);
 });
 
