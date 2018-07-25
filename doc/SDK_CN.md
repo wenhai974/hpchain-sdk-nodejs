@@ -590,7 +590,7 @@ sdk.asset.asset.getInfo(args).then(data => {
    成员变量    |     类型  |        描述                           |
 ------------- | -------- | ----------------------------------   |
 sourceAddress |   String |  选填，操作源账户
-metadata      |   String |  选填，备注，必须是16进制字符串
+metadata      |   String |  选填，备注
 destAddress   |   String |  必填，目标账户地址
 initBalance   |   String |  必填，初始化资产，其值只能是包含数字的字符串且不能以0开头, 值范围[1, max(int64)] (单位是MO)
 > 1 BU = 10^8 MO
@@ -610,7 +610,7 @@ operation |   Object  |  激活账户操作对象
    成员变量    |     类型  |        描述                           |
 ------------- | -------- | ----------------------------------   |
 sourceAddress		|   String |  选填，操作源账户
-metadata			|   String |  选填，备注，必须是16进制字符串
+metadata			|   String |  选填，备注
 destAddress		|   String |  必填，目标账户地址
 buAmount			|   String |  必填，初始化资产，其值只能是包含数字的字符串且不能以0开头, 值范围[1, max(int64)] (单位是MO)
 
@@ -630,7 +630,7 @@ operation |   Object  |  发送BU操作对象
    成员变量    |     类型  |        描述                           |
 ------------- | -------- | ----------------------------------   |
 sourceAddress		|   String |  选填，操作源账户
-metadata			|   String |  选填，备注，必须是16进制字符串
+metadata			|   String |  选填，备注
 code				|   String |  必填，资产编码
 assetAmount		|   String |  必填，资产发布数量，其值只能是包含数字的字符串且不能以0开头, 值范围[1, max(int64)] (单位是MO)
 
@@ -650,7 +650,7 @@ operation |   Object  |  发布资产操作对象
    成员变量    |     类型  |        描述                           |
 ------------- | -------- | ----------------------------------   |
 sourceAddress		|   String |  选填，操作源账户
-metadata			|   String |  选填，备注，必须是16进制字符串
+metadata			|   String |  选填，备注
 destAddress		|   String |  必填，目标账户地址
 code				|   String |  必填，资产编码
 issuer				|   String |  必填，资产发行账户地址
@@ -684,7 +684,7 @@ feeLimit			|   String     |  必填，交易费用 (单位是MO)
 nonce				|   String     |  必填，交易序列号
 operations		|   Array		  |  必填，操作
 ceilLedgerSeq		|   String     |  选填，区块高度限制
-metadata			|   String     |  选填，备注，必须是16进制字符串
+metadata			|   String     |  选填，备注
 
 >  gasPrice、feeLimit、nonce、ceilLedgerSeq其值只能是包含数字的字符串且不能以0开头
 > 响应数据
