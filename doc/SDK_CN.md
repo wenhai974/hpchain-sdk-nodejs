@@ -1535,8 +1535,8 @@ INVALID_TX_THRESHOLD_ERROR									| 11018 |	txThreshold must between 0 and max(
 INVALID_OPERATION_TYPE_ERROR								| 11019 |	operation type must between 1 and 100
 INVALID_TYPE_THRESHOLD_ERROR								| 11020 |	typeThreshold must between 0 and max(int64)
 INVALID_ASSET_CODE_ERROR										| 11023 |	the length of key must between 1 and 1024
-INVALID_ASSET_AMOUNT_ERROR									| 11024 |	assetMount must between 0 and max(int64)
-INVALID_BU_AMOUNT_ERROR											| 11026 |	buAmount must between 0 and max(int64)
+INVALID_ASSET_AMOUNT_ERROR									| 11024 |	assetAmount must between 1 and max(int64)
+INVALID_BU_AMOUNT_ERROR											| 11026 |	buAmount must between 1 and max(int64)
 INVALID_ISSUER_ADDRESS_ERROR								| 11027 |	invalid issuer address
 NO_SUCH_TOKEN_ERROR													| 11030	|	no such token
 INVALID_TOKEN_NAME_ERROR										| 11031	|	the length of token name must between 1 and 1024
