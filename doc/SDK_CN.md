@@ -601,6 +601,17 @@ initBalance   |   String |  必填，初始化资产，其值只能是包含数�
 ---------	| -------- | ----------------------------------   |
 operation |   Object  |  激活账户操作对象
 
+> 错误码
+
+异常		|     错误码 |        描述                           |
+---------	| -------- | ----------------------------------   |
+INVALID_SOURCEADDRESS_ERROR |   11002  |  invalid sourceAddress
+INVALID_DESTADDRESS_ERROR | 11003 | invalid destAddress
+INVALID_INITBALANCE_ERROR | 11004 | initBalance must between 1 and max(int64)
+SOURCEADDRESS_EQUAL_DESTADDRESS_ERROR | 11005 | sourceAddress cannot be equal to destAddress
+INVALID_METADATA_ERROR | 15028 | invalid metadata
+SYSTEM_ERROR | 20000 | system error
+
 ##### 发送BU
 >  调用方式: sdk.operation.buSendOperation(args)
 >
@@ -619,6 +630,17 @@ buAmount			|   String |  必填，初始化资产，其值只能是包含数字�
 成员变量		|     类型  |        描述                           |
 ---------	| -------- | ----------------------------------   |
 operation |   Object  |  发送BU操作对象
+
+> 错误码
+
+异常		|     错误码 |        描述                           |
+---------	| -------- | ----------------------------------   |
+INVALID_SOURCEADDRESS_ERROR | 11002 | invalid sourceAddress
+INVALID_DESTADDRESS_ERROR | 11003 | invalid destAddress
+SOURCEADDRESS_EQUAL_DESTADDRESS_ERROR | 11005 | sourceAddress cannot be equal to destAddress
+INVALID_BU_AMOUNT_ERROR | 11026 | buAmount must between 1 and max(int64)
+INVALID_ISSUER_ADDRESS_ERROR | 11027 | invalid issuer address
+SYSTEM_ERROR | 20000 | system error
 
 
 ##### 发布资产
@@ -639,6 +661,16 @@ assetAmount		|   String |  必填，资产发布数量，其值只能是包含�
 成员变量		|     类型  |        描述                           |
 ---------	| -------- | ----------------------------------   |
 operation |   Object  |  发布资产操作对象
+
+> 错误码
+
+异常		|     错误码 |        描述                           |
+---------	| -------- | ----------------------------------   |
+INVALID_SOURCEADDRESS_ERROR | 11002 | Invalid sourceAddress
+INVALID_ASSET_CODE _ERROR | 11023 |The length of key must between 1 and 1024
+INVALID_ASSET_AMOUNT_ERROR | 11024 | assetAmount must between 1 and max(int64)
+SYSTEM_ERROR | 20000 | system error
+
 
 
 ##### 转移资产
@@ -662,6 +694,17 @@ assetAmount		|   String |  必填，资产转移数量，其值只能是包含�
 ---------	| -------- | ----------------------------------   |
 operation |   Object  |  转移资产操作对象
 
+> 错误码
+
+异常		|     错误码 |        描述                           |
+---------	| -------- | ----------------------------------   |
+INVALID_SOURCEADDRESS_ERROR |11002 | invalid sourceAddress
+INVALID_DESTADDRESS_ERROR | 11003 | invalid destAddress
+SOURCEADDRESS_EQUAL_DESTADDRESS_ERROR | 11005 | sourceAddress cannot be equal to destAddress
+INVALID_ASSET_CODE _ERROR | 11023 | the length of asset code must between 1 and 1024
+INVALID_ASSET_AMOUNT_ERROR | 11024 | assetAmount must between 1 and max(int64)
+INVALID_ISSUER_ADDRESS_ERROR | 11027 | invalid issuer address
+SYSTEM_ERROR |20000 | system error
 
 ### buildBlob
 
@@ -736,7 +779,7 @@ sourceAddress		|   String     |  必填，发起该操作的源账户地址
 nonce				|   String     |  必填，待发起的交易序列号
 operations			|   Array     |  必填，待提交的操作列表
 signtureNumber	|   String     |  选填，待签名者的数量，默认是1
-metadata			|   String     |  选填，备注，必须为16进制字符串
+metadata			|   String     |  选填，备注
 
 > 响应数据
 
