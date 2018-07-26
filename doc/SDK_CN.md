@@ -745,6 +745,7 @@ INVALID_NONCE_ERROR					| 11048 | nonce must between 1 and max(int64)
 INVALID_GASPRICE_ERROR			| 11049	| amount must between gasPrice in block and max(int64)
 INVALID_FEELIMIT_ERROR			| 11050	|	feeLimit must between 1000000 and max(int64)
 INVALID_CEILLEDGERSEQ_ERROR			| 11052 |	ceilLedgerSeq must be equal or bigger than 0
+INVALID_METADATA_ERROR | 15028 | invalid metadata
 SYSTEM_ERROR 								|   20000     |  系统错误
 > 示例
 

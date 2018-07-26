@@ -96,6 +96,19 @@ describe('Test build blob', function() {
 
     data.errorCode.should.equal(11048);
 
+    // Invalid metadata
+    data = sdk.transaction.buildBlob({
+      sourceAddress,
+      gasPrice: '100',
+      feeLimit: '1000',
+      nonce,
+      ceilLedgerSeq: '1',
+      operations: [ acountActivateOperation ],
+      metadata: 1234,
+    });
+
+    data.errorCode.should.equal(15028);
+
     // Invalid operation
     delete acountActivateOperation.type;
     data = sdk.transaction.buildBlob({
