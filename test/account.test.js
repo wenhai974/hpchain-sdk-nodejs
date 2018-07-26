@@ -1,95 +1,103 @@
 'use strict';
 
-const should = require('chai').should();
-const co = require('co');
-const BigNumber = require('bignumber.js');
-
-
+require('chai').should();
 const BumoSDK = require('../index');
 
 const sdk = new BumoSDK({
   host: 'seed1.bumotest.io:26002',
 });
 
-describe('Test bumo-sdk account', function() {
+describe('Test bumo-sdk account service', function() {
 
-  it('test account.create', function() {
-    sdk.account.create().then(result => {
-      console.log(result);
-    }).catch(err => {
-      console.log(err.message);
-    });
-  });
-
-  it('test account.getInfo', function() {
-    const address = 'buQemmMwmRQY1JkcU7w3nhruoX5N3j6C29uo';
-    // const address = 'buQsBMbFNH3NRJBbFRCPWDzjx7RqRc1hhvn1';
-    // const address = 'buQVkUUBKpDKRmHYWw1MU8U7ngoQehno165i';
-    sdk.account.getInfo(address).then(result => {
-      console.log(result);
-      console.log(JSON.stringify(result));
-    }).catch(err => {
-      console.log(err.message);
-    });
-  });
-
-  // check address
-  it('test account.checkValid', function() {
-    sdk.account.checkValid('buQsBMbFNH3NRJBbFRCPWDzjx7RqRc1hhvn1').then(result => {
-      console.log(result);
-    }).catch(err => {
-      console.log(err.message);
-    })
-  });
-
-  it('test account.getBalance', function() {
-    const address = 'buQsBMbFNH3NRJBbFRCPWDzjx7RqRc1hhvn1';
-
-    sdk.account.getBalance(address).then(result => {
-      console.log(result);
-    }).catch(err => {
-      console.log(err);
-    });
-
-  });
-
-  it('test account.getNonce', function() {
-    const address = 'buQsBMbFNH3NRJBbFRCPWDzjx7RqRc1hhvn1';
-
-    sdk.account.getNonce(address).then(result => {
-      console.log(result);
-    }).catch(err => {
-      console.log(err.message);
-    });
+  it('test account.create()', async() => {
+    const keypair = await sdk.account.create();
+    keypair.errorCode.should.equal(0);
+    keypair.result.should.be.a('object');
+    keypair.result.should.have.property('privateKey').with.lengthOf(56);
+    keypair.result.should.have.property('publicKey').with.lengthOf(76);
+    keypair.result.should.have.property('address').with.lengthOf(36);
   });
 
 
-  it('test account.getAssets', function() {
-    // const address = 'buQsBMbFNH3NRJBbFRCPWDzjx7RqRc1hhvn1';
-    const address = 'buQemmMwmRQY1JkcU7w3nhruoX5N3j6C29uo';
+  it('test account.getInfo(address)', async() => {
+    let address = 'buQemmMwmRQY1JkcU7w3nhruoX5N3j6C29uo';
+    let data = await sdk.account.getInfo(address);
+    data.should.be.a('object');
+    data.errorCode.should.equal(0);
 
-    sdk.account.getAssets(address).then(result => {
-      console.log(result);
-      console.log(JSON.stringify(result));
-    }).catch(err => {
-      console.log(err.message);
-    });
+    address = '';
+    data = await sdk.account.getInfo(address);
+    data.should.be.a('object');
+    data.errorCode.should.equal(11006);
+
+    address = 'buQemmMwmRQY1JkcU7w3nhruoX5N3j6C29uA';
+    data = await sdk.account.getInfo(address);
+    data.should.be.a('object');
+    data.errorCode.should.equal(11006);
+
+    address = 100;
+    data = await sdk.account.getInfo(address);
+    data.should.be.a('object');
+    data.errorCode.should.equal(11006);
   });
 
-  it('test account.activate operation', function() {
-    const sourceAddress = 'buQsBMbFNH3NRJBbFRCPWDzjx7RqRc1hhvn1';
-    const destAddress = 'buQVkUUBKpDKRmHYWw1MU8U7ngoQehno165i';
-    const initBalance = '1000';
-    const metadata = 'Test Account Activate';
+  it('test account.checkValid(address)', async() => {
+    let data = await sdk.account.checkValid('buQsBMbFNH3NRJBbFRCPWDzjx7RqRc1hhvn1');
+    data.should.be.a('object');
+    data.result.should.be.a('object');
+    data.result.should.have.property('isValid').equal(true);
 
-    const result = sdk.operation.accountActivateOperation({
-      sourceAddress,
-      destAddress,
-      initBalance,
-      metadata,
-    });
+    data = await sdk.account.checkValid('buQsBMbFNH3NRJBbFRCPWDzjx7RqRc1hhvn2');
+    data.should.be.a('object');
+    data.result.should.be.a('object');
+    data.result.should.have.property('isValid').equal(false);
 
-    console.log(result);
+    data = await sdk.account.checkValid('');
+    data.should.be.a('object');
+    data.result.should.be.a('object');
+    data.result.should.have.property('isValid').equal(false);
+
+
+    data = await sdk.account.checkValid(123);
+    data.should.be.a('object');
+    data.result.should.be.a('object');
+    data.result.should.have.property('isValid').equal(false);
+  });
+
+  it('test account.getBalance(address)', async() => {
+    let address = 'buQsBMbFNH3NRJBbFRCPWDzjx7RqRc1hhvn1';
+    let data = await sdk.account.getBalance(address);
+    data.should.be.a('object');
+    data.errorCode.should.equal(0);
+    data.result.should.have.property('balance');
+
+    address = '';
+    data = await sdk.account.getBalance(address);
+    data.should.be.a('object');
+    data.errorCode.should.equal(11006);
+
+    address = '123';
+    data = await sdk.account.getBalance(address);
+    data.should.be.a('object');
+    data.errorCode.should.equal(11006);
+
+    address = 123;
+    data = await sdk.account.getBalance(address);
+    data.should.be.a('object');
+    data.errorCode.should.equal(11006);
+  });
+
+  it('test account.getNonce(address)', async() => {
+    let address = 'buQsBMbFNH3NRJBbFRCPWDzjx7RqRc1hhvn1';
+    let data = await sdk.account.getNonce(address);
+    data.should.be.a('object');
+    data.errorCode.should.equal(0);
+    data.result.should.have.property('nonce');
+
+    address = '';
+    data = await sdk.account.getNonce(address);
+    data.should.be.a('object');
+    data.errorCode.should.equal(11006);
   });
 
 });

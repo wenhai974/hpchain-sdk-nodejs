@@ -1,7 +1,6 @@
 'use strict';
 
-const should = require('chai').should();
-const JSONbig = require('json-bigint');
+require('chai').should();
 const BigNumber = require('bignumber.js');
 const co = require('co');
 
@@ -50,9 +49,8 @@ describe('Test transaction', function() {
         // metadata: 'Test evaluation fee',
       };
 
-      // return console.log(args);
       sdk.transaction.evaluateFee(args).then(feeData => {
-        console.log(feeData)
+        // console.log(feeData)
       }).catch(err => {
         console.log(err);
       });
@@ -65,8 +63,7 @@ describe('Test transaction', function() {
   it('test getInfo', function() {
     const hash = 'e21fb61a66e251ec2cb593ab09781daaacaea6701f2ac2f26eb867d8e60324ba';
     sdk.transaction.getInfo(hash).then(data => {
-      console.log(data);
-      console.log(JSON.stringify(data));
+      // console.log(data);
     })
   });
 
@@ -113,7 +110,6 @@ describe('Test transaction', function() {
       let feeData = yield sdk.transaction.evaluateFee(args);
 
       if (feeData.errorCode !== 0) {
-        console.log('feeData')
         console.log(feeData);
         return;
       }
@@ -135,10 +131,7 @@ describe('Test transaction', function() {
         console.log(blobInfo);
         return;
       }
-      // console.log(blobInfo);
-      // return;
 
-      // blobInfo = JSONbig.parse(blobInfo);
       let blob = blobInfo.result.transactionBlob;
 
       // 3. sign blob
@@ -148,7 +141,8 @@ describe('Test transaction', function() {
       });
 
       if (signatureInfo.errorCode !== 0) {
-        console.log(signatureInfo);
+        signatureInfo.errorCode.should.equal(11058);
+        // console.log(signatureInfo);
         return;
       }
 
@@ -159,7 +153,7 @@ describe('Test transaction', function() {
         signature: signature,
       });
 
-      console.log(transactionInfo);
+      // console.log(transactionInfo);
 
     }).catch(err => {
       console.log(err);
