@@ -38,8 +38,8 @@ const sdk = new BumoSDK({
   Usage:
 
 ```js
-// Get account balance
-sdk.account.getBalance('buQXz2qbTb3yx2cRyCz92EnaUKHrwZognnDw').then(data => {
+// Create account
+sdk.account.create().then(data => {
   console.log(data);
 }).catch(err => {
   console.log(err.message);
