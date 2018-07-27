@@ -39,8 +39,6 @@ const sdk = new BumoSDK({
 
 ```js
 // Get account balance
-
-// sdk is the instance of bumo-sdk
 sdk.account.getBalance('buQXz2qbTb3yx2cRyCz92EnaUKHrwZognnDw').then(data => {
   console.log(data);
 }).catch(err => {
@@ -50,15 +48,18 @@ sdk.account.getBalance('buQXz2qbTb3yx2cRyCz92EnaUKHrwZognnDw').then(data => {
 ```
 
 
-## bumo-sdk  Test
+## Tests
+
+  To run the test suite, first install the dependencies, then run `npm test`:
+
 ```bash
+$ npm install
 $ npm test
 ```
 
+## Docs
 
-## Example project
-
-[Sample document entry](doc/SDK_CN.md "")
+  * [Documentation](doc/SDK_CN.md)
 
 ## License
 

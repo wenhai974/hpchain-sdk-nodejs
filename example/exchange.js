@@ -1,8 +1,8 @@
 'use strict';
 
 require('chai').should();
-const BumoSDK = require('../index');
 const BigNumber = require('bignumber.js');
+const BumoSDK = require('bumo-sdk');
 
 const sdk = new BumoSDK({
   host: 'seed1.bumotest.io:26002',
