@@ -20,6 +20,10 @@ describe('Test asset service', function() {
     data.result.should.have.property('assets');
     data.result.assets.should.be.a('array');
 
+    // empty argument
+    data = await sdk.asset.asset.getInfo();
+    data.errorCode.should.equal(15016);
+
     // invalid address
     data = await sdk.asset.asset.getInfo({
       address: '',
