@@ -742,8 +742,8 @@ transactionBlob |   String     |  Transaction序列化后的16进制字符串
 -----------  | ----------- | -------- |
 INVALID_SOURCEADDRESS_ERROR | 11002 | invalid sourceAddress
 INVALID_NONCE_ERROR					| 11048 | nonce must between 1 and max(int64)
-INVALID_GASPRICE_ERROR			| 11049	| amount must between gasPrice in block and max(int64)
-INVALID_FEELIMIT_ERROR			| 11050	|	feeLimit must between 1000000 and max(int64)
+INVALID_GASPRICE_ERROR			| 11049	| GasPrice must be between 1 and max(int64)
+INVALID_FEELIMIT_ERROR			| 11050	|	feeLimit must be between 1 and max(int64)
 INVALID_CEILLEDGERSEQ_ERROR			| 11052 |	ceilLedgerSeq must be equal or bigger than 0
 INVALID_METADATA_ERROR | 15028 | invalid metadata
 SYSTEM_ERROR 								|   20000     |  系统错误
@@ -852,7 +852,7 @@ publicKey    |   String     | 公钥
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
 INVALID_BLOB_ERROR | 11056 | invalid blob
-PRIVATEKEY_ONE_ERROR | 11058 | one of privateKeys error
+PRIVATEKEY_ONE_ERROR | 11058 | one of privateKeys is invalid
 SYSTEM_ERROR |   20000     |  系统错误
 
 > 示例
@@ -1607,7 +1607,7 @@ INVALID_SIGNATURENUMBER_ERROR								| 11054	|	signagureNumber must between 1 an
 INVALID_HASH_ERROR													| 11055	|	invalid transaction hash
 INVALID_BLOB_ERROR													| 11056	|	invalid blob
 PRIVATEKEY_NULL_ERROR												|	11057	| privateKeys cannot be empty
-PRIVATEKEY_ONE_ERROR												| 11058	|	one of privateKeys error
+PRIVATEKEY_ONE_ERROR												| 11058	|	one of privateKeys is invalid
 URL_EMPTY_ERROR															| 11062	|	url cannot be empty
 CONTRACTADDRESS_CODE_BOTH_NULL_ERROR				| 11063	|	contractAddress and code cannot be empty at the same time
 INVALID_OPTTYPE_ERROR												| 11064	|	optType must between 0 and 2
