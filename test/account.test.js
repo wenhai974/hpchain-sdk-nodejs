@@ -100,4 +100,13 @@ describe('Test bumo-sdk account service', function() {
     data.errorCode.should.equal(11006);
   });
 
+  it('test account.getMetadata()', async() => {
+    let data = await sdk.account.getMetadata({
+      address: 'buQhP94E8FjWDF3zfsxjqVQDeBypvzMrB3y3',
+      key: 'mykey1'
+    });
+    console.log(data);
+    console.log(JSON.stringify(data));
+  });
+
 });

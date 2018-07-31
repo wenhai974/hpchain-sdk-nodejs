@@ -7,7 +7,8 @@ const co = require('co');
 const BumoSDK = require('../index');
 
 const sdk = new BumoSDK({
-  host: 'seed1.bumotest.io:26002',
+  // host: 'seed1.bumotest.io:26002',
+  host: '192.168.1.162:56002',
 });
 
 describe('Test transaction', function() {
@@ -68,9 +69,14 @@ describe('Test transaction', function() {
   });
 
   it('transaction', function() {
-    const privateKey = 'your private key';
-    const sourceAddress = 'buQnc3AGCo6ycWJCce516MDbPHKjK7ywwkuo';
-    const destAddress = 'buQWESXjdgXSFFajEZfkwi5H4fuAyTGgzkje';
+    // const privateKey = 'your private key';
+    // const sourceAddress = 'buQnc3AGCo6ycWJCce516MDbPHKjK7ywwkuo';
+    // const privateKey = 'privbUdwf6xV1d5Jvkcakuz8T8nfFn4U7d5s55VUbwmi79DPxqNWSD1n';
+    // const sourceAddress = 'buQhP94E8FjWDF3zfsxjqVQDeBypvzMrB3y3';
+    //
+    const privateKey = 'privbsKxedzmq9g9Na1bBCbnC3UQvEYZUVAEXHErS4PFvhZd2162xEut';
+    const sourceAddress = 'buQcGP2a1PY45dauMfhk9QsFbn7a6BKKAM9x';
+    const destAddress = 'buQoeuA7mYHv6t95zBpghdfqC8efGc3w3k1S';
 
     co(function* () {
       const result = yield sdk.account.getNonce(sourceAddress);
@@ -84,9 +90,9 @@ describe('Test transaction', function() {
 
       // 1.build operation
       let sendBuInfo = sdk.operation.buSendOperation({
-        sourceAddress,
+        // sourceAddress,
         destAddress,
-        buAmount: '30000',
+        buAmount: '10000000',
         // metadata: 'oh my send bu',
       });
 
@@ -99,29 +105,29 @@ describe('Test transaction', function() {
       // console.log(sendBuOperation);
       // return;
       // evaluation fee
-      const args = {
-        sourceAddress,
-        nonce,
-        operations: [sendBuOperation],
-        signtureNumber: '100',
-        // metadata: 'Test evaluation fee',
-      };
-
-      let feeData = yield sdk.transaction.evaluateFee(args);
-
-      if (feeData.errorCode !== 0) {
-        console.log(feeData);
-        return;
-      }
-      const feeLimit = feeData.result.feeLimit;
-      const gasPrice = feeData.result.gasPrice;
+      // const args = {
+      //   sourceAddress,
+      //   nonce,
+      //   operations: [sendBuOperation],
+      //   signtureNumber: '100',
+      //   // metadata: 'Test evaluation fee',
+      // };
+      //
+      // let feeData = yield sdk.transaction.evaluateFee(args);
+      //
+      // if (feeData.errorCode !== 0) {
+      //   console.log(feeData);
+      //   return;
+      // }
+      // const feeLimit = feeData.result.feeLimit;
+      // const gasPrice = feeData.result.gasPrice;
 
       // 2. build blob
       let blobInfo = sdk.transaction.buildBlob({
         sourceAddress,
-        gasPrice,
-        feeLimit,
-        nonce: '123',
+        gasPrice: '1000',
+        feeLimit: '14119000',
+        nonce,
         // ceilLedgerSeq: '',
         operations: [ sendBuOperation ],
         // metadata: '6f68206d79207478',
@@ -153,7 +159,7 @@ describe('Test transaction', function() {
         signature: signature,
       });
 
-      // console.log(transactionInfo);
+      console.log(transactionInfo);
 
     }).catch(err => {
       console.log(err);
