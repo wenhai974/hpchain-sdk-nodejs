@@ -69,12 +69,7 @@ describe('Test transaction', function() {
   });
 
   it('transaction', function() {
-    // const privateKey = 'your private key';
-    // const sourceAddress = 'buQnc3AGCo6ycWJCce516MDbPHKjK7ywwkuo';
-    // const privateKey = 'privbUdwf6xV1d5Jvkcakuz8T8nfFn4U7d5s55VUbwmi79DPxqNWSD1n';
-    // const sourceAddress = 'buQhP94E8FjWDF3zfsxjqVQDeBypvzMrB3y3';
-    //
-    const privateKey = 'privbsKxedzmq9g9Na1bBCbnC3UQvEYZUVAEXHErS4PFvhZd2162xEut';
+    const privateKey = 'private key';
     const sourceAddress = 'buQcGP2a1PY45dauMfhk9QsFbn7a6BKKAM9x';
     const destAddress = 'buQoeuA7mYHv6t95zBpghdfqC8efGc3w3k1S';
 

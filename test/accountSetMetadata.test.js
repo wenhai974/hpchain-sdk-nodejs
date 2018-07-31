@@ -12,7 +12,7 @@ describe('Test account Set Metadata Operation', function() {
 
   it('test operation.accountSetMetadataOperation()', async() => {
 
-    const privateKey = 'privbUdwf6xV1d5Jvkcakuz8T8nfFn4U7d5s55VUbwmi79DPxqNWSD1n';
+    const privateKey = 'private key';
     const sourceAddress = 'buQhP94E8FjWDF3zfsxjqVQDeBypvzMrB3y3';
 
     // Get nonce

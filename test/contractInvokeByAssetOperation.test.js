@@ -8,15 +8,16 @@ const BumoSDK = require('../index');
 
 const sdk = new BumoSDK({
   host: 'seed1.bumotest.io:26002',
-  // host: '192.168.1.34:36002',
 });
 
-describe('Test create contract account transaction', function() {
+describe('Test contract invoke by asset operation transaction', function() {
 
-  it('test create contract account ', function() {
+  it('test contract invoke by asset operation' , function() {
+
     const privateKey = 'private key';
     const sourceAddress = 'buQhP94E8FjWDF3zfsxjqVQDeBypvzMrB3y3';
-
+    // const contractAddress = 'buQtzK1XfRHTKBet6e8jdGQqVGTWdEWueDbN';
+    const contractAddress = 'buQqbhTrfAqZtiX79zp4MWwUVfpcadvtz2TM';
     co(function* () {
       const result = yield sdk.account.getNonce(sourceAddress);
 
@@ -28,32 +29,24 @@ describe('Test create contract account transaction', function() {
 
       nonce = new BigNumber(nonce).plus(1).toString(10);
 
-      let contractCreateOperation = sdk.operation.contractCreateOperation({
+      let contractInvokeByBUOperation = sdk.operation.contractInvokeByAssetOperation({
+        contractAddress,
         sourceAddress,
-        initBalance: '100000000',
-        type: 0,
-        payload: `
-          "use strict";
-          function init(bar)
-          {
-            return;
-          }
-
-          function main(input)
-          {
-            return;
-          }
-        `,
-        initInput: 'aaaaa',
+        assetAmount: '1000',
+        input: 'aaaa',
+        code: 'leo',
+        issuer: 'buQsBMbFNH3NRJBbFRCPWDzjx7RqRc1hhvn1',
         // metadata: 'Test contract create operation',
       });
 
-      if (contractCreateOperation.errorCode !== 0) {
-        console.log(contractCreateOperation);
+      if (contractInvokeByBUOperation.errorCode !== 0) {
+        console.log(contractInvokeByBUOperation);
         return;
       }
 
-      const operationItem = contractCreateOperation.result.operation;
+      // console.log(contractInvokeByBUOperation);
+      // return;
+      const operationItem = contractInvokeByBUOperation.result.operation;
 
       const args = {
         sourceAddress,
