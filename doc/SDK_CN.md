@@ -711,7 +711,7 @@ INVALID_ISSUER_ADDRESS_ERROR | 11027 | invalid issuer address
 SYSTEM_ERROR |20000 | system error
 
 
-##### 合约创建
+##### 创建合约
 >  调用方式: sdk.operation.contractCreateOperation(args)
 >
 >	参数说明: args为Object，其中包含如下属性
@@ -735,7 +735,12 @@ operation |   Object  |  合约创建操作对象
 
 异常		|     错误码 |        描述                           |
 ---------	| -------- | ----------------------------------   |
-INVALID_SOURCEADDRESS_ERROR |11002  |invalid sourceAddressINVALID_INITBALANCE_ERROR |11004 | initBalance  must between 1 and max(int64)PAYLOAD_EMPTY_ERROR |11044 |payload must be a non-empty stringSYSTEM_ERROR |20000 | system error
+INVALID_SOURCEADDRESS_ERROR |11002  |invalid sourceAddressINVALID_INITBALANCE_ERROR |11004 | initBalance  must between 1 and max(int64)PAYLOAD_EMPTY_ERROR |11044 |payload must be a non-empty string
+CONTRACT_EXECUTE_FAIL | 15029 |contract execute fail
+CONTRACT_SYNTAX_ERROR |15030 | contract syntax error
+CONTRACT_TOO_MANY_RECURSION | 15031 | contract too many recursion
+CONTRACT_TOO_MANY_TRANSACTIONS | 15032 | contract too many transactions
+CONTRACT_EXECUTE_EXPIRED | 15033 | contract execute expiredSYSTEM_ERROR |20000 | system error
 
 
 ##### 资产转移并触发合约，或仅触发合约
@@ -765,7 +770,8 @@ operation |   Object  |   资产转移并触发合约操作对象
 
 异常		|     错误码 |        描述                           |
 ---------	| -------- | ----------------------------------   |
-INVALID_SOURCEADDRESS_ERROR | 11002 |invalid sourceAddressINVALID_CONTRACTADDRESS_ERROR | 11037 | invalid contract addressCONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR |11038 | contractAddress is not a contract accountSOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR |11040 |sourceAddress cannot be equal to contractAddressINVALID_ASSET_CODE_ERROR |11023 |the length of asset code must between 0 and 1024INVALID_ASSET_AMOUNT_ERROR | 11024 | assetAmount must between 1 and max(int64)INVALID_ISSUER_ADDRESS_ERROR |11027 | invalid issuer addressSYSTEM_ERROR |20000 | system error
+INVALID_SOURCEADDRESS_ERROR | 11002 |invalid sourceAddressINVALID_CONTRACTADDRESS_ERROR | 11037 | invalid contract addressCONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR |11038 | contractAddress is not a contract accountSOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR |11040 |sourceAddress cannot be equal to contractAddressINVALID_ASSET_CODE_ERROR |11023 |the length of asset code must between 0 and 1024INVALID_ASSET_AMOUNT_ERROR | 11024 | assetAmount must between 1 and max(int64)INVALID_ISSUER_ADDRESS_ERROR |11027 | invalid issuer address
+INVALID_INPUT_ERROR | 15028 | invalid inputSYSTEM_ERROR |20000 | system error
 
 ##### BU资产的发送和触发合约，或仅触发合约
 >  调用方式: sdk.operation.contractInvokeByBUOperation(args)
@@ -795,6 +801,7 @@ CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038 | contractAddress is not a con
 SOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR | 11040 | sourceAddress cannot be equal to contractAddress
 INVALID_BU_AMOUNT_ERROR | 11026 | buAmount must between 1 and max(int64)
 INVALID_ISSUER_ADDRESS_ERROR | 11027 | invalid issuer address
+INVALID_INPUT_ERROR | 15028 | invalid input
 SYSTEM_ERROR |20000 |system error
 
 
@@ -1601,7 +1608,7 @@ isValid |boolean | 合约账户地址是否有效
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-INVALID_CONTRACTADDRESS_ERROR | 11037 |Invalid contract addressCONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR |11038 |contractAddress is not a contract account
+INVALID_CONTRACTADDRESS_ERROR | 11037 |invalid contract addressCONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR |11038 |contractAddress is not a contract account
 SYSTEM_ERROR |   20000     |  系统错误
 
 > 示例
