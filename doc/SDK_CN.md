@@ -44,6 +44,10 @@
 	- [getLatestReward](#getlatestreward)
 	- [getFees](#getfees)
 	- [getLatestFees](#getlatestfees)
+- [合约服务](#合约服务)
+	- [getInfo](#getinfo-合约)
+	- [checkValid](#checkvalid-合约)
+
 - [工具](#工具)
 	- [utfToHex](#utftohex)
 	- [hexToUtf](#hextoutf)
@@ -705,6 +709,94 @@ INVALID_ASSET_CODE _ERROR | 11023 | the length of asset code must between 1 and 
 INVALID_ASSET_AMOUNT_ERROR | 11024 | assetAmount must between 1 and max(int64)
 INVALID_ISSUER_ADDRESS_ERROR | 11027 | invalid issuer address
 SYSTEM_ERROR |20000 | system error
+
+
+##### 合约创建
+>  调用方式: sdk.operation.contractCreateOperation(args)
+>
+>	参数说明: args为Object，其中包含如下属性
+
+
+   成员变量    |     类型  |        描述                           |
+------------- | -------- | ----------------------------------   |
+initBalance		|   String |  必填，给合约账户的初始化资产，大小[1, max(64)]
+payload				|   String |  必填，合约代码
+sourceAddress		|   String |  选填，操作源账户
+metadata			|   String |  选填，备注
+
+
+> 返回值
+
+成员变量		|     类型  |        描述                           |
+---------	| -------- | ----------------------------------   |
+operation |   Object  |  合约创建操作对象
+
+> 错误码
+
+异常		|     错误码 |        描述                           |
+---------	| -------- | ----------------------------------   |
+INVALID_SOURCEADDRESS_ERROR |11002  |invalid sourceAddressINVALID_INITBALANCE_ERROR |11004 | initBalance  must between 1 and max(int64)PAYLOAD_EMPTY_ERROR |11044 |payload must be a non-empty stringSYSTEM_ERROR |20000 | system error
+
+
+##### 资产转移并触发合约，或仅触发合约
+>  调用方式: sdk.operation.contractInvokeByAssetOperation(args)
+>
+>	参数说明: args为Object，其中包含如下属性
+
+
+   成员变量    |     类型  |        描述                           |
+------------- | -------- | ----------------------------------   |
+contractAddress | String | 必填，合约账户地址
+sourceAddress | String | 选填，发起该操作的源账户地址
+code | String |选填，资产编码，长度[0, 1024]，当为null时，仅触发合约
+issuer |String | 选填，资产发行账户地址，当为null时，仅触发合约
+assetAmount | String | 选填资产数量，大小[0, max(int64)]，当是0时，仅触发合约
+input |String | 选填，待触发的合约的main()入参
+metadata |String | 选填，备注
+
+
+> 返回值
+
+成员变量		|     类型  |        描述                           |
+---------	| -------- | ----------------------------------   |
+operation |   Object  |   资产转移并触发合约操作对象
+
+> 错误码
+
+异常		|     错误码 |        描述                           |
+---------	| -------- | ----------------------------------   |
+INVALID_SOURCEADDRESS_ERROR | 11002 |invalid sourceAddressINVALID_CONTRACTADDRESS_ERROR | 11037 | invalid contract addressCONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR |11038 | contractAddress is not a contract accountSOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR |11040 |sourceAddress cannot be equal to contractAddressINVALID_ASSET_CODE_ERROR |11023 |the length of asset code must between 0 and 1024INVALID_ASSET_AMOUNT_ERROR | 11024 | assetAmount must between 1 and max(int64)INVALID_ISSUER_ADDRESS_ERROR |11027 | invalid issuer addressSYSTEM_ERROR |20000 | system error
+
+##### BU资产的发送和触发合约，或仅触发合约
+>  调用方式: sdk.operation.contractInvokeByBUOperation(args)
+>
+>	参数说明: args为Object，其中包含如下属性
+
+
+   成员变量    |     类型  |        描述                           |
+------------- | -------- | ----------------------------------   |
+contractAddress |String | 必填，合约账户地址
+sourceAddress | String | 选填，发起该操作的源账户地址buAmount | String | 选填，资产发行数量，大小[0, max(int64)]，当0时仅触发合约input |String | 选填，待触发的合约的main()入参metadata |String | 选填，备注
+
+
+> 返回值
+
+成员变量		|     类型  |        描述                           |
+---------	| -------- | ----------------------------------   |
+operation |   Object  |  BU资产的发送和触发合约操作对象
+
+> 错误码
+
+异常		|     错误码 |        描述                           |
+---------	| -------- | ----------------------------------   |
+INVALID_SOURCEADDRESS_ERROR | 11002 | invalid sourceAddress
+INVALID_CONTRACTADDRESS_ERROR | 11037 | invalid contract address
+CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038 | contractAddress is not a contract account
+SOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR | 11040 | sourceAddress cannot be equal to contractAddress
+INVALID_BU_AMOUNT_ERROR | 11026 | buAmount must between 1 and max(int64)
+INVALID_ISSUER_ADDRESS_ERROR | 11027 | invalid issuer address
+SYSTEM_ERROR |20000 |system error
+
 
 ### buildBlob
 
@@ -1435,6 +1527,95 @@ sdk.block.getLatestFees().then(result => {
 
 ```
 
+## 合约服务
+
+### getInfo-合约
+
+> 接口说明
+
+  查询合约代码
+
+> 调用方法
+
+sdk.contract.getInfo(contractAddress)
+
+> 请求参数
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+contractAddress     |   String     |  合约账户地址
+
+> 响应数据
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+contract |Object | 合约信息
+type | Number | 合约类型
+payload | String | 合约代码
+
+
+> 错误码
+
+   异常       |     错误码   |   描述   |
+-----------  | ----------- | -------- |
+INVALID_CONTRACTADDRESS_ERROR | 11037 |Invalid contract addressCONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR |11038 |contractAddress is not a contract account
+SYSTEM_ERROR |   20000     |  系统错误
+
+> 示例
+
+```js
+const contractAddress = 'buQqbhTrfAqZtiX79zp4MWwUVfpcadvtz2TM';
+sdk.contract.getInfo(contractAddress).then(result => {
+  console.log(result);
+}).catch(err => {
+  console.log(err.message);
+});
+
+```
+
+### checkValid-合约
+
+> 接口说明
+
+  检测合约账户地址的有效性
+
+> 调用方法
+
+sdk.contract.checkValid(contractAddress)
+
+> 请求参数
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+contractAddress     |   String     |  合约账户地址
+
+> 响应数据
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+isValid |boolean | 合约账户地址是否有效
+
+
+
+> 错误码
+
+   异常       |     错误码   |   描述   |
+-----------  | ----------- | -------- |
+INVALID_CONTRACTADDRESS_ERROR | 11037 |Invalid contract addressCONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR |11038 |contractAddress is not a contract account
+SYSTEM_ERROR |   20000     |  系统错误
+
+> 示例
+
+```js
+
+const contractAddress = 'buQhP94E8FjWDF3zfsxjqVQDeBypvzMrB3y3';
+sdk.contract.checkValid(contractAddress).then(result => {
+  console.log(result);
+}).catch(err => {
+  console.log(err.message);
+});
+
+```
 
 
 ## 工具
