@@ -325,34 +325,34 @@ address     |   String     |  待检测的账户地址
 
 > 响应数据
 
-   参数    |     类型      |        描述       
+   参数    |     类型      |        描述
 --------- | ------------- | ----------------
-address	  |    String     |    账户地址       
-balance	  |    String      |    账户余额       
+address	  |    String     |    账户地址
+balance	  |    String      |    账户余额
 nonce	  |    String      |    账户交易序列号
 priv	  | [Object](#priv) |    账户权限
 
 #### priv
-   成员       |     类型     |        描述       
+   成员       |     类型     |        描述
 -----------  | ------------ | ----------------
 master_weight |	 String    |   账户自身权重
 signers	     |[Object](#signers)|   签名者权重
 thresholds	 |[Object](#thresholds)|	门限
 
 #### signers
-   成员       |     类型     |        描述       
+   成员       |     类型     |        描述
 -----------  | ------------ | ----------------
 address	     |   String	    |   签名账户地址
 weight	     |   String    |   签名账户权重
 
 #### thresholds
-   成员       |     类型     |        描述       
+   成员       |     类型     |        描述
 -----------  | ------------ | ----------------
 tx_threshold	 |    String	    |   交易默认门限
 type_thresholds|[Object](#type_thresholds)|不同类型交易的门限
 
 #### type_thresholds
-   成员       |     类型     |        描述       
+   成员       |     类型     |        描述
 -----------  | ------------ | ----------------
 type         |    String	    |    操作类型
 threshold    |    String      |    门限
@@ -524,7 +524,7 @@ sdk.account.getAssets(address).then(result => {
 
 > 调用方法
 
-sdk.asset.asset.getInfo(args);
+sdk.token.asset.getInfo(args);
 
 > 请求参数args为Object其中包含如下属性
 
@@ -568,7 +568,7 @@ const args = {
 };
 
 
-sdk.asset.asset.getInfo(args).then(data => {
+sdk.token.asset.getInfo(args).then(data => {
   console.log(data);
 });
 
@@ -735,12 +735,15 @@ operation |   Object  |  合约创建操作对象
 
 异常		|     错误码 |        描述                           |
 ---------	| -------- | ----------------------------------   |
-INVALID_SOURCEADDRESS_ERROR |11002  |invalid sourceAddressINVALID_INITBALANCE_ERROR |11004 | initBalance  must between 1 and max(int64)PAYLOAD_EMPTY_ERROR |11044 |payload must be a non-empty string
+INVALID_SOURCEADDRESS_ERROR |11002  |invalid sourceAddress
+INVALID_INITBALANCE_ERROR |11004 | initBalance  must between 1 and max(int64)
+PAYLOAD_EMPTY_ERROR |11044 |payload must be a non-empty string
 CONTRACT_EXECUTE_FAIL | 15029 |contract execute fail
 CONTRACT_SYNTAX_ERROR |15030 | contract syntax error
 CONTRACT_TOO_MANY_RECURSION | 15031 | contract too many recursion
 CONTRACT_TOO_MANY_TRANSACTIONS | 15032 | contract too many transactions
-CONTRACT_EXECUTE_EXPIRED | 15033 | contract execute expiredSYSTEM_ERROR |20000 | system error
+CONTRACT_EXECUTE_EXPIRED | 15033 | contract execute expired
+SYSTEM_ERROR |20000 | system error
 
 
 ##### 资产转移并触发合约，或仅触发合约
@@ -770,8 +773,15 @@ operation |   Object  |   资产转移并触发合约操作对象
 
 异常		|     错误码 |        描述                           |
 ---------	| -------- | ----------------------------------   |
-INVALID_SOURCEADDRESS_ERROR | 11002 |invalid sourceAddressINVALID_CONTRACTADDRESS_ERROR | 11037 | invalid contract addressCONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR |11038 | contractAddress is not a contract accountSOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR |11040 |sourceAddress cannot be equal to contractAddressINVALID_ASSET_CODE_ERROR |11023 |the length of asset code must between 0 and 1024INVALID_ASSET_AMOUNT_ERROR | 11024 | assetAmount must between 1 and max(int64)INVALID_ISSUER_ADDRESS_ERROR |11027 | invalid issuer address
-INVALID_INPUT_ERROR | 15028 | invalid inputSYSTEM_ERROR |20000 | system error
+INVALID_SOURCEADDRESS_ERROR | 11002 |invalid sourceAddress
+INVALID_CONTRACTADDRESS_ERROR | 11037 | invalid contract address
+CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR |11038 | contractAddress is not a contract account
+SOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR |11040 |sourceAddress cannot be equal to contractAddress
+INVALID_ASSET_CODE_ERROR |11023 |the length of asset code must between 0 and 1024
+INVALID_ASSET_AMOUNT_ERROR | 11024 | assetAmount must between 1 and max(int64)
+INVALID_ISSUER_ADDRESS_ERROR |11027 | invalid issuer address
+INVALID_INPUT_ERROR | 15028 | invalid input
+SYSTEM_ERROR |20000 | system error
 
 ##### BU资产的发送和触发合约，或仅触发合约
 >  调用方式: sdk.operation.contractInvokeByBUOperation(args)
@@ -782,7 +792,10 @@ INVALID_INPUT_ERROR | 15028 | invalid inputSYSTEM_ERROR |20000 | system error
    成员变量    |     类型  |        描述                           |
 ------------- | -------- | ----------------------------------   |
 contractAddress |String | 必填，合约账户地址
-sourceAddress | String | 选填，发起该操作的源账户地址buAmount | String | 选填，资产发行数量，大小[0, max(int64)]，当0时仅触发合约input |String | 选填，待触发的合约的main()入参metadata |String | 选填，备注
+sourceAddress | String | 选填，发起该操作的源账户地址
+buAmount | String | 选填，资产发行数量，大小[0, max(int64)]，当0时仅触发合约
+input |String | 选填，待触发的合约的main()入参
+metadata |String | 选填，备注
 
 
 > 返回值
@@ -812,7 +825,10 @@ SYSTEM_ERROR |20000 |system error
 
    成员变量    |     类型  |        描述                           |
 ------------- | -------- | ----------------------------------   |
-sourceAddress |String |选填，发起该操作的源账户地址topic |String |必填，日志主题，长度[1, 128]data | String | 必填，日志内容，每个字符串长度[1, 1024]metadata |String | 选填，备注
+sourceAddress |String |选填，发起该操作的源账户地址
+topic |String |必填，日志主题，长度[1, 128]
+data | String | 必填，日志内容，每个字符串长度[1, 1024]
+metadata |String | 选填，备注
 
 
 > 返回值
@@ -825,7 +841,10 @@ operation |   Object  |  在区块链上写日志信息的操作对象
 
 异常		|     错误码 |        描述                           |
 ---------	| -------- | ----------------------------------   |
-INVALID_SOURCEADDRESS_ERROR | 11002 | invalid sourceAddressINVALID_LOG_TOPIC_ERROR |11045 | the length of key must between 1 and 128INVALID_LOG_DATA_ERROR | 11046 | the length of value must between 1 and 1024SYSTEM_ERROR |20000 | system error
+INVALID_SOURCEADDRESS_ERROR | 11002 | invalid sourceAddress
+INVALID_LOG_TOPIC_ERROR |11045 | the length of key must between 1 and 128
+INVALID_LOG_DATA_ERROR | 11046 | the length of value must between 1 and 1024
+SYSTEM_ERROR |20000 | system error
 
 
 ### buildBlob
@@ -1582,13 +1601,14 @@ contractAddress     |   String     |  合约账户地址
 contract |Object | 合约信息
 type | Number | 合约类型
 payload | String | 合约代码
-
+
 
 > 错误码
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-INVALID_CONTRACTADDRESS_ERROR | 11037 |Invalid contract addressCONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR |11038 |contractAddress is not a contract account
+INVALID_CONTRACTADDRESS_ERROR | 11037 |Invalid contract address
+CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR |11038 |contractAddress is not a contract account
 SYSTEM_ERROR |   20000     |  系统错误
 
 > 示例
@@ -1625,13 +1645,14 @@ contractAddress     |   String     |  合约账户地址
 ----------- | ------------ | ---------------- |
 isValid |boolean | 合约账户地址是否有效
 
-
+
 
 > 错误码
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-INVALID_CONTRACTADDRESS_ERROR | 11037 |invalid contract addressCONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR |11038 |contractAddress is not a contract account
+INVALID_CONTRACTADDRESS_ERROR | 11037 |invalid contract address
+CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR |11038 |contractAddress is not a contract account
 SYSTEM_ERROR |   20000     |  系统错误
 
 > 示例

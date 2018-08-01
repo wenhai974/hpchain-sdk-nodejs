@@ -10,7 +10,7 @@ const sdk = new BumoSDK({
 describe('Test asset service', function() {
 
   it('test asset.getInfo()', async() => {
-    let data = await sdk.asset.asset.getInfo({
+    let data = await sdk.token.asset.getInfo({
       address: 'buQWESXjdgXSFFajEZfkwi5H4fuAyTGgzkje',
       code: 'BTC',
       issuer: 'buQWESXjdgXSFFajEZfkwi5H4fuAyTGgzkje',
@@ -21,11 +21,11 @@ describe('Test asset service', function() {
     data.result.assets.should.be.a('array');
 
     // empty argument
-    data = await sdk.asset.asset.getInfo();
+    data = await sdk.token.asset.getInfo();
     data.errorCode.should.equal(15016);
 
     // invalid address
-    data = await sdk.asset.asset.getInfo({
+    data = await sdk.token.asset.getInfo({
       address: '',
       code: 'BTC',
       issuer: 'buQWESXjdgXSFFajEZfkwi5H4fuAyTGgzkje',
@@ -33,7 +33,7 @@ describe('Test asset service', function() {
     data.errorCode.should.equal(11006);
 
     // invalid code
-    data = await sdk.asset.asset.getInfo({
+    data = await sdk.token.asset.getInfo({
       address: 'buQWESXjdgXSFFajEZfkwi5H4fuAyTGgzkje',
       code: '',
       issuer: 'buQWESXjdgXSFFajEZfkwi5H4fuAyTGgzkje',
@@ -41,7 +41,7 @@ describe('Test asset service', function() {
     data.errorCode.should.equal(11023);
 
     // invalid issuer address
-    data = await sdk.asset.asset.getInfo({
+    data = await sdk.token.asset.getInfo({
       address: 'buQWESXjdgXSFFajEZfkwi5H4fuAyTGgzkje',
       code: 'BTC',
       issuer: 'buQWESXjdgXSFFajEZfkwi5H4fuAyTGgzkjeA',
@@ -49,7 +49,7 @@ describe('Test asset service', function() {
     data.errorCode.should.equal(11027);
 
     // BTCDEMO asset does not exist
-    data = await sdk.asset.asset.getInfo({
+    data = await sdk.token.asset.getInfo({
       address: 'buQWESXjdgXSFFajEZfkwi5H4fuAyTGgzkje',
       code: 'BTCDEMO',
       issuer: 'buQWESXjdgXSFFajEZfkwi5H4fuAyTGgzkje',
