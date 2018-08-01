@@ -804,6 +804,29 @@ INVALID_ISSUER_ADDRESS_ERROR | 11027 | invalid issuer address
 INVALID_INPUT_ERROR | 15028 | invalid input
 SYSTEM_ERROR |20000 |system error
 
+##### 在区块链上写日志信息
+>  调用方式: sdk.operation.logCreateOperation(args)
+>
+>	参数说明: args为Object，其中包含如下属性
+
+
+   成员变量    |     类型  |        描述                           |
+------------- | -------- | ----------------------------------   |
+sourceAddress |String |选填，发起该操作的源账户地址topic |String |必填，日志主题，长度[1, 128]data | String | 必填，日志内容，每个字符串长度[1, 1024]metadata |String | 选填，备注
+
+
+> 返回值
+
+成员变量		|     类型  |        描述                           |
+---------	| -------- | ----------------------------------   |
+operation |   Object  |  在区块链上写日志信息的操作对象
+
+> 错误码
+
+异常		|     错误码 |        描述                           |
+---------	| -------- | ----------------------------------   |
+INVALID_SOURCEADDRESS_ERROR | 11002 | invalid sourceAddressINVALID_LOG_TOPIC_ERROR |11045 | the length of key must between 1 and 128INVALID_LOG_DATA_ERROR | 11046 | the length of value must between 1 and 1024SYSTEM_ERROR |20000 | system error
+
 
 ### buildBlob
 
