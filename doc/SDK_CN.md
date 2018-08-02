@@ -321,34 +321,34 @@ address     |   String     |  待检测的账户地址
 
 > 响应数据
 
-   参数    |     类型      |        描述       
+   参数    |     类型      |        描述
 --------- | ------------- | ----------------
-address	  |    String     |    账户地址       
-balance	  |    String      |    账户余额       
+address	  |    String     |    账户地址
+balance	  |    String      |    账户余额
 nonce	  |    String      |    账户交易序列号
 priv	  | [Object](#priv) |    账户权限
 
 #### priv
-   成员       |     类型     |        描述       
+   成员       |     类型     |        描述
 -----------  | ------------ | ----------------
 master_weight |	 String    |   账户自身权重
 signers	     |[Object](#signers)|   签名者权重
 thresholds	 |[Object](#thresholds)|	门限
 
 #### signers
-   成员       |     类型     |        描述       
+   成员       |     类型     |        描述
 -----------  | ------------ | ----------------
 address	     |   String	    |   签名账户地址
 weight	     |   String    |   签名账户权重
 
 #### thresholds
-   成员       |     类型     |        描述       
+   成员       |     类型     |        描述
 -----------  | ------------ | ----------------
 tx_threshold	 |    String	    |   交易默认门限
 type_thresholds|[Object](#type_thresholds)|不同类型交易的门限
 
 #### type_thresholds
-   成员       |     类型     |        描述       
+   成员       |     类型     |        描述
 -----------  | ------------ | ----------------
 type         |    String	    |    操作类型
 threshold    |    String      |    门限
@@ -520,7 +520,7 @@ sdk.account.getAssets(address).then(result => {
 
 > 调用方法
 
-sdk.asset.asset.getInfo(args);
+sdk.token.asset.getInfo(args);
 
 > 请求参数args为Object其中包含如下属性
 
@@ -564,7 +564,7 @@ const args = {
 };
 
 
-sdk.asset.asset.getInfo(args).then(data => {
+sdk.token.asset.getInfo(args).then(data => {
   console.log(data);
 });
 
