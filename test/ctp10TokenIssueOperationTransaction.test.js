@@ -29,7 +29,7 @@ describe('Test ctp10Token Issue Transaction', function() {
       nonce = new BigNumber(nonce).plus(1).toString(10);
 
       let ctp10TokenIssueOperation = sdk.operation.ctp10TokenIssueOperation({
-        initBalance: '10000000',
+        initBalance: '2000000000',
         name: 'leo',
         symbol: 'LEO',
         decimals: 6,
