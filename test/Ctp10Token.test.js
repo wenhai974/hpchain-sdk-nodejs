@@ -50,7 +50,6 @@ describe('Test token.ctp10Token', function() {
   });
 
   it('test token.ctp10Token.getBalance()', async() => {
-    let address = '';
     let data = await sdk.token.ctp10Token.getBalance({
       contractAddress: 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz',
       tokenOwner: 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz',
@@ -81,6 +80,16 @@ describe('Test token.ctp10Token', function() {
     });
     data.errorCode.should.equal(11035);
 
+  });
+
+  it('test token.ctp10Token.allowance()', async() => {
+
+    let data = await sdk.token.ctp10Token.allowance({
+      contractAddress: 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz',
+      tokenOwner: 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz',
+      spender: 'buQemmMwmRQY1JkcU7w3nhruoX5N3j6C29uo',
+    });
+    console.log(data);
   });
 
 
