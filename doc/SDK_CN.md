@@ -6,61 +6,62 @@
 
 - [名词解析](#名词解析)
 - [请求参数与响应数据格式](#请求参数与响应数据格式)
-	- [请求参数](#请求参数)
-	- [响应数据](#响应数据)
+  - [请求参数](#请求参数)
+  - [响应数据](#响应数据)
 - [使用方法](#使用方法)
     - [生成SDK实例](#生成SDK实例)
     - [查询](#信息查询)
-	- [提交交易](#提交交易)
-		- [获取账户nonce值](#获取账户nonce值)
-		- [构建操作](#构建操作)
-		- [构建交易Blob](#构建交易blob)
-		- [签名交易](#签名交易)
-		- [广播交易](#广播交易)
+    - [提交交易](#提交交易)
+    	- [获取账户nonce值](#获取账户nonce值)
+    	- [构建操作](#构建操作)
+    	- [构建交易Blob](#构建交易blob)
+    	- [签名交易](#签名交易)
+    	- [广播交易](#广播交易)
 - [账户服务](#账户服务)
-	- [checkValid](#checkvalid)
-	- [getInfo](#getinfo-账户)
-	- [getNonce](#getnonce)
-	- [getBalance](#getbalance)
-	- [getAssets](#getassets)
+  - [checkValid](#checkvalid)
+  - [getInfo](#getinfo-账户)
+  - [getNonce](#getnonce)
+  - [getBalance](#getbalance)
+  - [getAssets](#getassets)
 - [资产服务](#资产服务)
     - [getInfo](#getinfo-资产)
 - [交易服务](#交易服务)
     - [操作说明](#操作说明)
-	- [buildBlob](#buildblob)
-	- [evaluateFee](#evaluateFee)
-	- [sign](#sign)
-	- [submit](#submit)
-	- [getInfo](#getinfo-交易)
+    - [buildBlob](#buildblob)
+    - [evaluateFee](#evaluateFee)
+    - [sign](#sign)
+    - [submit](#submit)
+    - [getInfo](#getinfo-交易)
 - [区块服务](#区块服务)
     - [getNumber](#getnumber)
-	- [checkStatus](#checkstatus)
-	- [getTransactions](#gettransactions)
-	- [getInfo](#getinfo-区块)
-	- [getLatestInfo](#getlatestinfo)
-	- [getValidators](#getvalidators)
-	- [getLatestValidators](#getlatestvalidators)
-	- [getReward](#getreward)
-	- [getLatestReward](#getlatestreward)
-	- [getFees](#getfees)
-	- [getLatestFees](#getlatestfees)
+    - [checkStatus](#checkstatus)
+    - [getTransactions](#gettransactions)
+    - [getInfo](#getinfo-区块)
+    - [getLatestInfo](#getlatestinfo)
+    - [getValidators](#getvalidators)
+    - [getLatestValidators](#getlatestvalidators)
+    - [getReward](#getreward)
+    - [getLatestReward](#getlatestreward)
+    - [getFees](#getfees)
+    - [getLatestFees](#getlatestfees)
 - [ctp10Token服务](#ctp10token服务)
     - [checkValid](#checkvalid-ctp10token)
-	- [getInfo](#getinfo-ctp10token)
-	- [getName](#getname-ctp10token)
-	- [getSymbol](#getsymbol-ctp10token)
-	- [getDecimals](#getdecimals-ctp10token)
-	- [getTotalSupply](#gettotalsupply-ctp10token)
-	- [getBalance](#getbalance-ctp10token)
+    - [allowance](#allowance-ctp10token)
+    - [getInfo](#getinfo-ctp10token)
+    - [getName](#getname-ctp10token)
+    - [getSymbol](#getsymbol-ctp10token)
+    - [getDecimals](#getdecimals-ctp10token)
+    - [getTotalSupply](#gettotalsupply-ctp10token)
+    - [getBalance](#getbalance-ctp10token)
 - [合约服务](#合约服务)
-	- [getInfo](#getinfo-合约)
-	- [checkValid](#checkvalid-合约)
+  - [getInfo](#getinfo-合约)
+  - [checkValid](#checkvalid-合约)
 
 - [工具](#工具)
-	- [utfToHex](#utftohex)
-	- [hexToUtf](#hextoutf)
-	- [buToMo](#butomo)
-	- [moToBu](#motobu)
+  - [utfToHex](#utftohex)
+  - [hexToUtf](#hextoutf)
+  - [buToMo](#butomo)
+  - [moToBu](#motobu)
 - [错误码](#错误码)
 
 ## 名词解析
@@ -1032,7 +1033,7 @@ sdk.transaction.submit(args)
 
 > 请求参数args为Object, 包含如下属性
 
-  
+
     参数       |    类型  |   描述   |
 -----------  | ----------- | -------- |
 blob | String  | 必填，交易blob
@@ -1632,6 +1633,58 @@ SYSTEM_ERROR|20000|system error
   });
 ```
 
+
+
+### allowance-Ctp10Token 
+
+> 接口说明
+
+   该接口用于获取spender仍然被允许从owner提取的金额
+
+> 调用方法
+
+sdk.token.ctp10Token.allowance(args)
+
+> 请求参数
+
+| 参数            | 类型   | 描述                            |      |
+| --------------- | ------ | ------------------------------- | ---- |
+| contractAddress | String | 必填，合约账户地址              |      |
+| tokenOwner      | String | 必填，合约Token的持有者账户地址 |      |
+| spender         | String | 必填，被授权账户地址            |      |
+
+> 响应数据
+
+| 参数      | 类型   | 描述           |      |
+| --------- | ------ | -------------- | ---- |
+| allowance | String | 允许提取的金额 |      |
+
+> 错误码
+
+| 异常                          | 错误码 | 描述                             |      |
+| ----------------------------- | ------ | -------------------------------- | ---- |
+| INVALID_CONTRACTADDRESS_ERROR | 11037  | invalid contract address         |      |
+| NO_SUCH_TOKEN_ERROR           | 11030  | no such token                    |      |
+| INVALID_TOKENOWNER_ERRPR      | 11035  | invalid token owner              |      |
+| INVALID_SPENDER_ERROR         | 11043  | invalid spender                  |      |
+| GET_ALLOWNANCE_ERROR          | 11036  | fail to get allowance            |      |
+| REQUEST_NULL_ERROR            | 12001  | request parameter cannot be null |      |
+| SYSTEM_ERROR                  | 20000  | system error                     |      |
+
+> 示例
+
+```js
+const args = {
+  contractAddress: 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz',
+  tokenOwner: 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz',
+  spender: 'buQemmMwmRQY1JkcU7w3nhruoX5N3j6C29uo',
+};
+sdk.token.ctp10Token.allowance(args).then(data => {
+    console.log(data);
+});
+```
+
+
 ### getInfo-Ctp10Token
 
 > 接口说明
@@ -1874,10 +1927,13 @@ SYSTEM_ERROR|20000|system error
 > 示例
 
 ```js
-  const contractAddress = 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz';
-  sdk.token.ctp10Token.getBalance(contractAddress).then(data => {
-    console.log(data);
-  });
+const args = {
+  contractAddress: 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz',
+  tokenOwner: 'buQsuXPQojbZYMKzHXiMqVhH1HYsryzq1nJv',
+};
+sdk.token.ctp10Token.getBalance(contractAddress).then(args => {
+  console.log(data);
+});
 ```
 
 
