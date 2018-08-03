@@ -18,4 +18,42 @@ describe('Test token.ctp10Token', function() {
     data.errorCode.should.equal(11037)
   });
 
+
+  it('test token.ctp10Token.getInfo()', async() => {
+    let address = 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz';
+    let data = await sdk.token.ctp10Token.getInfo(address);
+    console.log(data);
+  });
+
+  it('test token.ctp10Token.getName()', async() => {
+    let address = 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz';
+    let data = await sdk.token.ctp10Token.getName(address);
+    console.log(data);
+  });
+
+  it('test token.ctp10Token.getSymbol()', async() => {
+    let address = 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz';
+    let data = await sdk.token.ctp10Token.getSymbol(address);
+    console.log(data);
+  });
+
+  it('test token.ctp10Token.getDecimals()', async() => {
+    let address = 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz';
+    let data = await sdk.token.ctp10Token.getDecimals(address);
+    console.log(data);
+  });
+
+  it('test token.ctp10Token.getTotalSupply()', async() => {
+    let address = 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz';
+    let data = await sdk.token.ctp10Token.getTotalSupply(address);
+    console.log(data);
+  });
+
+  it('test token.ctp10Token.getBalance()', async() => {
+    let address = 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz';
+    let data = await sdk.token.ctp10Token.getBalance(address);
+    console.log(data);
+  });
+
+
 });
