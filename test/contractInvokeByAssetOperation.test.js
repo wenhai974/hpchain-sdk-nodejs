@@ -29,7 +29,7 @@ describe('Test contract invoke by asset operation transaction', function() {
 
       nonce = new BigNumber(nonce).plus(1).toString(10);
 
-      let contractInvokeByBUOperation = sdk.operation.contractInvokeByAssetOperation({
+      let contractInvokeByBUOperation = yield sdk.operation.contractInvokeByAssetOperation({
         contractAddress,
         sourceAddress,
         assetAmount: '1000',
