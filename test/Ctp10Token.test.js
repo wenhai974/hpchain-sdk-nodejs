@@ -50,9 +50,37 @@ describe('Test token.ctp10Token', function() {
   });
 
   it('test token.ctp10Token.getBalance()', async() => {
-    let address = 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz';
-    let data = await sdk.token.ctp10Token.getBalance(address);
-    console.log(data);
+    let address = '';
+    let data = await sdk.token.ctp10Token.getBalance({
+      contractAddress: 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz',
+      tokenOwner: 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz',
+    });
+    data.errorCode.should.equal(0);
+
+    data = await sdk.token.ctp10Token.getBalance({
+      contractAddress: 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz',
+      tokenOwner: 'buQsuXPQojbZYMKzHXiMqVhH1HYsryzq1nJv',
+    });
+    data.errorCode.should.equal(11030);
+
+    data = await sdk.token.ctp10Token.getBalance({
+      contractAddress: 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgzA',
+      tokenOwner: 'buQsuXPQojbZYMKzHXiMqVhH1HYsryzq1nJv',
+    });
+    data.errorCode.should.equal(11037);
+
+    data = await sdk.token.ctp10Token.getBalance({
+      contractAddress: '',
+      tokenOwner: 'buQsuXPQojbZYMKzHXiMqVhH1HYsryzq1nJv',
+    });
+    data.errorCode.should.equal(11037);
+
+    data = await sdk.token.ctp10Token.getBalance({
+      contractAddress: 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz',
+      tokenOwner: 'buQsuXPQojbZYMKzHXiMqVhH1HYsryzq1nJvA',
+    });
+    data.errorCode.should.equal(11035);
+
   });
 
 
