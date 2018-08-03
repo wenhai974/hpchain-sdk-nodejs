@@ -44,6 +44,14 @@
 	- [getLatestReward](#getlatestreward)
 	- [getFees](#getfees)
 	- [getLatestFees](#getlatestfees)
+- [ctp10Token服务](#ctp10token服务)
+    - [checkValid](#checkvalid-ctp10token)
+	- [getInfo](#getinfo-ctp10token)
+	- [getName](#getname-ctp10token)
+	- [getSymbol](#getsymbol-ctp10token)
+	- [getDecimals](#getdecimals-ctp10token)
+	- [getTotalSupply](#gettotalsupply-ctp10token)
+	- [getBalance](#getbalance-ctp10token)
 - [合约服务](#合约服务)
 	- [getInfo](#getinfo-合约)
 	- [checkValid](#checkvalid-合约)
@@ -1579,6 +1587,299 @@ sdk.block.getLatestFees().then(result => {
 });
 
 ```
+
+
+## Ctp10Token服务
+
+ 遵循CTP1.0协议，主要是合约Token相关的接口
+
+ ### checkValid-Ctp10Token
+
+> 接口说明
+
+   该接口用于验证合约Token的有效性
+
+> 调用方法
+
+sdk.token.ctp10Token.checkValid(contractAddress);
+
+> 请求参数
+
+   参数      |     类型     |        描述       
+----------- | ------------ | ---------------- 
+contractAddress |   String  |  必填，待验证的Token合约地址   
+
+> 响应数据
+
+   参数      |     类型     |        描述       
+----------- | ------------ | ---------------- 
+isValid     |   String     |  是否有效   
+
+> 错误码
+
+   异常       |     错误码   |   描述   
+-----------  | ----------- | -------- 
+INVALID_CONTRACTADDRESS_ERROR|11037|invalid contract address
+SYSTEM_ERROR|20000|System error
+
+> 示例
+
+```js
+  const contractAddress = 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz';
+  sdk.token.ctp10Token.checkValid(contractAddress).then(data => {
+    console.log(data);
+  });
+```
+
+### getInfo-Ctp10Token
+
+> 接口说明
+
+   该接口用于获取合约token的信息
+
+> 调用方法
+
+sdk.token.ctp10Token.getInfo(contractAddress)
+
+> 请求参数
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+contractAddress     |   String     |  待查询的合约Token地址   |
+
+> 响应数据
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+ctp|String|合约Token版本号
+symbol|String|合约Token符号
+decimals|Number|合约数量的精度
+totalSupply|String|合约的总供应量
+name|String|合约Token的名称
+contractOwner|String|合约Token的拥有者
+
+> 错误码
+
+   异常       |     错误码   |   描述   |
+-----------  | ----------- | -------- |
+INVALID_CONTRACTADDRESS_ERROR|11037|invalid contract address
+NO_SUCH_TOKEN_ERROR|11030|no such token
+GET_TOKEN_INFO_ERROR|11066|fail to get token info
+SYSTEM_ERROR|20000|System error
+
+> 示例
+
+```js
+  const contractAddress = 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz';
+  sdk.token.ctp10Token.getInfo(contractAddress).then(data => {
+    console.log(data);
+  });
+```
+
+### getName-Ctp10Token 
+
+> 接口说明
+
+   该接口用于获取合约token的名称
+
+> 调用方法
+
+sdk.token.ctp10Token.getName(contractAddress)
+
+> 请求参数
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+contractAddress     |   String     |  待查询的合约账户地址   |
+
+> 响应数据
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+name     |   String     |  合约Token的名称   |
+
+> 错误码
+
+   异常       |     错误码   |   描述   |
+-----------  | ----------- | -------- |
+INVALID_CONTRACTADDRESS_ERROR|11037|invalid contract address
+NO_SUCH_TOKEN_ERROR|11030|no such token
+GET_TOKEN_INFO_ERROR|11066|fail to get token info
+SYSTEM_ERROR|20000|system error
+
+> 示例
+
+```js
+  const contractAddress = 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz';
+  sdk.token.ctp10Token.getName(contractAddress).then(data => {
+    console.log(data);
+  });
+```
+
+### getSymbol-Ctp10Token
+
+> 接口说明
+
+   该接口用于获取合约token的符号
+
+> 调用方法
+
+sdk.token.ctp10Token.getSymbol(contractAddress)
+
+> 请求参数
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+contractAddress     |   String     |  待查询的合约账户地址   |
+
+> 响应数据
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+symbol     |   String     |  合约Token的符号   |
+
+> 错误码
+
+   异常       |     错误码   |   描述   |
+-----------  | ----------- | -------- |
+INVALID_CONTRACTADDRESS_ERROR|11037|invalid contract address
+NO_SUCH_TOKEN_ERROR|11030|no such token
+GET_TOKEN_INFO_ERROR|11066|fail to get token info
+SYSTEM_ERROR|20000|system error
+
+> 示例
+
+```js
+  const contractAddress = 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz';
+  sdk.token.ctp10Token.getSymbol(contractAddress).then(data => {
+    console.log(data);
+  });
+```
+
+### getDecimals-Ctp10Token 
+
+> 接口说明
+
+   该接口用于获取合约token的精度
+
+> 调用方法
+
+sdk.token.ctp10Token.getDecimals(contractAddress)
+
+> 请求参数
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+contractAddress     |   String     |  待查询的合约账户地址   |
+
+> 响应数据
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+decimals     |   Integer     |  合约token精度   |
+
+> 错误码
+
+   异常       |     错误码   |   描述   |
+-----------  | ----------- | -------- |
+INVALID_CONTRACTADDRESS_ERROR|11037|invalid contract address
+NO_SUCH_TOKEN_ERROR|11030|no such token
+GET_TOKEN_INFO_ERROR|11066|fail to get token info
+SYSTEM_ERROR |   20000     |  system error |
+
+> 示例
+
+```js
+  const contractAddress = 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz';
+  sdk.token.ctp10Token.getDecimals(contractAddress).then(data => {
+    console.log(data);
+  });
+```
+
+### getTotalSupply-Ctp10Token
+
+> 接口说明
+
+   该接口用于获取合约token的总供应量
+
+> 调用方法
+
+sdk.token.ctp10Token.getTotalSupply(contractAddress)
+
+> 请求参数
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+contractAddress     |   String     |  待查询的合约账户地址   |
+
+> 响应数据
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+totalSupply     |   String     |   合约Token的总供应量  |
+
+> 错误码
+
+   异常       |     错误码   |   描述   |
+-----------  | ----------- | -------- |
+INVALID_CONTRACTADDRESS_ERROR|11037|invalid contract address
+NO_SUCH_TOKEN_ERROR|11030|no such token
+GET_TOKEN_INFO_ERROR|11066|fail to get token info
+SYSTEM_ERROR|20000|system error
+
+> 示例
+
+```js
+  const contractAddress = 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz';
+  sdk.token.ctp10Token.getTotalSupply(contractAddress).then(data => {
+    console.log(data);
+  });
+```
+
+### getBalance-Ctp10Token
+
+> 接口说明
+
+   获取合约token拥有者的账户余额
+
+> 调用方法
+
+sdk.token.ctp10Token.getBalance(contractAddress)
+
+> 请求参数
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+contractAddress     |   String     |  待查询的合约账户地址   |
+tokenOwner|String|必填，合约Token持有者的账户地址
+
+> 响应数据
+
+   参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+balance     |   String    |  token的余额   |
+
+> 错误码
+
+   异常       |     错误码   |   描述   |
+-----------  | ----------- | -------- |
+INVALID_TOKENOWNER_ERRPR|11035|invalid token owner
+INVALID_CONTRACTADDRESS_ERROR|11037|invalid contract address
+NO_SUCH_TOKEN_ERROR|11030|no such token
+GET_TOKEN_INFO_ERROR|11066|fail to get token info
+SYSTEM_ERROR|20000|system error
+
+
+> 示例
+
+```js
+  const contractAddress = 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz';
+  sdk.token.ctp10Token.getBalance(contractAddress).then(data => {
+    console.log(data);
+  });
+```
+
+
 
 ## 合约服务
 
