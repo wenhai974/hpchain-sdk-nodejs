@@ -748,7 +748,7 @@ SYSTEM_ERROR |20000 | system error
 
 ##### 资产转移并触发合约，或仅触发合约
 >  调用方式: sdk.operation.contractInvokeByAssetOperation(args)
->
+>  该方法为Promise
 >	参数说明: args为Object，其中包含如下属性
 
 
@@ -785,7 +785,7 @@ SYSTEM_ERROR |20000 | system error
 
 ##### BU资产的发送和触发合约，或仅触发合约
 >  调用方式: sdk.operation.contractInvokeByBUOperation(args)
->
+>  该方法为Promise
 >	参数说明: args为Object，其中包含如下属性
 
 
