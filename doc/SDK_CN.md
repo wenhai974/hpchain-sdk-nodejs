@@ -1032,10 +1032,11 @@ sdk.transaction.submit(args)
 
 > 请求参数args为Object, 包含如下属性
 
-   参数      |     类型     |        描述       |
------------ | ------------ | ---------------- |
-	blob				|   String     |  必填，交易blob
-  signature		|   Array     |  必填，签名列表
+  
+    参数       |    类型  |   描述   |
+-----------  | ----------- | -------- |
+blob | String  | 必填，交易blob
+signature | Array | 必填，签名列表
 
 
 > 响应数据
@@ -1620,7 +1621,7 @@ isValid     |   String     |  是否有效
    异常       |     错误码   |   描述   
 -----------  | ----------- | -------- 
 INVALID_CONTRACTADDRESS_ERROR|11037|invalid contract address
-SYSTEM_ERROR|20000|System error
+SYSTEM_ERROR|20000|system error
 
 > 示例
 
@@ -1665,7 +1666,7 @@ contractOwner|String|合约Token的拥有者
 INVALID_CONTRACTADDRESS_ERROR|11037|invalid contract address
 NO_SUCH_TOKEN_ERROR|11030|no such token
 GET_TOKEN_INFO_ERROR|11066|fail to get token info
-SYSTEM_ERROR|20000|System error
+SYSTEM_ERROR|20000|system error
 
 > 示例
 
