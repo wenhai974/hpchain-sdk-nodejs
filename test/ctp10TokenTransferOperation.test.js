@@ -26,7 +26,7 @@ describe('Test ctp10Token Transfer Operation', function() {
 
     nonce = new BigNumber(nonce).plus(1).toString(10);
 
-    let ctp10TokenTransferOperation = sdk.operation.ctp10TokenTransferOperation({
+    let ctp10TokenTransferOperation = await sdk.operation.ctp10TokenTransferOperation({
       contractAddress: 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz',
       destAddress: 'buQemmMwmRQY1JkcU7w3nhruoX5N3j6C29uo',
       tokenAmount: '3',
