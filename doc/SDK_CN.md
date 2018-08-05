@@ -1742,7 +1742,7 @@ sdk.block.getLatestFees().then(result => {
 
  遵循CTP1.0协议，主要是合约Token相关的接口
 
- ### checkValid-Ctp10Token
+### checkValid-Ctp10Token
 
 > 接口说明
 
@@ -1769,6 +1769,7 @@ isValid     |   String     |  是否有效
    异常       |     错误码   |   描述   
 -----------  | ----------- | -------- 
 INVALID_CONTRACTADDRESS_ERROR|11037|invalid contract address
+CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038 | contractAddress is not a contract account
 SYSTEM_ERROR|20000|system error
 
 > 示例
@@ -1810,13 +1811,14 @@ sdk.token.ctp10Token.allowance(args)
 
 | 异常                          | 错误码 | 描述                             |
 | ----------------------------- | ------ | -------------------------------- |
-| INVALID_CONTRACTADDRESS_ERROR | 11037  | invalid contract address         |
-| NO_SUCH_TOKEN_ERROR           | 11030  | no such token                    |
-| INVALID_TOKENOWNER_ERRPR      | 11035  | invalid token owner              |
-| INVALID_SPENDER_ERROR         | 11043  | invalid spender                  |
-| GET_ALLOWNANCE_ERROR          | 11036  | fail to get allowance            |
-| REQUEST_NULL_ERROR            | 12001  | request parameter cannot be null |
-| SYSTEM_ERROR                  | 20000  | system error                     |
+INVALID_CONTRACTADDRESS_ERROR | 11037  | invalid contract address
+CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038 | contractAddress is not a contract account
+NO_SUCH_TOKEN_ERROR           | 11030  | no such token
+INVALID_TOKENOWNER_ERRPR      | 11035  | invalid token owner
+INVALID_SPENDER_ERROR         | 11043  | invalid spender
+GET_ALLOWNANCE_ERROR          | 11036  | fail to get allowance
+REQUEST_NULL_ERROR            | 12001  | request parameter cannot be null
+SYSTEM_ERROR                  | 20000  | system error
 
 > 示例
 
@@ -1864,6 +1866,7 @@ contractOwner|String|合约Token的拥有者
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
 INVALID_CONTRACTADDRESS_ERROR|11037|invalid contract address
+CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038 | contractAddress is not a contract account
 NO_SUCH_TOKEN_ERROR|11030|no such token
 GET_TOKEN_INFO_ERROR|11066|fail to get token info
 SYSTEM_ERROR|20000|system error
@@ -1904,6 +1907,7 @@ name     |   String     |  合约Token的名称   |
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
 INVALID_CONTRACTADDRESS_ERROR|11037|invalid contract address
+CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038 | contractAddress is not a contract account
 NO_SUCH_TOKEN_ERROR|11030|no such token
 GET_TOKEN_INFO_ERROR|11066|fail to get token info
 SYSTEM_ERROR|20000|system error
@@ -1944,6 +1948,7 @@ symbol     |   String     |  合约Token的符号   |
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
 INVALID_CONTRACTADDRESS_ERROR|11037|invalid contract address
+CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038 | contractAddress is not a contract account
 NO_SUCH_TOKEN_ERROR|11030|no such token
 GET_TOKEN_INFO_ERROR|11066|fail to get token info
 SYSTEM_ERROR|20000|system error
@@ -1984,6 +1989,7 @@ decimals     |   Integer     |  合约token精度   |
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
 INVALID_CONTRACTADDRESS_ERROR|11037|invalid contract address
+CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038 | contractAddress is not a contract account
 NO_SUCH_TOKEN_ERROR|11030|no such token
 GET_TOKEN_INFO_ERROR|11066|fail to get token info
 SYSTEM_ERROR |   20000     |  system error |
@@ -2024,6 +2030,7 @@ totalSupply     |   String     |   合约Token的总供应量  |
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
 INVALID_CONTRACTADDRESS_ERROR|11037|invalid contract address
+CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038 | contractAddress is not a contract account
 NO_SUCH_TOKEN_ERROR|11030|no such token
 GET_TOKEN_INFO_ERROR|11066|fail to get token info
 SYSTEM_ERROR|20000|system error
@@ -2066,6 +2073,7 @@ balance     |   String    |  token的余额   |
 -----------  | ----------- | -------- |
 INVALID_TOKENOWNER_ERRPR|11035|invalid token owner
 INVALID_CONTRACTADDRESS_ERROR|11037|invalid contract address
+CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038 | contractAddress is not a contract account
 NO_SUCH_TOKEN_ERROR|11030|no such token
 GET_TOKEN_INFO_ERROR|11066|fail to get token info
 SYSTEM_ERROR|20000|system error
