@@ -1647,29 +1647,29 @@ sdk.token.ctp10Token.allowance(args)
 
 > 请求参数
 
-| 参数            | 类型   | 描述                            |      |
-| --------------- | ------ | ------------------------------- | ---- |
-| contractAddress | String | 必填，合约账户地址              |      |
-| tokenOwner      | String | 必填，合约Token的持有者账户地址 |      |
-| spender         | String | 必填，被授权账户地址            |      |
+| 参数            | 类型   | 描述                            |
+| --------------- | ------ | ------------------------------- |
+| contractAddress | String | 必填，合约账户地址              |
+| tokenOwner      | String | 必填，合约Token的持有者账户地址 |
+| spender         | String | 必填，被授权账户地址            |
 
 > 响应数据
 
-| 参数      | 类型   | 描述           |      |
-| --------- | ------ | -------------- | ---- |
-| allowance | String | 允许提取的金额 |      |
+| 参数      | 类型   | 描述           |
+| --------- | ------ | -------------- |
+| allowance | String | 允许提取的金额 |
 
 > 错误码
 
-| 异常                          | 错误码 | 描述                             |      |
-| ----------------------------- | ------ | -------------------------------- | ---- |
-| INVALID_CONTRACTADDRESS_ERROR | 11037  | invalid contract address         |      |
-| NO_SUCH_TOKEN_ERROR           | 11030  | no such token                    |      |
-| INVALID_TOKENOWNER_ERRPR      | 11035  | invalid token owner              |      |
-| INVALID_SPENDER_ERROR         | 11043  | invalid spender                  |      |
-| GET_ALLOWNANCE_ERROR          | 11036  | fail to get allowance            |      |
-| REQUEST_NULL_ERROR            | 12001  | request parameter cannot be null |      |
-| SYSTEM_ERROR                  | 20000  | system error                     |      |
+| 异常                          | 错误码 | 描述                             |
+| ----------------------------- | ------ | -------------------------------- |
+| INVALID_CONTRACTADDRESS_ERROR | 11037  | invalid contract address         |
+| NO_SUCH_TOKEN_ERROR           | 11030  | no such token                    |
+| INVALID_TOKENOWNER_ERRPR      | 11035  | invalid token owner              |
+| INVALID_SPENDER_ERROR         | 11043  | invalid spender                  |
+| GET_ALLOWNANCE_ERROR          | 11036  | fail to get allowance            |
+| REQUEST_NULL_ERROR            | 12001  | request parameter cannot be null |
+| SYSTEM_ERROR                  | 20000  | system error                     |
 
 > 示例
 
