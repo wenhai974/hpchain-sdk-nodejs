@@ -625,6 +625,30 @@ SOURCEADDRESS_EQUAL_DESTADDRESS_ERROR | 11005 | sourceAddress cannot be equal to
 INVALID_METADATA_ERROR | 15028 | invalid metadata
 SYSTEM_ERROR | 20000 | system error
 
+##### 设置账户metadata消息
+
+>  调用方式: sdk.operation.accountSetMetadataOperation(args)
+>
+>	参数说明: args为Object，其中包含如下属性
+
+
+   成员变量    |     类型  |        描述                           |
+------------- | -------- | ----------------------------------   |
+sourceAddress | String | 选填，发起该操作的源账户地址key | String | 必填，metadata的关键词，长度[1, 1024]value | String | 必填，metadata的内容，长度[0, 256000]version | int64 | 选填，metadata的版本deleteFlag | boolean | 选填，是否删除metadatametadata | String |选填，备注
+
+> 返回值
+
+成员变量		|     类型  |        描述                           |
+---------	| -------- | ----------------------------------   |
+operation |   Object  |  操作对象
+
+> 错误码
+
+异常		|     错误码 |        描述                           |
+---------	| -------- | ----------------------------------   |
+INVALID_SOURCEADDRESS_ERROR | 11002 | invalid sourceAddressINVALID_DATAKEY_ERROR | 11011 | the length of key must between 1 and 1024INVALID_DATAVALUE_ERROR | 11012 | the length of value must between 0 and 256000INVALID_DATAVERSION_ERROR | 11013 | the version must be equal or bigger than 0SYSTEM_ERROR | 20000 | system error
+
+
 ##### 发送BU
 >  调用方式: sdk.operation.buSendOperation(args)
 >
@@ -2361,7 +2385,7 @@ URL_EMPTY_ERROR															| 11062	|	url cannot be empty
 CONTRACTADDRESS_CODE_BOTH_NULL_ERROR				| 11063	|	contractAddress and code cannot be empty at the same time
 INVALID_OPTTYPE_ERROR												| 11064	|	optType must between 0 and 2
 INVALID_SIGNATURE_ERROR 										| 15027 | invalid signature
-GET_ALLOWANCE_ERROR													| 11065	|	底层错误描述
-GET_TOKEN_INFO_ERROR												| 11066	|	底层错误描述
+GET_ALLOWANCE_ERROR													| 11065	|	get allowance error
+GET_TOKEN_INFO_ERROR												| 11066	|	get token info error
 CONNECTN_BLOCKCHAIN_ERROR										| 19999	|	connect blockchain failed
 SYSTEM_ERROR																| 20000	|	System error
