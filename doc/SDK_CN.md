@@ -859,6 +859,153 @@ INVALID_LOG_TOPIC_ERROR |11045 | the length of key must between 1 and 128
 INVALID_LOG_DATA_ERROR | 11046 | the length of value must between 1 and 1024
 SYSTEM_ERROR |20000 | system error
 
+##### 发行合约token
+>  调用方式: sdk.operation.ctp10TokenIssueOperation(args)
+>
+>	参数说明: args为Object，其中包含如下属性
+
+
+   成员变量    |     类型  |        描述                           |
+------------- | -------- | ----------------------------------   |
+sourceAddress |String |选填，发起该操作的源账户地址initBalance | String |必填，给合约账户的初始化资产，大小[1, max(64)]name |String |必填，ctp10Token名称，长度[1, 1024]symbol | String |必填，ctp10Token符号，长度[1, 1024]decimals | String | 必填，ctp10Token数量的精度，大小[0, 8]totalSupply | String |必填，ctp10Token发行的总供应量，大小[1, max(int64)]metadata | String | 选填，备注
+
+
+> 返回值
+
+成员变量		|     类型  |        描述                           |
+---------	| -------- | ----------------------------------   |
+operation |   Object  |  发行合约token操作对象
+
+> 错误码
+
+异常		|     错误码 |        描述                           |
+---------	| -------- | ----------------------------------   |
+INVALID_SOURCEADDRESS_ERROR | 11002 | invalid sourceAddressINVALID_INITBALANCE_ERROR |11004 | initBalance  must between 1 and max(int64)INVALID_TOKEN_NAME_ERROR |11031 | the length of token name must between 1 and 1024INVALID_TOKEN_SYMBOL_ERROR | 11032 | the length of symbol must between 1 and 1024INVALID_TOKEN_DECIMALS_ERROR | 11033 | decimals must between 1 and 8INVALID_TOKEN_TOTALSUPPLY_ERROR | 11034 |totalSupply must between 1 and max(int64)SYSTEM_ERROR |20000 |system error
+
+
+##### 转移合约token
+>  调用方式: sdk.operation.ctp10TokenTransferOperation(args)
+> 
+>   返回Promise
+>
+>	参数说明: args为Object，其中包含如下属性
+
+
+   成员变量    |     类型  |        描述                           |
+------------- | -------- | ----------------------------------   |
+sourceAddress |String | 选填，合约token的持有者账户地址contractAddress | String | 必填，合约账户地址destAddress | String | 必填，待转移的目标账户地址tokenAmount | String | 必填，待转移的ctp10Token数量，大小[1, int(64)]metadata | String |选填，备注
+
+
+> 返回值
+
+成员变量		|     类型  |        描述                           |
+---------	| -------- | ----------------------------------   |
+operation |   Object  |   转移合约token的操作对象
+
+> 错误码
+
+异常		|     错误码 |        描述                           |
+---------	| -------- | ----------------------------------   |
+INVALID_SOURCEADDRESS_ERROR | 11002 | invalid sourceAddressINVALID_DESTADDRESS_ERROR | 11003 | invalid destAddressINVALID_CONTRACTADDRESS_ERROR | 11037 | invalid contract addressSOURCEADDRESS_EQUAL_DESTADDRESS_ERROR | 11005 | sourceAddress cannot be equal to destAddressCONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038 | contractAddress is not a contract accountINVALID_TOKEN_AMOUNT_ERROR | 11039 | token amount must between 1 and max(int64)
+SOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR | 11040 | sourceAddress cannot be equal to contractAddress
+INVALID_METADATA_ERROR | 15028 | invalid metadataNO_SUCH_TOKEN_ERROR | 11030 | no such tokenSYSTEM_ERROR | 20000 | system error
+
+
+
+##### 转移合约token
+>  调用方式: sdk.operation.ctp10TokenTransferFromOperation(args)
+>
+>  返回Promise
+>
+>	参数说明: args为Object，其中包含如下属性
+
+
+   成员变量    |     类型  |        描述                           |
+------------- | -------- | ----------------------------------   |
+sourceAddress |String | 选填，发起该操作的源账户地址contractAddress |String |必填，合约账户地址fromAddress | String | 必填，待转移的合约token持有者账户地址destAddress | String | 必填，待转移的目标账户地址tokenAmount | String | 必填，待转移的ctp10Token数量，大小[1, int(64)]metadata | String | 选填，备注
+
+
+> 返回值
+
+成员变量		|     类型  |        描述                           |
+---------	| -------- | ----------------------------------   |
+operation |   Object  |   转移合约token的操作对象
+
+> 错误码
+
+异常		|     错误码 |        描述                           |
+---------	| -------- | ----------------------------------   |
+INVALID_SOURCEADDRESS_ERROR | 11002 | invalid sourceAddressINVALID_CONTRACTADDRESS_ERROR | 11037 | invalid contract addressCONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038 | contractAddress is not a contract accountSOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR | 11040 | sourceAddress cannot be equal to contractAddressINVALID_FROMADDRESS_ERROR | 11041 | invalid fromAddressFROMADDRESS_EQUAL_DESTADDRESS_ERROR | 11042 | fromAddress cannot be equal to destAddressINVALID_TOKEN_AMOUNT_ERROR | 11039 |token amount must between 1 and max(int64)
+INVALID_METADATA_ERROR | 15028 | invalid metadataNO_SUCH_TOKEN_ERROR | 11030 | no such tokenSYSTEM_ERROR |20000 |system error##### 授权从交易发送者账户转出指定数量的合约token
+>  调用方式: sdk.operation.ctp10TokenApproveOperation(args)
+>
+>  返回Promise
+>
+>	参数说明: args为Object，其中包含如下属性
+
+
+   成员变量    |     类型  |        描述                           |
+------------- | -------- | ----------------------------------   |
+sourceAddress | String | 选填，合约token的持有者账户地址contractAddress | String | 必填，合约账户地址spender | String |必填，授权的账户地址tokenAmount | String | 必填，被授权的待转移的ctp10Token数量，大小[1, int(64)]metadata | String | 选填，备注
+> 返回值
+
+成员变量		|     类型  |        描述                           |
+---------	| -------- | ----------------------------------   |
+operation |   Object  |   operation操作对象
+
+> 错误码
+
+异常		|     错误码 |        描述                           |
+---------	| -------- | ----------------------------------   |
+INVALID_SOURCEADDRESS_ERROR | 11002 | invalid sourceAddressINVALID_CONTRACTADDRESS_ERROR | 11037 | invalid contract addressCONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038 | contractAddress is not a contract accountSOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR |11040 | sourceAddress cannot be equal to contractAddressINVALID_SPENDER_ERROR | 11043 |invalid spenderINVALID_TOKEN_AMOUNT_ERROR  | 11039 | token amount must between 1 and max(int64)
+INVALID_METADATA_ERROR | 15028 | invalid metadataNO_SUCH_TOKEN_ERROR | 11030 | no such tokenSYSTEM_ERROR | 20000 | system error##### 分配合约token
+>  调用方式: sdk.operation.ctp10TokenAssignOperation(args)
+>
+>  返回Promise
+>
+>	参数说明: args为Object，其中包含如下属性
+
+
+   成员变量    |     类型  |        描述                           |
+------------- | -------- | ----------------------------------   |
+sourceAddress |String | 选填，合约token的拥有者账户地址contractAddress |String | 必填，合约账户地址destAddress | String |必填，待分配的目标账户地址tokenAmount |String |必填，待分配的ctp10Token数量，大小[1, int(64)]metadata | String 选填，备注
+> 返回值
+
+成员变量		|     类型  |        描述                           |
+---------	| -------- | ----------------------------------   |
+operation |   Object  |   operation操作对象
+
+> 错误码
+
+异常		|     错误码 |        描述                           |
+---------	| -------- | ----------------------------------   |
+INVALID_SOURCEADDRESS_ERROR | 11002 | invalid sourceAddressINVALID_CONTRACTADDRESS_ERROR | 11037 | invalid contract addressCONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038 | contractAddress is not a contract accountSOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR | 11040 | sourceAddress cannot be equal to contractAddressINVALID_TOKEN_AMOUNT_ERROR | 11039 | token amount must between 1 and max(int64)
+INVALID_METADATA_ERROR | 15028 | invalid metadataNO_SUCH_TOKEN_ERROR | 11030 | no such tokenSYSTEM_ERROR|20000 |system error##### 转移合约token拥有权
+>  调用方式: sdk.operation.ctp10TokenChangeOwnerOperation(args)
+>
+>  返回Promise
+>
+>	参数说明: args为Object，其中包含如下属性
+
+
+   成员变量    |     类型  |        描述                           |
+------------- | -------- | ----------------------------------   |
+sourceAddress |String | 选填，合约token的拥有者账户地址contractAddress |String | 必填，合约账户地址tokenOwner | String | 必填，待分配的目标账户地址metadata | String 选填，备注
+> 返回值
+
+成员变量		|     类型  |        描述                           |
+---------	| -------- | ----------------------------------   |
+operation |   Object  |   operation操作对象
+
+> 错误码
+
+异常		|     错误码 |        描述                           |
+---------	| -------- | ----------------------------------   |
+INVALID_SOURCEADDRESS_ERROR | 11002 | invalid sourceAddressINVALID_CONTRACTADDRESS_ERROR | 11037 | invalid contract address
+INVALID_TOKENOWNER_ERRPR | 11035 | invalid token ownerCONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038 | contractAddress is not a contract accountSOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR | 11040 | sourceAddress cannot be equal to contractAddress
+INVALID_METADATA_ERROR | 15028 | invalid metadataNO_SUCH_TOKEN_ERROR | 11030 | no such tokenSYSTEM_ERROR|20000 |system error
+
+
 
 ### buildBlob
 
