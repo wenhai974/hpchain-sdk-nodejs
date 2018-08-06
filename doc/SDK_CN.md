@@ -56,6 +56,7 @@
 - [合约服务](#合约服务)
   - [getInfo](#getinfo-合约)
   - [checkValid](#checkvalid-合约)
+  - [getAddress](#getAddress-合约)
 
 - [工具](#工具)
   - [utfToHex](#utftohex)
@@ -2206,6 +2207,53 @@ sdk.contract.checkValid(contractAddress).then(result => {
 }).catch(err => {
   console.log(err.message);
 });
+
+```
+
+### getAddress-合约
+
+> 接口说明
+
+  查询合约地址
+
+> 调用方法
+
+sdk.contract.getAddress(hash)
+
+> 请求参数
+
+参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+hash     |   String     |  创建合约交易的hash   |
+
+> 响应数据
+
+参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+contractAddressList|List<[ContractAddressInfo](#contractaddressinfo)>|合约地址列表
+
+#### ContractAddressInfo
+
+成员      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+contractAddress|String|合约地址
+operationIndex|Number|所在操作的下标
+
+> 错误码
+
+异常       |     错误码   |   描述   |
+-----------  | ----------- | -------- |
+INVALID_HASH_ERROR|11055|invalid transaction hash
+SYSTEM_ERROR|20000|system error
+
+> 示例
+
+```js
+
+const hash = 'f298d08ec3987adc3aeef73e81cbb49cbad2316145ba190700de2d78657880c0';
+sdk.contract.getAddress(hash)..then(data => {
+  console.log(data);
+})
 
 ```
 
