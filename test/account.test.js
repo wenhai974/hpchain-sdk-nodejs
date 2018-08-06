@@ -109,4 +109,21 @@ describe('Test bumo-sdk account service', function() {
     console.log(JSON.stringify(data));
   });
 
+  it('test account.isActivated()', async() => {
+    let data = await sdk.account.isActivated('buQhP94E8FjWDF3zfsxjqVQDeBypvzMrB3y3');
+    data.errorCode.should.equal(0);
+    data.result.isActivated.should.equal(true);
+
+    data = await sdk.account.isActivated('buQekT954wJW5woAMmzpZhb43QHoDApKtoiU');
+    data.errorCode.should.equal(0);
+    data.result.isActivated.should.equal(false);
+
+    data = await sdk.account.isActivated();
+    data.errorCode.should.equal(15016);
+
+    data = await sdk.account.isActivated('');
+    data.errorCode.should.equal(11006);
+
+  });
+
 });
