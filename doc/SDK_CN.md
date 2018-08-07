@@ -2149,8 +2149,9 @@ payload | String | 合约代码
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-INVALID_CONTRACTADDRESS_ERROR | 11037 |Invalid contract address
+INVALID_CONTRACTADDRESS_ERROR | 11037 |invalid contract address
 CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR |11038 |contractAddress is not a contract account
+INVALID_CONTRACT_HASH_ERROR | 11025 | invalid transaction hash to create contract
 SYSTEM_ERROR |   20000     |  系统错误
 
 > 示例
@@ -2236,8 +2237,8 @@ contractAddressList|List<[ContractAddressInfo](#contractaddressinfo)>|合约地�
 
 成员      |     类型     |        描述       |
 ----------- | ------------ | ---------------- |
-contractAddress|String|合约地址
-operationIndex|Number|所在操作的下标
+contract_address|String|合约地址
+operation_index|Number|所在操作的下标
 
 > 错误码
 
