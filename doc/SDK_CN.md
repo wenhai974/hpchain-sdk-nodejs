@@ -655,7 +655,7 @@ operation |   Object  |  操作对象
 INVALID_SOURCEADDRESS_ERROR | 11002 | invalid sourceAddress
 INVALID_DATAKEY_ERROR | 11011 | the length of key must between 1 and 1024
 INVALID_DATAVALUE_ERROR | 11012 | the length of value must between 0 and 256000
-INVALID_DATAVERSION_ERROR | 11013 | the version must be equal or bigger than 0
+INVALID_DATAVERSION_ERROR | 11013 | the version must be equal to or greater than 0
 SYSTEM_ERROR | 20000 | system error
 
 
@@ -714,7 +714,7 @@ operation |   Object  |  发布资产操作对象
 异常		|     错误码 |        描述                           |
 ---------	| -------- | ----------------------------------   |
 INVALID_SOURCEADDRESS_ERROR | 11002 | Invalid sourceAddress
-INVALID_ASSET_CODE _ERROR | 11023 |The length of key must between 1 and 1024
+INVALID_ASSET_CODE_ERROR | 11023 |The length of key must between 1 and 1024
 INVALID_ASSET_AMOUNT_ERROR | 11024 | assetAmount must between 1 and max(int64)
 SYSTEM_ERROR | 20000 | system error
 
@@ -748,7 +748,7 @@ operation |   Object  |  转移资产操作对象
 INVALID_SOURCEADDRESS_ERROR |11002 | invalid sourceAddress
 INVALID_DESTADDRESS_ERROR | 11003 | invalid destAddress
 SOURCEADDRESS_EQUAL_DESTADDRESS_ERROR | 11005 | sourceAddress cannot be equal to destAddress
-INVALID_ASSET_CODE _ERROR | 11023 | the length of asset code must between 1 and 1024
+INVALID_ASSET_CODE_ERROR | 11023 | the length of asset code must between 1 and 1024
 INVALID_ASSET_AMOUNT_ERROR | 11024 | assetAmount must between 1 and max(int64)
 INVALID_ISSUER_ADDRESS_ERROR | 11027 | invalid issuer address
 SYSTEM_ERROR |20000 | system error
@@ -1079,7 +1079,7 @@ INVALID_SOURCEADDRESS_ERROR | 11002 | invalid sourceAddress
 INVALID_NONCE_ERROR					| 11048 | nonce must between 1 and max(int64)
 INVALID_GASPRICE_ERROR			| 11049	| GasPrice must be between 1 and max(int64)
 INVALID_FEELIMIT_ERROR			| 11050	|	feeLimit must be between 1 and max(int64)
-INVALID_CEILLEDGERSEQ_ERROR			| 11052 |	ceilLedgerSeq must be equal or bigger than 0
+INVALID_CEILLEDGERSEQ_ERROR			| 11052 |	ceilLedgerSeq must be equal to or greater than 0
 INVALID_METADATA_ERROR | 15028 | invalid metadata
 SYSTEM_ERROR 								|   20000     |  系统错误
 > 示例
@@ -1903,7 +1903,7 @@ contractOwner|String|合约Token的拥有者
 INVALID_CONTRACTADDRESS_ERROR|11037|invalid contract address
 CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038 | contractAddress is not a contract account
 NO_SUCH_TOKEN_ERROR|11030|no such token
-GET_TOKEN_INFO_ERROR|11066|fail to get token info
+GET_TOKEN_INFO_ERROR|11066|failed to get the token info
 SYSTEM_ERROR|20000|system error
 
 > 示例
@@ -1944,7 +1944,7 @@ name     |   String     |  合约Token的名称   |
 INVALID_CONTRACTADDRESS_ERROR|11037|invalid contract address
 CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038 | contractAddress is not a contract account
 NO_SUCH_TOKEN_ERROR|11030|no such token
-GET_TOKEN_INFO_ERROR|11066|fail to get token info
+GET_TOKEN_INFO_ERROR|11066|failed to get the token info
 SYSTEM_ERROR|20000|system error
 
 > 示例
@@ -1985,7 +1985,7 @@ symbol     |   String     |  合约Token的符号   |
 INVALID_CONTRACTADDRESS_ERROR|11037|invalid contract address
 CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038 | contractAddress is not a contract account
 NO_SUCH_TOKEN_ERROR|11030|no such token
-GET_TOKEN_INFO_ERROR|11066|fail to get token info
+GET_TOKEN_INFO_ERROR|11066|failed to get the token info
 SYSTEM_ERROR|20000|system error
 
 > 示例
@@ -2026,7 +2026,7 @@ decimals     |   Integer     |  合约token精度   |
 INVALID_CONTRACTADDRESS_ERROR|11037|invalid contract address
 CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038 | contractAddress is not a contract account
 NO_SUCH_TOKEN_ERROR|11030|no such token
-GET_TOKEN_INFO_ERROR|11066|fail to get token info
+GET_TOKEN_INFO_ERROR|11066|failed to get the token info
 SYSTEM_ERROR |   20000     |  system error |
 
 > 示例
@@ -2067,7 +2067,7 @@ totalSupply     |   String     |   合约Token的总供应量  |
 INVALID_CONTRACTADDRESS_ERROR|11037|invalid contract address
 CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038 | contractAddress is not a contract account
 NO_SUCH_TOKEN_ERROR|11030|no such token
-GET_TOKEN_INFO_ERROR|11066|fail to get token info
+GET_TOKEN_INFO_ERROR|11066|failed to get the token info
 SYSTEM_ERROR|20000|system error
 
 > 示例
@@ -2110,7 +2110,7 @@ INVALID_TOKENOWNER_ERRPR|11035|invalid token owner
 INVALID_CONTRACTADDRESS_ERROR|11037|invalid contract address
 CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038 | contractAddress is not a contract account
 NO_SUCH_TOKEN_ERROR|11030|no such token
-GET_TOKEN_INFO_ERROR|11066|fail to get token info
+GET_TOKEN_INFO_ERROR|11066|failed to get the token info
 SYSTEM_ERROR|20000|system error
 
 
@@ -2391,7 +2391,7 @@ console.log(bu);
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-ACCOUNT_CREATE_ERROR	|	11001	|	Create account failed
+ACCOUNT_CREATE_ERROR	|	11001	|	failed to create the account
 INVALID_SOURCEADDRESS_ERROR									|	11002	|	invalid sourceAddress
 INVALID_DESTADDRESS_ERROR										|	11003	|	invalid destAddress
 INVALID_INITBALANCE_ERROR										|	11004	|	initBalance must between 1 and max(int64)
@@ -2403,7 +2403,7 @@ NO_ASSET_ERROR															| 11009 |	the account does not have the asset
 NO_METADATA_ERROR														| 11010 |	the account does not have the metadata
 INVALID_DATAKEY_ERROR												| 11011 |	the length of key must between 1 and 1024
 INVALID_DATAVALUE_ERROR											| 11012 |	the length of value must between 0 and 256000
-INVALID_DATAVERSION_ERROR										| 11013 |	the version must be equal or bigger than 0
+INVALID_DATAVERSION_ERROR										| 11013 |	the version must be equal to or greater than 0
 INVALID_MASTERWEIGHT_ERROR									| 11015 |	masterWeight must between 0 and max(uint32)
 INVALID_SIGNER_ADDRESS_ERROR								| 11016 |	invalid signer address
 INVALID_SIGNER_WEIGHT_ERROR									| 11017 |	signer weight must between 0 and max(uint32)
@@ -2433,7 +2433,7 @@ INVALID_NONCE_ERROR													| 11048	|	nonce must between 1 and max(int64)
 INVALID_GASPRICE_ERROR											| 11049	|	amount must between gasPrice in block and max(int64)
 INVALID_FEELIMIT_ERROR											| 11050	|	feeLimit must between 1 and max(int64)
 OPERATIONS_EMPTY_ERROR											| 1105O	|	perations cannot be empty
-INVALID_CEILLEDGERSEQ_ERROR									| 11052	|	ceilLedgerSeq must be equal or bigger than 0
+INVALID_CEILLEDGERSEQ_ERROR									| 11052	|	ceilLedgerSeq must be equal to or greater than 0
 OPERATIONS_ONE_ERROR												| 11053	|	one of operations error
 INVALID_SIGNATURENUMBER_ERROR								| 11054	|	signagureNumber must between 1 and max(int32)
 INVALID_HASH_ERROR													| 11055	|	invalid transaction hash
@@ -2446,5 +2446,5 @@ INVALID_OPTTYPE_ERROR												| 11064	|	optType must between 0 and 2
 INVALID_SIGNATURE_ERROR 										| 15027 | invalid signature
 GET_ALLOWANCE_ERROR													| 11065	|	get allowance error
 GET_TOKEN_INFO_ERROR												| 11066	|	get token info error
-CONNECTN_BLOCKCHAIN_ERROR										| 19999	|	connect blockchain failed
+CONNECTN_BLOCKCHAIN_ERROR										| 19999	|	failed to connect to the blockchain
 SYSTEM_ERROR																| 20000	|	System error
