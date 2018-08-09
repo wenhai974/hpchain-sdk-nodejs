@@ -823,7 +823,7 @@ INVALID_CONTRACTADDRESS_ERROR | 11037 | invalid contract address
 CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR |11038 | contractAddress is not a contract account
 SOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR |11040 |sourceAddress cannot be equal to contractAddress
 INVALID_ASSET_CODE_ERROR |11023 |the length of asset code must between 0 and 1024
-INVALID_CONTRACT_ASSET_AMOUNT_ERROR | 15031 | assetAmount must between 1 and max(int64)
+INVALID_CONTRACT_ASSET_AMOUNT_ERROR | 15031 | assetAmount must between 0 and max(int64)
 INVALID_ISSUER_ADDRESS_ERROR |11027 | invalid issuer address
 INVALID_INPUT_ERROR | 15028 | invalid input
 SYSTEM_ERROR |20000 | system error
