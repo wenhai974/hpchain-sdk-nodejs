@@ -635,7 +635,12 @@ SYSTEM_ERROR | 20000 | system error
 
    成员变量    |     类型  |        描述                           |
 ------------- | -------- | ----------------------------------   |
-sourceAddress | String | 选填，发起该操作的源账户地址key | String | 必填，metadata的关键词，长度[1, 1024]value | String | 必填，metadata的内容，长度[0, 256000]version | int64 | 选填，metadata的版本deleteFlag | boolean | 选填，是否删除metadatametadata | String |选填，备注
+sourceAddress | String | 选填，发起该操作的源账户地址
+key | String | 必填，metadata的关键词，长度[1, 1024]
+value | String | 必填，metadata的内容，长度[0, 256000]
+version | String | 选填，metadata的版本
+deleteFlag | boolean | 选填，是否删除metadata
+metadata | String |选填，备注
 
 > 返回值
 
@@ -647,7 +652,11 @@ operation |   Object  |  操作对象
 
 异常		|     错误码 |        描述                           |
 ---------	| -------- | ----------------------------------   |
-INVALID_SOURCEADDRESS_ERROR | 11002 | invalid sourceAddressINVALID_DATAKEY_ERROR | 11011 | the length of key must between 1 and 1024INVALID_DATAVALUE_ERROR | 11012 | the length of value must between 0 and 256000INVALID_DATAVERSION_ERROR | 11013 | the version must be equal or bigger than 0SYSTEM_ERROR | 20000 | system error
+INVALID_SOURCEADDRESS_ERROR | 11002 | invalid sourceAddress
+INVALID_DATAKEY_ERROR | 11011 | the length of key must between 1 and 1024
+INVALID_DATAVALUE_ERROR | 11012 | the length of value must between 0 and 256000
+INVALID_DATAVERSION_ERROR | 11013 | the version must be equal or bigger than 0
+SYSTEM_ERROR | 20000 | system error
 
 
 ##### 发送BU
@@ -910,7 +919,7 @@ INVALID_SOURCEADDRESS_ERROR | 11002 | invalid sourceAddressINVALID_INITBALANCE_
 
 ##### 转移合约token
 >  调用方式: sdk.operation.ctp10TokenTransferOperation(args)
-> 
+>
 >   返回Promise
 >
 >	参数说明: args为Object，其中包含如下属性
@@ -1781,19 +1790,19 @@ sdk.token.ctp10Token.checkValid(contractAddress);
 > 请求参数
 
    参数      |     类型     |        描述       
------------ | ------------ | ---------------- 
+----------- | ------------ | ----------------
 contractAddress |   String  |  必填，待验证的Token合约地址   
 
 > 响应数据
 
    参数      |     类型     |        描述       
------------ | ------------ | ---------------- 
+----------- | ------------ | ----------------
 isValid     |   String     |  是否有效   
 
 > 错误码
 
    异常       |     错误码   |   描述   
------------  | ----------- | -------- 
+-----------  | ----------- | --------
 INVALID_CONTRACTADDRESS_ERROR|11037|invalid contract address
 CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038 | contractAddress is not a contract account
 SYSTEM_ERROR|20000|system error
@@ -1809,7 +1818,7 @@ SYSTEM_ERROR|20000|system error
 
 
 
-### allowance-Ctp10Token 
+### allowance-Ctp10Token
 
 > 接口说明
 
@@ -1906,7 +1915,7 @@ SYSTEM_ERROR|20000|system error
   });
 ```
 
-### getName-Ctp10Token 
+### getName-Ctp10Token
 
 > 接口说明
 
@@ -1988,7 +1997,7 @@ SYSTEM_ERROR|20000|system error
   });
 ```
 
-### getDecimals-Ctp10Token 
+### getDecimals-Ctp10Token
 
 > 接口说明
 
