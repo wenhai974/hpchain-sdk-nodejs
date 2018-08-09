@@ -47,7 +47,7 @@ describe('Test transaction', function() {
         nonce,
         operations: [operationItem],
         signtureNumber: '1',
-        ceilLedgerSeq: '123'
+        // ceilLedgerSeq: '30',
         // metadata: 'Test evaluation fee',
       };
 
