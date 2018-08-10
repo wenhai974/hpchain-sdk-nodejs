@@ -28,6 +28,8 @@ describe('Test account Set Metadata Operation', function() {
     let accountSetMetadataOperation = sdk.operation.accountSetMetadataOperation({
       key: 'mykey1',
       value: 'myvalue1',
+      // deleteFlag: 1,
+      version: '0'
     });
 
     if (accountSetMetadataOperation.errorCode !== 0) {
