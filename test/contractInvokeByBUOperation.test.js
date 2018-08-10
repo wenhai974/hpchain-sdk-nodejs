@@ -32,7 +32,7 @@ describe('Test contract Invoke By BU  transaction', function() {
       let contractInvokeByBUOperation = yield sdk.operation.contractInvokeByBUOperation({
         contractAddress,
         sourceAddress,
-        buAmount: 'a',
+        buAmount: '0',
         input: 'aaaa',
         // metadata: 'Test contract create operation',
       });
