@@ -838,11 +838,6 @@ operation |   Object  |  合约创建操作对象
 INVALID_SOURCEADDRESS_ERROR |11002  |invalid sourceAddress
 INVALID_INITBALANCE_ERROR |11004 | initBalance  must between 1 and max(int64)
 PAYLOAD_EMPTY_ERROR |11044 |payload must be a non-empty string
-CONTRACT_EXECUTE_FAIL | 15029 |contract execute fail
-CONTRACT_SYNTAX_ERROR |15030 | contract syntax error
-CONTRACT_TOO_MANY_RECURSION | 15031 | contract too many recursion
-CONTRACT_TOO_MANY_TRANSACTIONS | 15032 | contract too many transactions
-CONTRACT_EXECUTE_EXPIRED | 15033 | contract execute expired
 SYSTEM_ERROR |20000 | system error
 
 
