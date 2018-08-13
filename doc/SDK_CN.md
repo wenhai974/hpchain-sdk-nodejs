@@ -713,7 +713,7 @@ INVALID_SIGNER_WEIGHT_ERROR |11017 | Signer weight must between 0 and max(uint32
 INVALID_TX_THRESHOLD_ERROR | 11018 | TxThreshold must between 0 and max(int64)
 INVALID_OPERATION_TYPE_ERROR |11019 | Type of typeThreshold is invalid
 INVALID_TYPE_THRESHOLD_ERROR | 11020 | TypeThreshold must between 0 and max(int64)
-SYSTEM_ERROR | 20000 | system error
+SYSTEM_ERROR | 20000 | System error
 
 
 ##### 发送BU
@@ -977,7 +977,7 @@ INVALID_TOKEN_NAME_ERROR |11031 | The length of token name must between 1 and 10
 INVALID_TOKEN_SYMBOL_ERROR | 11032 | The length of symbol must between 1 and 1024
 INVALID_TOKEN_DECIMALS_ERROR | 11033 | Decimals must between 1 and 8
 INVALID_TOKEN_TOTALSUPPLY_ERROR | 11034 |TotalSupply must between 1 and max(int64)
-SYSTEM_ERROR |20000 |system error
+SYSTEM_ERROR |20000 |System error
 
 
 ##### 转移合约token
