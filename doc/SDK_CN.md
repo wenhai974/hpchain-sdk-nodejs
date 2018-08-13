@@ -2523,7 +2523,7 @@ console.log(bu);
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-ACCOUNT_CREATE_ERROR	|	11001	|	failed to create the account
+ACCOUNT_CREATE_ERROR	                      |	11001	|	Failed to create the account
 INVALID_SOURCEADDRESS_ERROR									|	11002	|	Invalid sourceAddress
 INVALID_DESTADDRESS_ERROR										|	11003	|	Invalid destAddress
 INVALID_INITBALANCE_ERROR										|	11004	|	InitBalance must between 1 and max(int64)
@@ -2580,3 +2580,16 @@ GET_ALLOWANCE_ERROR													| 11065	|	Get allowance error
 GET_TOKEN_INFO_ERROR												| 11066	|	Get token info error
 CONNECTN_BLOCKCHAIN_ERROR										| 19999	|	Failed to connect to the blockchain
 SYSTEM_ERROR																| 20000	|	System error
+ACCOUNT_NOT_EXIST                           | 15001 | Account not exist
+INVALID_NUMBER_OF_ARG                       | 15006 | Invalid number of arguments to the function
+QUERY_RESULT_NOT_EXIST                      | 15014 | Query result not exist
+INVALID_ARGUMENTS                           | 15016 | Invalid arguments to the function',
+FAIL                                        | 15017 | Fail
+INVALID_FORMAT_OF_ARG                       | 15019 | Invalid format of argument to the function
+INVALID_OPERATIONS                          | 15022 | Invalid operation
+INVALID_SIGNATURE_ERROR                     | 15027 | Invalid signature
+INVALID_METADATA_ERROR                      | 15028 | Invalid metadata
+INVALID_INPUT_ERROR                         | 15028 | Invalid input
+INVALID_DELETEFLAG_ERROR                    | 15029 | DeleteFlag must be a boolean
+INVALID_CONTRACT_BU_AMOUNT_ERROR            | 15030 | BuAmount must between 0 and max(int64)
+INVALID_CONTRACT_ASSET_AMOUNT_ERROR         | 15031 | AssetAmount must between 0 and max(int64)
