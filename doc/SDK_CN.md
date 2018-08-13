@@ -1403,7 +1403,7 @@ blockNumber    |   String    |  最新的区块高度
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-SYSTEM_ERROR |   20000     |  系统错误
+SYSTEM_ERROR |   20000     |  System error
 
 > 示例
 
@@ -1598,7 +1598,7 @@ version | String | 区块版本
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-SYSTEM_ERROR |   20000     |  系统错误
+SYSTEM_ERROR |   20000     |  System error
 
 > 示例
 
