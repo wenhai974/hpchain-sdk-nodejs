@@ -38,4 +38,27 @@ describe('Test bumo-sdk contract service', function() {
     data.errorCode.should.equal(11037);
   });
 
+  it('test contract.getAddress()', async() => {
+    let hash = 'f298d08ec3987adc3aeef73e81cbb49cbad2316145ba190700de2d78657880c0';
+    // hash = 'buQqbhTrfAqZtiX79zp4MWwUVfpcadvtz2TMA';
+    let data = await sdk.contract.getAddress(hash);
+    console.log(data);
+    console.log(JSON.stringify(data))
+  });
+
+  it('test contract.call()', async() => {
+
+    let data = await sdk.contract.call({
+      optType: 2,
+      // code: 'leo'
+      // contractAddress: 'buQVyqx5hnPPpuPdN5awWzkdaD1wKtczst8G',
+      contractAddress: 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz',
+      input: JSON.stringify({
+        // method: 'contractInfo',
+        method: 'name',
+      }),
+    });
+    console.log(JSON.stringify(data));
+  });
+
 });

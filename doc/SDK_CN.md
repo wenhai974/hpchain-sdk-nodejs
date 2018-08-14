@@ -6,53 +6,54 @@
 
 - [名词解析](#名词解析)
 - [请求参数与响应数据格式](#请求参数与响应数据格式)
-	- [请求参数](#请求参数)
-	- [响应数据](#响应数据)
+  - [请求参数](#请求参数)
+  - [响应数据](#响应数据)
 - [使用方法](#使用方法)
     - [生成SDK实例](#生成SDK实例)
     - [查询](#信息查询)
-	- [提交交易](#提交交易)
-		- [获取账户nonce值](#获取账户nonce值)
-		- [构建操作](#构建操作)
-		- [构建交易Blob](#构建交易blob)
-		- [签名交易](#签名交易)
-		- [广播交易](#广播交易)
+    - [提交交易](#提交交易)
+    	- [获取账户nonce值](#获取账户nonce值)
+    	- [构建操作](#构建操作)
+    	- [构建交易Blob](#构建交易blob)
+    	- [签名交易](#签名交易)
+    	- [广播交易](#广播交易)
 - [账户服务](#账户服务)
-	- [checkValid](#checkvalid)
-	- [getInfo](#getinfo-账户)
-	- [getNonce](#getnonce)
-	- [getBalance](#getbalance)
-	- [getAssets](#getassets)
+  - [checkValid](#checkvalid)
+  - [getInfo](#getinfo-账户)
+  - [getNonce](#getnonce)
+  - [getBalance](#getbalance)
+  - [getAssets](#getassets)
 - [资产服务](#资产服务)
     - [getInfo](#getinfo-资产)
 - [交易服务](#交易服务)
     - [操作说明](#操作说明)
-	- [buildBlob](#buildblob)
-	- [evaluateFee](#evaluateFee)
-	- [sign](#sign)
-	- [submit](#submit)
-	- [getInfo](#getinfo-交易)
+    - [buildBlob](#buildblob)
+    - [evaluateFee](#evaluateFee)
+    - [sign](#sign)
+    - [submit](#submit)
+    - [getInfo](#getinfo-交易)
 - [区块服务](#区块服务)
     - [getNumber](#getnumber)
-	- [checkStatus](#checkstatus)
-	- [getTransactions](#gettransactions)
-	- [getInfo](#getinfo-区块)
-	- [getLatestInfo](#getlatestinfo)
-	- [getValidators](#getvalidators)
-	- [getLatestValidators](#getlatestvalidators)
-	- [getReward](#getreward)
-	- [getLatestReward](#getlatestreward)
-	- [getFees](#getfees)
-	- [getLatestFees](#getlatestfees)
+    - [checkStatus](#checkstatus)
+    - [getTransactions](#gettransactions)
+    - [getInfo](#getinfo-区块)
+    - [getLatestInfo](#getlatestinfo)
+    - [getValidators](#getvalidators)
+    - [getLatestValidators](#getlatestvalidators)
+    - [getReward](#getreward)
+    - [getLatestReward](#getlatestreward)
+    - [getFees](#getfees)
+    - [getLatestFees](#getlatestfees)
 - [合约服务](#合约服务)
-	- [getInfo](#getinfo-合约)
-	- [checkValid](#checkvalid-合约)
+  - [getInfo](#getinfo-合约)
+  - [checkValid](#checkvalid-合约)
+  - [getAddress](#getAddress-合约)
 
 - [工具](#工具)
-	- [utfToHex](#utftohex)
-	- [hexToUtf](#hextoutf)
-	- [buToMo](#butomo)
-	- [moToBu](#motobu)
+  - [utfToHex](#utftohex)
+  - [hexToUtf](#hextoutf)
+  - [buToMo](#butomo)
+  - [moToBu](#motobu)
 - [错误码](#错误码)
 
 ## 名词解析
@@ -363,9 +364,9 @@ threshold    |    String      |    门限
 
    异常       |     错误码   |   描述
 -----------  | ----------- | --------
-INVALID_ADDRESS_ERROR| 11006 | invalid address
-CONNECTNETWORK_ERROR| 11007| connect network failed
-SYSTEM_ERROR |   20000     |  system error
+INVALID_ADDRESS_ERROR| 11006 | Invalid address
+CONNECTNETWORK_ERROR| 11007| Connect network failed
+SYSTEM_ERROR |   20000     |  System error
 
 > 示例
 
@@ -405,9 +406,9 @@ nonce       |   String    |  该账户的交易序列号
 
    异常       |     错误码   |   描述
 -----------  | ----------- | --------
-INVALID_ADDRESS_ERROR	|	11006	| invalid address
-CONNECTNETWORK_ERROR	|	11007	| connect network failed
-SYSTEM_ERROR				|	20000	|  system error
+INVALID_ADDRESS_ERROR	|	11006	| Invalid address
+CONNECTNETWORK_ERROR	|	11007	| Connect network failed
+SYSTEM_ERROR				|	20000	|  System error
 
 > 示例
 
@@ -449,9 +450,9 @@ balance     |   String    |  该账户的余额
 
    异常       |     错误码   |   描述
 -----------  | ----------- | --------
-INVALID_ADDRESS_ERROR| 11006 | invalid address
-CONNECTNETWORK_ERROR| 11007| connect network failed
-SYSTEM_ERROR |   20000     |  system error
+INVALID_ADDRESS_ERROR| 11006 | Invalid address
+CONNECTNETWORK_ERROR| 11007| Connect network failed
+SYSTEM_ERROR |   20000     |  System error
 
 > 示例
 
@@ -496,9 +497,9 @@ key			|	object |  包含属性: code资产编码、issuer资产发行账户地�
 
    异常       |     错误码   |   描述
 -----------  | ----------- | --------
-INVALID_ADDRESS_ERROR| 11006 | invalid address
-CONNECTNETWORK_ERROR| 11007| connect network failed
-SYSTEM_ERROR |   20000     |  system error
+INVALID_ADDRESS_ERROR| 11006 | Invalid address
+CONNECTNETWORK_ERROR| 11007| Connect network failed
+SYSTEM_ERROR |   20000     |  System error
 
 > 示例
 
@@ -551,11 +552,11 @@ key			|	object |  包含属性: code资产编码、issuer资产发行账户地�
 
    异常       					|     错误码   |   描述   |
 ----------------------			| ----------- | -------- |
-INVALID_ADDRESS_ERROR			|	11006	| invalid address
-CONNECTNETWORK_ERROR			|	11007	| connect network failed
-INVALID_ASSET_CODE_ERROR		|	11023	| the length of asset code must between 1 and 1024
-INVALID_ISSUER_ADDRESS_ERROR	|	11027	| invalid issuer address
-SYSTEM_ERROR						|	20000	| system error
+INVALID_ADDRESS_ERROR			|	11006	| Invalid address
+CONNECTNETWORK_ERROR			|	11007	| Connect network failed
+INVALID_ASSET_CODE_ERROR		|	11023	| The length of asset code must between 1 and 1024
+INVALID_ISSUER_ADDRESS_ERROR	|	11027	| Invalid issuer address
+SYSTEM_ERROR						|	20000	| System error
 
 > 示例
 
@@ -609,12 +610,102 @@ operation |   Object  |  激活账户操作对象
 
 异常		|     错误码 |        描述                           |
 ---------	| -------- | ----------------------------------   |
-INVALID_SOURCEADDRESS_ERROR |   11002  |  invalid sourceAddress
-INVALID_DESTADDRESS_ERROR | 11003 | invalid destAddress
-INVALID_INITBALANCE_ERROR | 11004 | initBalance must between 1 and max(int64)
-SOURCEADDRESS_EQUAL_DESTADDRESS_ERROR | 11005 | sourceAddress cannot be equal to destAddress
-INVALID_METADATA_ERROR | 15028 | invalid metadata
-SYSTEM_ERROR | 20000 | system error
+INVALID_SOURCEADDRESS_ERROR |   11002  |  Invalid sourceAddress
+INVALID_DESTADDRESS_ERROR | 11003 | Invalid destAddress
+INVALID_INITBALANCE_ERROR | 11004 | InitBalance must between 1 and max(int64)
+SOURCEADDRESS_EQUAL_DESTADDRESS_ERROR | 11005 | SourceAddress cannot be equal to destAddress
+INVALID_METADATA_ERROR | 15028 | Invalid metadata
+SYSTEM_ERROR | 20000 | System error
+
+##### 设置账户metadata消息
+
+>  调用方式: sdk.operation.accountSetMetadataOperation(args)
+>
+>	参数说明: args为Object，其中包含如下属性
+
+
+   成员变量    |     类型  |        描述                           |
+------------- | -------- | ----------------------------------   |
+sourceAddress | String | 选填，发起该操作的源账户地址
+key | String | 必填，metadata的关键词，长度[1, 1024]
+value | String | 必填，metadata的内容，长度[0, 256000]
+version | String | 选填，metadata的版本
+deleteFlag | boolean | 选填，是否删除metadata
+metadata | String |选填，备注
+
+> 返回值
+
+成员变量		|     类型  |        描述                           |
+---------	| -------- | ----------------------------------   |
+operation |   Object  |  操作对象
+
+> 错误码
+
+异常		|     错误码 |        描述                           |
+---------	| -------- | ----------------------------------   |
+INVALID_SOURCEADDRESS_ERROR | 11002 | Invalid sourceAddress
+INVALID_DATAKEY_ERROR | 11011 | The length of key must between 1 and 1024
+INVALID_DATAVALUE_ERROR | 11012 | The length of value must between 0 and 256000
+INVALID_DATAVERSION_ERROR | 11013 | The version must be equal to or greater than 0
+SYSTEM_ERROR | 20000 | System error
+
+
+##### 设置账户权限
+
+>  调用方式: sdk.operation.accountSetPrivilegeOperation(args)
+>
+>	参数说明: args为Object，其中包含如下属性
+
+
+   成员变量    |     类型  |        描述                           |
+------------- | -------- | ----------------------------------   |
+sourceAddress |String | 选填，发起该操作的源账户地址
+masterWeight | String | 选填，账户自身权重，大小[0, max(uint32)]
+txThreshold | String | 选填，交易门限，大小[0, max(int64)]
+metadata | String | 选填，备注
+Signer | Array | 选填，签名者权重列表
+typeThresholds | Array | 选填，指定类型交易门限
+
+
+>
+> Signer 中的元素为对象
+>
+
+   成员变量    |     类型  |        描述                           |
+------------- | -------- | ----------------------------------   |
+address | String | 选填，签名账户地址
+weight | String | 选填，签名账户权重，大小[0, max(uint32)]
+
+
+>
+> typeThresholds 中的元素为对象
+>
+
+   成员变量    |     类型  |        描述                           |
+------------- | -------- | ----------------------------------   |
+type | String | 选填，操作类型，大小[1, 100]
+threshold | String | 选填，门限，大小[0, max(int64)]
+
+
+> 返回值
+
+成员变量		|     类型  |        描述                           |
+---------	| -------- | ----------------------------------   |
+operation |   Object  |  操作对象
+
+> 错误码
+
+异常		|     错误码 |        描述                           |
+---------	| -------- | ----------------------------------   |
+INVALID_SOURCEADDRESS_ERROR |11002 | Invalid sourceAddress
+INVALID_MASTERWEIGHT_ERROR | 11015 | MasterWeight must between 0 and max(uint32)
+INVALID_SIGNER_ADDRESS_ERROR | 11016 | Invalid signer address
+INVALID_SIGNER_WEIGHT_ERROR |11017 | Signer weight must between 0 and max(uint32)
+INVALID_TX_THRESHOLD_ERROR | 11018 | TxThreshold must between 0 and max(int64)
+INVALID_OPERATION_TYPE_ERROR |11019 | Type of typeThreshold is invalid
+INVALID_TYPE_THRESHOLD_ERROR | 11020 | TypeThreshold must between 0 and max(int64)
+SYSTEM_ERROR | 20000 | System error
+
 
 ##### 发送BU
 >  调用方式: sdk.operation.buSendOperation(args)
@@ -639,12 +730,12 @@ operation |   Object  |  发送BU操作对象
 
 异常		|     错误码 |        描述                           |
 ---------	| -------- | ----------------------------------   |
-INVALID_SOURCEADDRESS_ERROR | 11002 | invalid sourceAddress
-INVALID_DESTADDRESS_ERROR | 11003 | invalid destAddress
-SOURCEADDRESS_EQUAL_DESTADDRESS_ERROR | 11005 | sourceAddress cannot be equal to destAddress
-INVALID_BU_AMOUNT_ERROR | 11026 | buAmount must between 1 and max(int64)
-INVALID_ISSUER_ADDRESS_ERROR | 11027 | invalid issuer address
-SYSTEM_ERROR | 20000 | system error
+INVALID_SOURCEADDRESS_ERROR | 11002 | Invalid sourceAddress
+INVALID_DESTADDRESS_ERROR | 11003 | Invalid destAddress
+SOURCEADDRESS_EQUAL_DESTADDRESS_ERROR | 11005 | SourceAddress cannot be equal to destAddress
+INVALID_BU_AMOUNT_ERROR | 11026 | BuAmount must between 1 and max(int64)
+INVALID_ISSUER_ADDRESS_ERROR | 11027 | Invalid issuer address
+SYSTEM_ERROR | 20000 | System error
 
 
 ##### 发布资产
@@ -671,9 +762,9 @@ operation |   Object  |  发布资产操作对象
 异常		|     错误码 |        描述                           |
 ---------	| -------- | ----------------------------------   |
 INVALID_SOURCEADDRESS_ERROR | 11002 | Invalid sourceAddress
-INVALID_ASSET_CODE _ERROR | 11023 |The length of key must between 1 and 1024
-INVALID_ASSET_AMOUNT_ERROR | 11024 | assetAmount must between 1 and max(int64)
-SYSTEM_ERROR | 20000 | system error
+INVALID_ASSET_CODE_ERROR | 11023 |The length of key must between 1 and 1024
+INVALID_ASSET_AMOUNT_ERROR | 11024 | AssetAmount must between 1 and max(int64)
+SYSTEM_ERROR | 20000 | System error
 
 
 
@@ -702,13 +793,13 @@ operation |   Object  |  转移资产操作对象
 
 异常		|     错误码 |        描述                           |
 ---------	| -------- | ----------------------------------   |
-INVALID_SOURCEADDRESS_ERROR |11002 | invalid sourceAddress
-INVALID_DESTADDRESS_ERROR | 11003 | invalid destAddress
-SOURCEADDRESS_EQUAL_DESTADDRESS_ERROR | 11005 | sourceAddress cannot be equal to destAddress
-INVALID_ASSET_CODE _ERROR | 11023 | the length of asset code must between 1 and 1024
-INVALID_ASSET_AMOUNT_ERROR | 11024 | assetAmount must between 1 and max(int64)
-INVALID_ISSUER_ADDRESS_ERROR | 11027 | invalid issuer address
-SYSTEM_ERROR |20000 | system error
+INVALID_SOURCEADDRESS_ERROR |11002 | Invalid sourceAddress
+INVALID_DESTADDRESS_ERROR | 11003 | Invalid destAddress
+SOURCEADDRESS_EQUAL_DESTADDRESS_ERROR | 11005 | SourceAddress cannot be equal to destAddress
+INVALID_ASSET_CODE_ERROR | 11023 | The length of asset code must between 1 and 1024
+INVALID_ASSET_AMOUNT_ERROR | 11024 | AssetAmount must between 1 and max(int64)
+INVALID_ISSUER_ADDRESS_ERROR | 11027 | Invalid issuer address
+SYSTEM_ERROR |20000 | System error
 
 
 ##### 创建合约
@@ -735,19 +826,16 @@ operation |   Object  |  合约创建操作对象
 
 异常		|     错误码 |        描述                           |
 ---------	| -------- | ----------------------------------   |
-INVALID_SOURCEADDRESS_ERROR |11002  |invalid sourceAddress
-INVALID_INITBALANCE_ERROR |11004 | initBalance  must between 1 and max(int64)
-PAYLOAD_EMPTY_ERROR |11044 |payload must be a non-empty string
-CONTRACT_EXECUTE_FAIL | 15029 |contract execute fail
-CONTRACT_SYNTAX_ERROR |15030 | contract syntax error
-CONTRACT_TOO_MANY_RECURSION | 15031 | contract too many recursion
-CONTRACT_TOO_MANY_TRANSACTIONS | 15032 | contract too many transactions
-CONTRACT_EXECUTE_EXPIRED | 15033 | contract execute expired
-SYSTEM_ERROR |20000 | system error
+INVALID_SOURCEADDRESS_ERROR |11002  |Invalid sourceAddress
+INVALID_INITBALANCE_ERROR |11004 | InitBalance  must between 1 and max(int64)
+PAYLOAD_EMPTY_ERROR |11044 |Payload must be a non-empty string
+SYSTEM_ERROR |20000 | System error
 
 
 ##### 资产转移并触发合约，或仅触发合约
 >  调用方式: sdk.operation.contractInvokeByAssetOperation(args)
+>
+>  该方法为Promise
 >
 >	参数说明: args为Object，其中包含如下属性
 
@@ -773,18 +861,20 @@ operation |   Object  |   资产转移并触发合约操作对象
 
 异常		|     错误码 |        描述                           |
 ---------	| -------- | ----------------------------------   |
-INVALID_SOURCEADDRESS_ERROR | 11002 |invalid sourceAddress
-INVALID_CONTRACTADDRESS_ERROR | 11037 | invalid contract address
-CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR |11038 | contractAddress is not a contract account
-SOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR |11040 |sourceAddress cannot be equal to contractAddress
-INVALID_ASSET_CODE_ERROR |11023 |the length of asset code must between 0 and 1024
-INVALID_ASSET_AMOUNT_ERROR | 11024 | assetAmount must between 1 and max(int64)
-INVALID_ISSUER_ADDRESS_ERROR |11027 | invalid issuer address
-INVALID_INPUT_ERROR | 15028 | invalid input
-SYSTEM_ERROR |20000 | system error
+INVALID_SOURCEADDRESS_ERROR | 11002 |Invalid sourceAddress
+INVALID_CONTRACTADDRESS_ERROR | 11037 | Invalid contract address
+CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR |11038 | ContractAddress is not a contract account
+SOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR |11040 |SourceAddress cannot be equal to contractAddress
+INVALID_ASSET_CODE_ERROR |11023 |The length of asset code must between 0 and 1024
+INVALID_CONTRACT_ASSET_AMOUNT_ERROR | 15031 | AssetAmount must between 0 and max(int64)
+INVALID_ISSUER_ADDRESS_ERROR |11027 | Invalid issuer address
+INVALID_INPUT_ERROR | 15028 | Invalid input
+SYSTEM_ERROR |20000 | System error
 
 ##### BU资产的发送和触发合约，或仅触发合约
 >  调用方式: sdk.operation.contractInvokeByBUOperation(args)
+>
+>  该方法为Promise
 >
 >	参数说明: args为Object，其中包含如下属性
 
@@ -808,14 +898,13 @@ operation |   Object  |  BU资产的发送和触发合约操作对象
 
 异常		|     错误码 |        描述                           |
 ---------	| -------- | ----------------------------------   |
-INVALID_SOURCEADDRESS_ERROR | 11002 | invalid sourceAddress
-INVALID_CONTRACTADDRESS_ERROR | 11037 | invalid contract address
-CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038 | contractAddress is not a contract account
-SOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR | 11040 | sourceAddress cannot be equal to contractAddress
-INVALID_BU_AMOUNT_ERROR | 11026 | buAmount must between 1 and max(int64)
-INVALID_ISSUER_ADDRESS_ERROR | 11027 | invalid issuer address
-INVALID_INPUT_ERROR | 15028 | invalid input
-SYSTEM_ERROR |20000 |system error
+INVALID_SOURCEADDRESS_ERROR | 11002 | Invalid sourceAddress
+INVALID_CONTRACTADDRESS_ERROR | 11037 | Invalid contract address
+CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038 | ContractAddress is not a contract account
+SOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR | 11040 | SourceAddress cannot be equal to contractAddress
+INVALID_CONTRACT_BU_AMOUNT_ERROR | 15030 | BuAmount must between 0 and max(int64)
+INVALID_INPUT_ERROR | 15028 | Invalid input
+SYSTEM_ERROR |20000 |System error
 
 ##### 在区块链上写日志信息
 >  调用方式: sdk.operation.logCreateOperation(args)
@@ -841,10 +930,10 @@ operation |   Object  |  在区块链上写日志信息的操作对象
 
 异常		|     错误码 |        描述                           |
 ---------	| -------- | ----------------------------------   |
-INVALID_SOURCEADDRESS_ERROR | 11002 | invalid sourceAddress
-INVALID_LOG_TOPIC_ERROR |11045 | the length of key must between 1 and 128
-INVALID_LOG_DATA_ERROR | 11046 | the length of value must between 1 and 1024
-SYSTEM_ERROR |20000 | system error
+INVALID_SOURCEADDRESS_ERROR | 11002 | Invalid sourceAddress
+INVALID_LOG_TOPIC_ERROR |11045 | The length of key must between 1 and 128
+INVALID_LOG_DATA_ERROR | 11046 | The length of value must between 1 and 1024
+SYSTEM_ERROR |20000 | System error
 
 
 ### buildBlob
@@ -881,13 +970,13 @@ transactionBlob |   String     |  Transaction序列化后的16进制字符串
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-INVALID_SOURCEADDRESS_ERROR | 11002 | invalid sourceAddress
-INVALID_NONCE_ERROR					| 11048 | nonce must between 1 and max(int64)
+INVALID_SOURCEADDRESS_ERROR | 11002 | Invalid sourceAddress
+INVALID_NONCE_ERROR					| 11048 | Nonce must between 1 and max(int64)
 INVALID_GASPRICE_ERROR			| 11049	| GasPrice must be between 1 and max(int64)
-INVALID_FEELIMIT_ERROR			| 11050	|	feeLimit must be between 1 and max(int64)
-INVALID_CEILLEDGERSEQ_ERROR			| 11052 |	ceilLedgerSeq must be equal or bigger than 0
-INVALID_METADATA_ERROR | 15028 | invalid metadata
-SYSTEM_ERROR 								|   20000     |  系统错误
+INVALID_FEELIMIT_ERROR			| 11050	|	FeeLimit must be between 1 and max(int64)
+INVALID_CEILLEDGERSEQ_ERROR			| 11052 |	CeilLedgerSeq must be equal to or greater than 0
+INVALID_METADATA_ERROR | 15028 | Invalid metadata
+SYSTEM_ERROR 								|   20000     |  System error
 > 示例
 
 ```js
@@ -934,9 +1023,9 @@ feeLimit    |   String     |  交易费用
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-INVALID_NONCE_ERROR					| 11048 | nonce must between 1 and max(int64)
+INVALID_NONCE_ERROR					| 11048 | Nonce must between 1 and max(int64)
 INVALID_ARGUMENTS | 15016 | Invalid arguments to the function
-SYSTEM_ERROR |   20000     |  系统错误
+SYSTEM_ERROR |   20000     |  System error
 
 > 示例
 
@@ -992,9 +1081,9 @@ publicKey    |   String     | 公钥
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-INVALID_BLOB_ERROR | 11056 | invalid blob
-PRIVATEKEY_ONE_ERROR | 11058 | one of privateKeys is invalid
-SYSTEM_ERROR |   20000     |  系统错误
+INVALID_BLOB_ERROR | 11056 | Invalid blob
+PRIVATEKEY_ONE_ERROR | 11058 | One of privateKeys is invalid
+SYSTEM_ERROR |   20000     |  System error
 
 > 示例
 
@@ -1020,10 +1109,12 @@ sdk.transaction.submit(args)
 
 > 请求参数args为Object, 包含如下属性
 
+
+
    参数      |     类型     |        描述       |
 ----------- | ------------ | ---------------- |
-	blob				|   String     |  必填，交易blob
-  signature		|   Array     |  必填，签名列表
+blob | String  | 必填，交易blob
+signature | Array | 必填，签名列表
 
 
 > 响应数据
@@ -1038,9 +1129,9 @@ hash    |   String     |  交易hash
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-INVALID_BLOB_ERROR | 11056 | invalid blob
-INVALID_SIGNATURE_ERROR | 15027 | invalid signature
-SYSTEM_ERROR |   20000     |  系统错误
+INVALID_BLOB_ERROR | 11056 | Invalid blob
+INVALID_SIGNATURE_ERROR | 15027 | Invalid signature
+SYSTEM_ERROR |   20000     |  System error
 
 > 示例
 
@@ -1075,7 +1166,7 @@ blockNumber    |   String    |  最新的区块高度
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-SYSTEM_ERROR |   20000     |  系统错误
+SYSTEM_ERROR |   20000     |  System error
 
 > 示例
 
@@ -1109,7 +1200,7 @@ isSynchronous     |   boolean     |  区块是否同步
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-SYSTEM_ERROR |   20000     |  系统错误
+SYSTEM_ERROR |   20000     |  System error
 
 > 示例
 
@@ -1185,9 +1276,9 @@ public_key|String|公钥
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-INVALID_BLOCKNUMBER_ERROR | 11060 | blockNumber must bigger than 0
-QUERY_RESULT_NOT_EXIST | 15014 | query result not exist
-SYSTEM_ERROR |   20000     |  系统错误
+INVALID_BLOCKNUMBER_ERROR | 11060 | BlockNumber must bigger than 0
+QUERY_RESULT_NOT_EXIST | 15014 | Query result not exist
+SYSTEM_ERROR |   20000     |  System error
 
 > 示例
 
@@ -1231,8 +1322,8 @@ version | String | 区块版本
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-INVALID_BLOCKNUMBER_ERROR | 11060 | blockNumber must bigger than 0
-SYSTEM_ERROR |   20000     |  系统错误
+INVALID_BLOCKNUMBER_ERROR | 11060 | BlockNumber must bigger than 0
+SYSTEM_ERROR |   20000     |  System error
 
 > 示例
 
@@ -1270,7 +1361,7 @@ version | String | 区块版本
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-SYSTEM_ERROR |   20000     |  系统错误
+SYSTEM_ERROR |   20000     |  System error
 
 > 示例
 
@@ -1321,8 +1412,8 @@ pledge_coin_amount | String | 验证节点押金
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-INVALID_BLOCKNUMBER_ERROR | 11060 | blockNumber must bigger than 0
-SYSTEM_ERROR |   20000     |  系统错误
+INVALID_BLOCKNUMBER_ERROR | 11060 | BlockNumber must bigger than 0
+SYSTEM_ERROR |   20000     |  System error
 
 > 示例
 
@@ -1366,7 +1457,7 @@ pledge_coin_amount | String | 验证节点押金
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-SYSTEM_ERROR |   20000     |  系统错误
+SYSTEM_ERROR |   20000     |  System error
 
 > 示例
 
@@ -1417,8 +1508,8 @@ validator | String| 验证节点地址
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-INVALID_BLOCKNUMBER_ERROR | 11060 | blockNumber must bigger than 0
-SYSTEM_ERROR |   20000     |  系统错误
+INVALID_BLOCKNUMBER_ERROR | 11060 | BlockNumber must bigger than 0
+SYSTEM_ERROR |   20000     |  System error
 
 > 示例
 
@@ -1464,7 +1555,7 @@ validator | String| 验证节点地址
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-SYSTEM_ERROR |   20000     |  系统错误
+SYSTEM_ERROR |   20000     |  System error
 
 > 示例
 
@@ -1516,8 +1607,8 @@ baseReserve | String| 账户最低资产限制
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-INVALID_BLOCKNUMBER_ERROR | 11060 | blockNumber must bigger than 0
-SYSTEM_ERROR |   20000     |  系统错误
+INVALID_BLOCKNUMBER_ERROR | 11060 | BlockNumber must bigger than 0
+SYSTEM_ERROR |   20000     |  System error
 
 > 示例
 
@@ -1562,7 +1653,7 @@ baseReserve | String| 账户最低资产限制
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-SYSTEM_ERROR |   20000     |  系统错误
+SYSTEM_ERROR |   20000     |  System error
 
 > 示例
 
@@ -1575,6 +1666,7 @@ sdk.block.getLatestFees().then(result => {
 });
 
 ```
+
 
 ## 合约服务
 
@@ -1608,8 +1700,9 @@ payload | String | 合约代码
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
 INVALID_CONTRACTADDRESS_ERROR | 11037 |Invalid contract address
-CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR |11038 |contractAddress is not a contract account
-SYSTEM_ERROR |   20000     |  系统错误
+CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR |11038 |ContractAddress is not a contract account
+INVALID_CONTRACT_HASH_ERROR | 11025 | Invalid transaction hash to create contract
+SYSTEM_ERROR |   20000     |  System error
 
 > 示例
 
@@ -1651,9 +1744,9 @@ isValid |boolean | 合约账户地址是否有效
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-INVALID_CONTRACTADDRESS_ERROR | 11037 |invalid contract address
-CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR |11038 |contractAddress is not a contract account
-SYSTEM_ERROR |   20000     |  系统错误
+INVALID_CONTRACTADDRESS_ERROR | 11037 |Invalid contract address
+CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR |11038 |ContractAddress is not a contract account
+SYSTEM_ERROR |   20000     |  System error
 
 > 示例
 
@@ -1665,6 +1758,53 @@ sdk.contract.checkValid(contractAddress).then(result => {
 }).catch(err => {
   console.log(err.message);
 });
+
+```
+
+### getAddress-合约
+
+> 接口说明
+
+  查询合约地址
+
+> 调用方法
+
+sdk.contract.getAddress(hash)
+
+> 请求参数
+
+参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+hash     |   String     |  创建合约交易的hash   |
+
+> 响应数据
+
+参数      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+contractAddressList|List<[ContractAddressInfo](#contractaddressinfo)>|合约地址列表
+
+#### ContractAddressInfo
+
+成员      |     类型     |        描述       |
+----------- | ------------ | ---------------- |
+contract_address|String|合约地址
+operation_index|Number|所在操作的下标
+
+> 错误码
+
+异常       |     错误码   |   描述   |
+-----------  | ----------- | -------- |
+INVALID_HASH_ERROR|11055|Invalid transaction hash
+SYSTEM_ERROR|20000|System error
+
+> 示例
+
+```js
+
+const hash = 'f298d08ec3987adc3aeef73e81cbb49cbad2316145ba190700de2d78657880c0';
+sdk.contract.getAddress(hash).then(data => {
+  console.log(data);
+})
 
 ```
 
@@ -1791,60 +1931,73 @@ console.log(bu);
 
    异常       |     错误码   |   描述   |
 -----------  | ----------- | -------- |
-ACCOUNT_CREATE_ERROR	|	11001	|	Create account failed
-INVALID_SOURCEADDRESS_ERROR									|	11002	|	invalid sourceAddress
-INVALID_DESTADDRESS_ERROR										|	11003	|	invalid destAddress
-INVALID_INITBALANCE_ERROR										|	11004	|	initBalance must between 1 and max(int64)
-SOURCEADDRESS_EQUAL_DESTADDRESS_ERROR				|	11005	|	sourceAddress cannot be equal to destAddress
-INVALID_ADDRESS_ERROR												|	11006	|	invalid address
-CONNECTNETWORK_ERROR												|	11007 |	connect network failed
-METADATA_NOT_HEX_STRING_ERROR								|	11008 |	metadata must be a hex string
-NO_ASSET_ERROR															| 11009 |	the account does not have the asset
-NO_METADATA_ERROR														| 11010 |	the account does not have the metadata
-INVALID_DATAKEY_ERROR												| 11011 |	the length of key must between 1 and 1024
-INVALID_DATAVALUE_ERROR											| 11012 |	the length of value must between 0 and 256000
-INVALID_DATAVERSION_ERROR										| 11013 |	the version must be equal or bigger than 0
-INVALID_MASTERWEIGHT_ERROR									| 11015 |	masterWeight must between 0 and max(uint32)
-INVALID_SIGNER_ADDRESS_ERROR								| 11016 |	invalid signer address
-INVALID_SIGNER_WEIGHT_ERROR									| 11017 |	signer weight must between 0 and max(uint32)
-INVALID_TX_THRESHOLD_ERROR									| 11018 |	txThreshold must between 0 and max(int64)
-INVALID_OPERATION_TYPE_ERROR								| 11019 |	operation type must between 1 and 100
-INVALID_TYPE_THRESHOLD_ERROR								| 11020 |	typeThreshold must between 0 and max(int64)
-INVALID_ASSET_CODE_ERROR										| 11023 |	the length of key must between 1 and 1024
-INVALID_ASSET_AMOUNT_ERROR									| 11024 |	assetAmount must between 1 and max(int64)
-INVALID_BU_AMOUNT_ERROR											| 11026 |	buAmount must between 1 and max(int64)
-INVALID_ISSUER_ADDRESS_ERROR								| 11027 |	invalid issuer address
-NO_SUCH_TOKEN_ERROR													| 11030	|	no such token
-INVALID_TOKEN_NAME_ERROR										| 11031	|	the length of token name must between 1 and 1024
-INVALID_TOKEN_SIMBOL_ERROR									| 11032	|	the length of symbol must between 1 and 1024
-INVALID_TOKEN_DECIMALS_ERROR								| 11033	|	decimals must less than 8
-INVALID_TOKEN_TOTALSUPPLY_ERROR							| 11034	|	totalSupply must between 1 and max(int64)
-INVALID_TOKENOWNER_ERRPR										| 11035	|	invalid token owner
-INVALID_CONTRACTADDRESS_ERROR								| 11037	|	invalid contract address
-CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR		| 11038	|	contractAddress is not a contract account
-INVALID_TOKEN_AMOUNT_ERROR									| 11039	|	amount must between 1 and max(int64)
-SOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR		| 11040	|	sourceAddress cannot be equal to contractAddress
-INVALID_FROMADDRESS_ERROR										| 11041	|	invalid fromAddress
-FROMADDRESS_EQUAL_DESTADDRESS_ERROR					| 11042	|	fromAddress cannot be equal to destAddress
-INVALID_SPENDER_ERROR												| 11043	|	invalid spender
-INVALID_LOG_TOPIC_ERROR											| 11045	|	the length of log topic must between 1 and 128
-INVALID_LOG_DATA_ERROR											| 11046	|	the length of one of log data must between 1 and 1024
-INVALID_NONCE_ERROR													| 11048	|	nonce must between 1 and max(int64)
-INVALID_GASPRICE_ERROR											| 11049	|	amount must between gasPrice in block and max(int64)
-INVALID_FEELIMIT_ERROR											| 11050	|	feeLimit must between 1 and max(int64)
-OPERATIONS_EMPTY_ERROR											| 1105O	|	perations cannot be empty
-INVALID_CEILLEDGERSEQ_ERROR									| 11052	|	ceilLedgerSeq must be equal or bigger than 0
-OPERATIONS_ONE_ERROR												| 11053	|	one of operations error
-INVALID_SIGNATURENUMBER_ERROR								| 11054	|	signagureNumber must between 1 and max(int32)
-INVALID_HASH_ERROR													| 11055	|	invalid transaction hash
-INVALID_BLOB_ERROR													| 11056	|	invalid blob
-PRIVATEKEY_NULL_ERROR												|	11057	| privateKeys cannot be empty
-PRIVATEKEY_ONE_ERROR												| 11058	|	one of privateKeys is invalid
-URL_EMPTY_ERROR															| 11062	|	url cannot be empty
-CONTRACTADDRESS_CODE_BOTH_NULL_ERROR				| 11063	|	contractAddress and code cannot be empty at the same time
-INVALID_OPTTYPE_ERROR												| 11064	|	optType must between 0 and 2
-INVALID_SIGNATURE_ERROR 										| 15027 | invalid signature
-GET_ALLOWANCE_ERROR													| 11065	|	底层错误描述
-GET_TOKEN_INFO_ERROR												| 11066	|	底层错误描述
-CONNECTN_BLOCKCHAIN_ERROR										| 19999	|	connect blockchain failed
+ACCOUNT_CREATE_ERROR	                      |	11001	|	Failed to create the account
+INVALID_SOURCEADDRESS_ERROR									|	11002	|	Invalid sourceAddress
+INVALID_DESTADDRESS_ERROR										|	11003	|	Invalid destAddress
+INVALID_INITBALANCE_ERROR										|	11004	|	InitBalance must between 1 and max(int64)
+SOURCEADDRESS_EQUAL_DESTADDRESS_ERROR				|	11005	|	SourceAddress cannot be equal to destAddress
+INVALID_ADDRESS_ERROR												|	11006	|	Invalid address
+CONNECTNETWORK_ERROR												|	11007 |	Connect network failed
+METADATA_NOT_HEX_STRING_ERROR								|	11008 |	Metadata must be a hex string
+NO_ASSET_ERROR															| 11009 |	The account does not have the asset
+NO_METADATA_ERROR														| 11010 |	The account does not have the metadata
+INVALID_DATAKEY_ERROR												| 11011 |	The length of key must between 1 and 1024
+INVALID_DATAVALUE_ERROR											| 11012 |	The length of value must between 0 and 256000
+INVALID_DATAVERSION_ERROR										| 11013 |	The version must be equal to or greater than 0
+INVALID_MASTERWEIGHT_ERROR									| 11015 |	MasterWeight must between 0 and max(uint32)
+INVALID_SIGNER_ADDRESS_ERROR								| 11016 |	Invalid signer address
+INVALID_SIGNER_WEIGHT_ERROR									| 11017 |	Signer weight must between 0 and max(uint32)
+INVALID_TX_THRESHOLD_ERROR									| 11018 |	TxThreshold must between 0 and max(int64)
+INVALID_OPERATION_TYPE_ERROR								| 11019 |	Operation type must between 1 and 100
+INVALID_TYPE_THRESHOLD_ERROR								| 11020 |	TypeThreshold must between 0 and max(int64)
+INVALID_ASSET_CODE_ERROR										| 11023 |	The length of key must between 1 and 1024
+INVALID_ASSET_AMOUNT_ERROR									| 11024 |	AssetAmount must between 1 and max(int64)
+INVALID_BU_AMOUNT_ERROR											| 11026 |	BuAmount must between 1 and max(int64)
+INVALID_ISSUER_ADDRESS_ERROR								| 11027 |	Invalid issuer address
+NO_SUCH_TOKEN_ERROR													| 11030	|	No such token
+INVALID_TOKEN_NAME_ERROR										| 11031	|	The length of token name must between 1 and 1024
+INVALID_TOKEN_SIMBOL_ERROR									| 11032	|	The length of symbol must between 1 and 1024
+INVALID_TOKEN_DECIMALS_ERROR								| 11033	|	Decimals must less than 8
+INVALID_TOKEN_TOTALSUPPLY_ERROR							| 11034	|	TotalSupply must between 1 and max(int64)
+INVALID_TOKENOWNER_ERRPR										| 11035	|	Invalid token owner
+INVALID_CONTRACTADDRESS_ERROR								| 11037	|	Invalid contract address
+CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR		| 11038	|	ContractAddress is not a contract account
+INVALID_TOKEN_AMOUNT_ERROR									| 11039	|	Amount must between 1 and max(int64)
+SOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR		| 11040	|	SourceAddress cannot be equal to contractAddress
+INVALID_FROMADDRESS_ERROR										| 11041	|	Invalid fromAddress
+FROMADDRESS_EQUAL_DESTADDRESS_ERROR					| 11042	|	FromAddress cannot be equal to destAddress
+INVALID_SPENDER_ERROR												| 11043	|	Invalid spender
+INVALID_LOG_TOPIC_ERROR											| 11045	|	The length of log topic must between 1 and 128
+INVALID_LOG_DATA_ERROR											| 11046	|	The length of one of log data must between 1 and 1024
+INVALID_NONCE_ERROR													| 11048	|	Nonce must between 1 and max(int64)
+INVALID_GASPRICE_ERROR											| 11049	|	Amount must between gasPrice in block and max(int64)
+INVALID_FEELIMIT_ERROR											| 11050	|	FeeLimit must between 1 and max(int64)
+OPERATIONS_EMPTY_ERROR											| 1105O	|	Perations cannot be empty
+INVALID_CEILLEDGERSEQ_ERROR									| 11052	|	CeilLedgerSeq must be equal to or greater than 0
+OPERATIONS_ONE_ERROR												| 11053	|	One of operations error
+INVALID_SIGNATURENUMBER_ERROR								| 11054	|	SignagureNumber must between 1 and max(int32)
+INVALID_HASH_ERROR													| 11055	|	Invalid transaction hash
+INVALID_BLOB_ERROR													| 11056	|	Invalid blob
+PRIVATEKEY_NULL_ERROR												|	11057	| PrivateKeys cannot be empty
+PRIVATEKEY_ONE_ERROR												| 11058	|	One of privateKeys is invalid
+URL_EMPTY_ERROR															| 11062	|	Url cannot be empty
+CONTRACTADDRESS_CODE_BOTH_NULL_ERROR				| 11063	|	ContractAddress and code cannot be empty at the same time
+INVALID_OPTTYPE_ERROR												| 11064	|	OptType must between 0 and 2
+INVALID_SIGNATURE_ERROR 										| 15027 | Invalid signature
+GET_ALLOWANCE_ERROR													| 11065	|	Get allowance error
+GET_TOKEN_INFO_ERROR												| 11066	|	Get token info error
+CONNECTN_BLOCKCHAIN_ERROR										| 19999	|	Failed to connect to the blockchain
 SYSTEM_ERROR																| 20000	|	System error
+ACCOUNT_NOT_EXIST                           | 15001 | Account not exist
+INVALID_NUMBER_OF_ARG                       | 15006 | Invalid number of arguments to the function
+QUERY_RESULT_NOT_EXIST                      | 15014 | Query result not exist
+INVALID_ARGUMENTS                           | 15016 | Invalid arguments to the function',
+FAIL                                        | 15017 | Fail
+INVALID_FORMAT_OF_ARG                       | 15019 | Invalid format of argument to the function
+INVALID_OPERATIONS                          | 15022 | Invalid operation
+INVALID_SIGNATURE_ERROR                     | 15027 | Invalid signature
+INVALID_METADATA_ERROR                      | 15028 | Invalid metadata
+INVALID_INPUT_ERROR                         | 15028 | Invalid input
+INVALID_DELETEFLAG_ERROR                    | 15029 | DeleteFlag must be a boolean
+INVALID_CONTRACT_BU_AMOUNT_ERROR            | 15030 | BuAmount must between 0 and max(int64)
+INVALID_CONTRACT_ASSET_AMOUNT_ERROR         | 15031 | AssetAmount must between 0 and max(int64)

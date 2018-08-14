@@ -7,8 +7,8 @@ const co = require('co');
 const BumoSDK = require('../index');
 
 const sdk = new BumoSDK({
-  // host: 'seed1.bumotest.io:26002',
-  host: '192.168.1.162:56002',
+  host: 'seed1.bumotest.io:26002',
+  // host: '192.168.1.162:56002',
 });
 
 describe('Test transaction', function() {
@@ -47,11 +47,13 @@ describe('Test transaction', function() {
         nonce,
         operations: [operationItem],
         signtureNumber: '1',
+        // ceilLedgerSeq: '30',
         // metadata: 'Test evaluation fee',
       };
 
+
       sdk.transaction.evaluateFee(args).then(feeData => {
-        // console.log(feeData)
+        console.log(feeData)
       }).catch(err => {
         console.log(err);
       });

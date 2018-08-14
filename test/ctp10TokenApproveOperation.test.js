@@ -11,9 +11,9 @@ const sdk = new BumoSDK({
   // host: '192.168.1.34:36002',
 });
 
-describe('Test ctp10Token Transfer Operation', function() {
+describe('Test ctp10Token Approve Operation', function() {
 
-  it('Test ctp10Token Transfer Operation', async() => {
+  it('Test ctp10Token Approve Operation', async() => {
     const privateKey = 'private key';
     let sourceAddress = 'buQhP94E8FjWDF3zfsxjqVQDeBypvzMrB3y3';
     const result = await sdk.account.getNonce(sourceAddress);
@@ -26,20 +26,20 @@ describe('Test ctp10Token Transfer Operation', function() {
 
     nonce = new BigNumber(nonce).plus(1).toString(10);
 
-    let ctp10TokenTransferOperation = await sdk.operation.ctp10TokenTransferOperation({
+    let ctp10TokenApproveOperation = await sdk.operation.ctp10TokenApproveOperation({
       contractAddress: 'buQVkwAVz8VkEGKvX1zQerJj4q61fFdWGCgz',
-      destAddress: 'buQemmMwmRQY1JkcU7w3nhruoX5N3j6C29uo',
-      tokenAmount: '3',
+      spender: 'buQemmMwmRQY1JkcU7w3nhruoX5N3j6C29uo',
+      tokenAmount: '1',
       sourceAddress,
       // metadata: '',
     });
 
-    if (ctp10TokenTransferOperation.errorCode !== 0) {
-      console.log(ctp10TokenTransferOperation);
+    if (ctp10TokenApproveOperation.errorCode !== 0) {
+      console.log(ctp10TokenApproveOperation);
       return;
     }
 
-    const operationItem = ctp10TokenTransferOperation.result.operation;
+    const operationItem = ctp10TokenApproveOperation.result.operation;
 
     const args = {
       sourceAddress,
