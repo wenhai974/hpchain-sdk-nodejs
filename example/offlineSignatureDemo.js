@@ -1,7 +1,6 @@
 'use strict';
 
 require('chai').should();
-const BigNumber = require('bignumber.js');
 const BumoSDK = require('bumo-sdk');
 
 const sdk = new BumoSDK({
@@ -10,27 +9,32 @@ const sdk = new BumoSDK({
 
 describe('The demo of offline signature', function() {
 
-  it('The demo of submit transaction', async() => {
+  // ====================================
+  // Take `buSendOperation` as an example
+  // Offline signature contains 2 steps:
+  // step1. Get blob
+  // step2. Sign blob with sender private key
+  // ====================================
+  it('The demo of offline signature', async() => {
     const senderPrivateKey = 'sender private key';
     const senderAddress = 'buQavuuHbqQz1Uc7kpY9zWLGup9GuoBLd5g8';
     const receiverAddress = 'buQsBMbFNH3NRJBbFRCPWDzjx7RqRc1hhvn1';
-
-    const accountInfo = await sdk.account.getNonce(senderAddress);
-
-    if (accountInfo.errorCode !== 0) {
-      console.log(accountInfo);
-      return;
-    }
-    let nonce = accountInfo.result.nonce;
-    // nonce + 1
-    nonce = new BigNumber(nonce).plus(1).toString(10);
+    // The unit is MO
+    const gasPrice = '1000';
+    // The unit is MO
+    const feeLimit = '306000';
+    // The unit is MO
+    const buAmount = '7000';
+    // Transaction initiation account's Nonce + 1
+    const nonce = '10';
+    const metadata = 'send bu demo';
 
     // build operation (buSendOperation)
     const operationInfo = sdk.operation.buSendOperation({
       sourceAddress: senderAddress,
       destAddress: receiverAddress,
-      buAmount: '7000',
-      metadata: 'send bu demo',
+      buAmount,
+      metadata,
     });
 
     if (operationInfo.errorCode !== 0) {
@@ -40,11 +44,13 @@ describe('The demo of offline signature', function() {
 
     const operationItem = operationInfo.result.operation;
 
-    // build blob
+    // ====================================
+    // step1. Get blob
+    // ====================================
     const blobInfo = sdk.transaction.buildBlob({
       sourceAddress: senderAddress,
-      gasPrice: '1000',
-      feeLimit: '306000',
+      gasPrice,
+      feeLimit,
       nonce,
       operations: [ operationItem ],
     });
@@ -56,7 +62,9 @@ describe('The demo of offline signature', function() {
 
     const blob = blobInfo.result.transactionBlob;
 
-    // sign blob with sender private key
+    // ====================================
+    // step2. Sign blob with sender private key
+    // ====================================
     let signatureInfo = sdk.transaction.sign({
       privateKeys: [ senderPrivateKey ],
       blob,
