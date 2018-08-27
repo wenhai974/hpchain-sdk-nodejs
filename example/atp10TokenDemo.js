@@ -34,7 +34,7 @@ describe('The demo of atp10Token', function() {
     const nonce = '10';
 
     // Get the account address
-    const issuerAddresss = getAddressByPrivateKey(issuerPrivateKey);
+    const issuerAddress = getAddressByPrivateKey(issuerPrivateKey);
 
     const atp10TokenMetadata = {
       version: '1.0',
@@ -46,7 +46,7 @@ describe('The demo of atp10Token', function() {
 
     // Build operation
     const operation = sdk.operation.assetIssueOperation({
-      sourceAddress: issuerAddresss,
+      sourceAddress: issuerAddress,
       code: atp10TokenMetadata.name,
       assetAmount: nowSupply,
       metadata,
@@ -55,7 +55,7 @@ describe('The demo of atp10Token', function() {
     if (operation.errorCode === 0) {
       let args = {
         privateKey: issuerPrivateKey,
-        sourceAddress: issuerAddresss,
+        sourceAddress: issuerAddress,
         gasPrice,
         feeLimit,
         nonce,
@@ -90,7 +90,7 @@ describe('The demo of atp10Token', function() {
     const nonce = '10';
 
     // Get the account address
-    const issuerAddresss = getAddressByPrivateKey(issuerPrivateKey);
+    const issuerAddress = getAddressByPrivateKey(issuerPrivateKey);
 
     const atp10TokenMetadata = {
       version: '1.0',
@@ -101,7 +101,7 @@ describe('The demo of atp10Token', function() {
     };
     // Build operation
     const operation = sdk.operation.assetIssueOperation({
-      sourceAddress: issuerAddresss,
+      sourceAddress: issuerAddress,
       code: atp10TokenMetadata.name,
       assetAmount: nowSupply,
       metadata,
@@ -110,7 +110,7 @@ describe('The demo of atp10Token', function() {
     if (operation.errorCode === 0) {
       let args = {
         privateKey: issuerPrivateKey,
-        sourceAddress: issuerAddresss,
+        sourceAddress: issuerAddress,
         gasPrice,
         feeLimit,
         nonce,
@@ -126,8 +126,6 @@ describe('The demo of atp10Token', function() {
   it('SendAtp10Token', async() => {
     // The account private key to send atp1.0 token
     const senderPrivateKey = "Sender Private Key";
-    // The account that issued the atp 1.0 token
-    const issuerAddress = "";
     // The account to receive atp 1.0 token
     const destAddress = "buQc77ZYKT2dYZ5pzdsfGdGjGMJGGR9ZVZ1p";
     // The token code
