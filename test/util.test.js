@@ -62,8 +62,7 @@ describe('Test util', function() {
     result.should.equal(true);
 
     data = sdk.util.buToMo('0.1');
-    result = (data === undefined);
-    result.should.equal(true);
+    data.should.equal('10000000');
 
     data = sdk.util.buToMo('-1');
     result = (data === undefined);
@@ -87,10 +86,6 @@ describe('Test util', function() {
     result = (data === undefined);
     result.should.equal(true);
 
-    data = sdk.util.moToBu('0.1');
-    result = (data === undefined);
-    result.should.equal(true);
-
     data = sdk.util.moToBu('-1');
     result = (data === undefined);
     result.should.equal(true);
@@ -98,7 +93,6 @@ describe('Test util', function() {
     data = sdk.util.moToBu(-1);
     result = (data === undefined);
     result.should.equal(true);
-
   });
 
 
