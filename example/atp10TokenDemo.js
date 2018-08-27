@@ -142,24 +142,24 @@ describe('The demo of atp10Token', function() {
     const nonce = '100';
 
     // Get the account address
-    const senderAddresss = getAddressByPrivateKey(senderPrivateKey);
+    const senderAddress = getAddressByPrivateKey(senderPrivateKey);
     // Check whether the destination account is activated
     let status = await checkAccountStatus(destAddress);
 
     if  (!status) {
       let accountInfo = await accountActivate({
         privateKey: senderPrivateKey,
-        sourceAddress: senderAddresss,
+        sourceAddress: senderAddress,
         destAddress: destAddress,
         nonce: '22',
       });
     }
 
     const operation = sdk.operation.assetSendOperation({
-      sourceAddress: senderAddresss,
+      sourceAddress: senderAddress,
       destAddress: destAddress,
       code: code,
-      issuer: senderAddresss,
+      issuer: senderAddress,
       assetAmount: amount,
       metadata: metadata,
     });
@@ -167,7 +167,7 @@ describe('The demo of atp10Token', function() {
     if (operation.errorCode === 0) {
       let args = {
         privateKey: senderPrivateKey,
-        sourceAddress: senderAddresss,
+        sourceAddress: senderAddress,
         gasPrice,
         feeLimit,
         nonce,
