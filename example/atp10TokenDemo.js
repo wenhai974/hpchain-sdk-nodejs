@@ -3,6 +3,7 @@
 require('chai').should();
 const encryption = require('bumo-encryption');
 const BumoSDK = require('bumo-sdk');
+// const BumoSDK = require('../index');
 
 const sdk = new BumoSDK({
   host: 'seed1.bumotest.io:26002',
@@ -10,12 +11,17 @@ const sdk = new BumoSDK({
 
 describe('The demo of atp10Token', function() {
 
-  // IssueUnlimitedAtp10Token, The totalSupply must be smaller than and equal
-  // to 0
+  // Issue Unlimited Atp10Token
   it('IssueUnlimitedAtp10Token', async() => {
-    const issuerPrivateKey = "issuer private key";
+    const issuerPrivateKey = 'issuer private key';
     // The token name
-    const name = 'TXT';
+    const name = 'MYTESTTOKEN';
+    // The token code
+    const code = 'MYTESTTOKEN';
+    // The apt token icon
+    const icon = '';
+    // The apt token version
+    const version = '1.0';
     // The token total supply number
     const totalSupply = 0;
     // The token now supply number
@@ -31,111 +37,150 @@ describe('The demo of atp10Token', function() {
     // feeLimit, the unit is MO
     const feeLimit = '5003000000';
     // Transaction initiation account's Nonce + 1
-    const nonce = '10';
+    const nonce = '87';
 
     // Get the account address
-    const issuerAddresss = getAddressByPrivateKey(issuerPrivateKey);
+    const issuerAddress = getAddressByPrivateKey(issuerPrivateKey);
 
-    const atp10TokenMetadata = {
-      version: '1.0',
-      name,
-      totalSupply,
-      decimals,
-      description,
-    };
 
     // Build operation
-    const operation = sdk.operation.assetIssueOperation({
-      sourceAddress: issuerAddresss,
-      code: atp10TokenMetadata.name,
+    const assetIssueOperation = sdk.operation.assetIssueOperation({
+      sourceAddress: issuerAddress,
+      code,
       assetAmount: nowSupply,
       metadata,
     });
 
-    if (operation.errorCode === 0) {
-      let args = {
-        privateKey: issuerPrivateKey,
-        sourceAddress: issuerAddresss,
-        gasPrice,
-        feeLimit,
-        nonce,
-        operation,
-        metadata: atp10TokenMetadata,
-      };
-      const result = await submitTransaction(args);
-      console.log(result);
+    if (assetIssueOperation.errorCode !== 0) {
+      console.log(assetIssueOperation);
+      return assetIssueOperation;
     }
+
+    const apt10Obj = {
+      name,
+      code,
+      description,
+      decimals,
+      totalSupply,
+      icon,
+    };
+    const key = `asset_property_${code}`;
+    const value = JSON.stringify(apt10Obj);
+    const accountSetMetadataOperation = sdk.operation.accountSetMetadataOperation({
+      key,
+      value,
+      version,
+    });
+
+    if (accountSetMetadataOperation.errorCode !== 0) {
+      console.log(accountSetMetadataOperation);
+      return accountSetMetadataOperation;
+    }
+
+    let args = {
+      privateKey: issuerPrivateKey,
+      sourceAddress: issuerAddress,
+      gasPrice,
+      feeLimit,
+      nonce,
+      operation: [ assetIssueOperation, accountSetMetadataOperation ],
+      metadata,
+    };
+    const result = await submitTransaction(args);
+    console.log(result);
   });
 
-  // IssuelimitedAtp10Token,  The totalSupply must be bigger than 0
+  // Issue limited Atp10Token
   it('IssuelimitedAtp10Token', async() => {
-    const issuerPrivateKey = "issuer private key";
+    const issuerPrivateKey = 'issuer private key';
     // The token name
-    const name = 'TXT';
+    const name = 'MYTESTTOKEN';
+    // The token code
+    const code = 'MYTESTTOKEN';
+    // The apt token icon
+    const icon = '';
+    // The apt token version
+    const version = '1.0';
     // The token total supply number
     const totalSupply = 1000000000;
     // The token now supply number
     const nowSupply = '1000000000';
     // The token decimals
-    const decimals = 8;
+    const decimals = 0;
     // Description
     const description = 'test limited issuance of apt1.0 token';
     // The operation notes
-    const metadata = 'test the limited issuance of apt1.0 token';
-    // The fixed write 1000, the unit is MO
+    const metadata = 'test limited issuance of apt1.0 token';
+    // the unit is MO
     const gasPrice = '1000';
     // feeLimit, the unit is MO
-    const feeLimit = '5001000000';
+    const feeLimit = '5003000000';
     // Transaction initiation account's Nonce + 1
-    const nonce = '10';
+    const nonce = '88';
 
     // Get the account address
-    const issuerAddresss = getAddressByPrivateKey(issuerPrivateKey);
+    const issuerAddress = getAddressByPrivateKey(issuerPrivateKey);
 
-    const atp10TokenMetadata = {
-      version: '1.0',
-      name,
-      totalSupply,
-      decimals,
-      description,
-    };
+
     // Build operation
-    const operation = sdk.operation.assetIssueOperation({
-      sourceAddress: issuerAddresss,
-      code: atp10TokenMetadata.name,
+    const assetIssueOperation = sdk.operation.assetIssueOperation({
+      sourceAddress: issuerAddress,
+      code,
       assetAmount: nowSupply,
       metadata,
     });
 
-    if (operation.errorCode === 0) {
-      let args = {
-        privateKey: issuerPrivateKey,
-        sourceAddress: issuerAddresss,
-        gasPrice,
-        feeLimit,
-        nonce,
-        operation,
-        metadata: atp10TokenMetadata,
-      };
-      const result = await submitTransaction(args);
-      console.log(result);
+    if (assetIssueOperation.errorCode !== 0) {
+      console.log(assetIssueOperation);
+      return assetIssueOperation;
     }
+
+    const apt10Obj = {
+      name,
+      code,
+      description,
+      decimals,
+      totalSupply,
+      icon,
+    };
+    const key = `asset_property_${code}`;
+    const value = JSON.stringify(apt10Obj);
+    const accountSetMetadataOperation = sdk.operation.accountSetMetadataOperation({
+      key,
+      value,
+      version,
+    });
+
+    if (accountSetMetadataOperation.errorCode !== 0) {
+      console.log(accountSetMetadataOperation);
+      return accountSetMetadataOperation;
+    }
+
+    let args = {
+      privateKey: issuerPrivateKey,
+      sourceAddress: issuerAddress,
+      gasPrice,
+      feeLimit,
+      nonce,
+      operation: [ assetIssueOperation, accountSetMetadataOperation ],
+      metadata,
+    };
+    const result = await submitTransaction(args);
+    console.log(result);
   });
 
 
   it('SendAtp10Token', async() => {
     // The account private key to send atp1.0 token
-    const senderPrivateKey = "Sender Private Key";
-    // The account that issued the atp 1.0 token
-    const issuerAddress = "";
+    const senderPrivateKey = 'Sender Private Key';
     // The account to receive atp 1.0 token
-    const destAddress = "buQc77ZYKT2dYZ5pzdsfGdGjGMJGGR9ZVZ1p";
+    const destAddress = 'buQc77ZYKT2dYZ5pzdsfGdGjGMJGGR9ZVZ1p';
     // The token code
-    const code = "TXT";
+    const code = 'MYTESTTOKEN';
     // The token amount to be sent
     const amount = '1000000000';
     // The operation notes
-    const metadata = "test one off issue apt1.0 token";
+    const metadata = 'test one off issue apt1.0 token';
     // the unit is MO
     const gasPrice = '1000';
     // maximum cost, the unit is MO
@@ -144,24 +189,24 @@ describe('The demo of atp10Token', function() {
     const nonce = '100';
 
     // Get the account address
-    const senderAddresss = getAddressByPrivateKey(senderPrivateKey);
+    const senderAddress = getAddressByPrivateKey(senderPrivateKey);
     // Check whether the destination account is activated
     let status = await checkAccountStatus(destAddress);
 
     if  (!status) {
       let accountInfo = await accountActivate({
         privateKey: senderPrivateKey,
-        sourceAddress: senderAddresss,
+        sourceAddress: senderAddress,
         destAddress: destAddress,
         nonce: '22',
       });
     }
 
     const operation = sdk.operation.assetSendOperation({
-      sourceAddress: senderAddresss,
+      sourceAddress: senderAddress,
       destAddress: destAddress,
       code: code,
-      issuer: senderAddresss,
+      issuer: senderAddress,
       assetAmount: amount,
       metadata: metadata,
     });
@@ -169,7 +214,7 @@ describe('The demo of atp10Token', function() {
     if (operation.errorCode === 0) {
       let args = {
         privateKey: senderPrivateKey,
-        sourceAddress: senderAddresss,
+        sourceAddress: senderAddress,
         gasPrice,
         feeLimit,
         nonce,
@@ -215,15 +260,25 @@ describe('The demo of atp10Token', function() {
 
   // Submit
   async function submitTransaction(args) {
-    // 1. Build Operation
-    const operationItem = args.operation.result.operation;
+    let operations = [];
+
+    if (Array.isArray(args.operation)) {
+      args.operation.forEach(function(item) {
+        operations.push(item.result.operation);
+      })
+    } else {
+      operations.push(args.operation.result.operation);
+    }
+
+    // // 1. Build Operation
+    // const operationItem = args.operation.result.operation;
 
     let opt = {
       sourceAddress: args.sourceAddress,
       gasPrice: args.gasPrice,
       feeLimit: args.feeLimit,
       nonce: args.nonce,
-      operations: [ operationItem ],
+      operations,
     };
 
     if (args.metadata) {

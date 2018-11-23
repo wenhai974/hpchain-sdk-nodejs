@@ -43,62 +43,50 @@ describe('Test util', function() {
   it('test buToMo(string)', function() {
     let data = sdk.util.buToMo('5');
     data.should.equal('500000000');
-    let result;
 
     data = sdk.util.buToMo(5);
-    result = (data === undefined);
-    result.should.equal(true);
+    data.should.equal('');
 
     data = sdk.util.buToMo();
-    result = (data === undefined);
-    result.should.equal(true);
+    data.should.equal('');
 
     data = sdk.util.buToMo('');
-    result = (data === undefined);
-    result.should.equal(true);
+    data.should.equal('');
 
     data = sdk.util.buToMo('abc');
-    result = (data === undefined);
-    result.should.equal(true);
+    data.should.equal('');
 
     data = sdk.util.buToMo('0.1');
-    result = (data === undefined);
-    result.should.equal(true);
+    data.should.equal('10000000');
 
     data = sdk.util.buToMo('-1');
-    result = (data === undefined);
-    result.should.equal(true);
+    data.should.equal('');
   });
 
   it('test moToBu(string)', function() {
     let data = sdk.util.moToBu('500000000');
     data.should.equal('5');
-    let result;
+
+    data = sdk.util.moToBu('0');
+    data.should.equal('0');
 
     data = sdk.util.moToBu('');
-    result = (data === undefined);
-    result.should.equal(true);
+    data.should.equal('');
 
     data = sdk.util.moToBu();
-    result = (data === undefined);
-    result.should.equal(true);
+    data.should.equal('');
 
     data = sdk.util.moToBu('abc');
-    result = (data === undefined);
-    result.should.equal(true);
-
-    data = sdk.util.moToBu('0.1');
-    result = (data === undefined);
-    result.should.equal(true);
+    data.should.equal('');
 
     data = sdk.util.moToBu('-1');
-    result = (data === undefined);
-    result.should.equal(true);
+    data.should.equal('');
 
     data = sdk.util.moToBu(-1);
-    result = (data === undefined);
-    result.should.equal(true);
+    data.should.equal('');
 
+    data = sdk.util.moToBu('0.1');
+    data.should.equal('');
   });
 
 
