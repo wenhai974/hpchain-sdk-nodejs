@@ -24,10 +24,11 @@ describe('The demo of atp10Token', function() {
     const version = '1.0';
     // The token total supply number
     const totalSupply = 0;
-    // The token now supply number
-    const nowSupply = '1000000000';
     // The token decimals
-    const decimals = 0;
+    const decimals = 8;
+    // The token now supply number, which includes the dicimals.
+    // If decimals is 8 and you want to issue 10 tokens now, the nowSupply must be 10 * 10 ^ 8, like below.
+    const nowSupply = sdk.utils.unitWithDecimals('10', decimals);
     // Description
     const description = 'test unlimited issuance of apt1.0 token';
     // The operation notes
@@ -101,12 +102,13 @@ describe('The demo of atp10Token', function() {
     const icon = '';
     // The apt token version
     const version = '1.0';
+    // The token decimals
+    const decimals = 1;
     // The token total supply number
     const totalSupply = 1000000000;
     // The token now supply number
-    const nowSupply = '1000000000';
-    // The token decimals
-    const decimals = 0;
+    // If decimals is 1 and you want to issue 10 tokens now, the nowSupply must be 10 * 10 ^ 1, like below.
+    const nowSupply = sdk.utils.unitWithDecimals('10', decimals);
     // Description
     const description = 'test limited issuance of apt1.0 token';
     // The operation notes
