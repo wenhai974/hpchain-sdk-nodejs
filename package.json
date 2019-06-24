@@ -1,6 +1,6 @@
 {
   "name": "bumo-sdk",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "bumo sdk",
   "main": "index.js",
   "scripts": {
