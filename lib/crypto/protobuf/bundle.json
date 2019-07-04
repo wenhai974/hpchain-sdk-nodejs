@@ -150,6 +150,10 @@
             "reserve": {
               "type": "string",
               "id": 11
+            },
+            "chainId": {
+              "type": "int64",
+              "id": 12
             }
           }
         },
@@ -411,6 +415,10 @@
               "rule": "repeated",
               "type": "Operation",
               "id": 7
+            },
+            "chainId": {
+              "type": "int64",
+              "id": 8
             }
           },
           "nested": {
@@ -693,6 +701,10 @@
             "newValidator": {
               "type": "string",
               "id": 2
+            },
+            "chainId": {
+              "type": "int64",
+              "id": 3
             }
           }
         },
@@ -957,6 +969,10 @@
             "viewChangeWithRawvalue": {
               "type": "PbftViewChangeWithRawValue",
               "id": 8
+            },
+            "chainId": {
+              "type": "int64",
+              "id": 9
             }
           }
         },
@@ -1161,6 +1177,10 @@
             "timestamp": {
               "type": "int64",
               "id": 3
+            },
+            "chainId": {
+              "type": "int64",
+              "id": 4
             }
           }
         },
@@ -1182,6 +1202,10 @@
             "proof": {
               "type": "bytes",
               "id": 4
+            },
+            "chainId": {
+              "type": "int64",
+              "id": 5
             }
           },
           "nested": {
